@@ -84,5 +84,5 @@
         </section>
     </section>
 </section>
-
+<script src="{{ asset('js/productslide.js') }}"></script>
 @endsection
