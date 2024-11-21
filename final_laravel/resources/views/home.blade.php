@@ -36,15 +36,6 @@
     </div>
     
     <!-- Slideshow Section -->
-    @php
-        $slideshowImages = [
-            'https://asset.swarovski.com/c_crop,g_xy_center,w_11455,h_3877,x_5728,y_3892/f_auto,q_auto,dpr_2.0/swa-cms/LOOKBOOKSS24_LOOK06-1_OF_GL_72DPI_RGB_SALE.jpg',
-            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_11348,h_3842,x_5669,y_4529/dpr_2.0,f_auto,q_auto,c_lfill,w_1449,h_830/swa-cms/LOOKBOOKSS24_LOOK06-2_OF_GL_72DPI_RGB_EXT2/.jpg',
-            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_6649,h_2251,x_3325,y_1126/dpr_2.0,f_auto,q_auto,c_lfill,w_1449,h_830/swa-cms/2024_MOL-MILAN_ARCHSHOT_VISUAL_FUTURE-HISTORY-2_GL_72DPI_RGB/.jpg',
-            'https://media.tiffany.com/is/image/tiffanydm/2024-TITAN-HP-Stories-1?$tile$&wid=736&hei=920&fmt=webp',
-            'https://cms-live-rc.pandora.net/resource/responsive-image/2994966/m66-feature-module/lg/5/q124-editorial-aprilmay-mostloved-model-summercelebration-twoimageoverlap.jpg',
-        ];
-    @endphp
 
     <div class="slideshow-container relative tablet:mt-3 phone:mt-2 tablet:mx-auto max-w-[1300px] tablet:gap-7 phone:gap-2 phone:mx-[10px] sha">
         @foreach ($slideshowImages as $url)
@@ -75,52 +66,16 @@
         </section>
 
         <!-- Product Grid -->
-        @php
-            $products = [
-                [
-                    'id' => 1,
-                    'name' => 'Product 1',
-                    'images' => ['/images/product1.jpg'],
-                    'price' => 100,
-                    'sales' => 20,
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Product 2',
-                    'images' => ['/images/product2.jpg'],
-                    'price' => 120,
-                    'sales' => 15,
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Product 3',
-                    'images' => ['/images/product3.jpg'],
-                    'price' => 150,
-                    'sales' => 30,
-                ],
-                [
-                    'id' => 4,
-                    'name' => 'Product 4',
-                    'images' => ['/images/product4.jpg'],
-                    'price' => 80,
-                    'sales' => 10,
-                ],
-            ];
-        @endphp
-
         <section class="grid justify-center">
-            <section
-                class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 mx-auto max-w-[1200px] gap-4 px-4"
-            >
+            <section class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 mx-auto max-w-[1200px] gap-4 px-4">
                 @foreach ($products as $item)
                 <div class="mb-32 phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px] shadow-md">
-                    <a href="/product?id={{ $item['id'] }}">
+                    <a href="{{ route('detail', $item->id) }}">
                         <div class="bg-gray-100 rounded-lg phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px]">
-                            <img src="{{ $item['images'][0] }}" alt="{{ $item['name'] }}" class="rounded w-full h-full object-cover">
-                        </div>
-                        <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">{{ $item['name'] }}</h3>
+                        <img src="{{ $item->images->first()->first_url }}" alt="{{ $item->name }}" class="rounded w-full h-full object-cover" onerror="this.onerror=null;this.src='/path/to/fallback-image.jpg';">                        </div>
+                        <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">{{ $item->name }}</h3>
                         <h4 class="text-center font-roboto phone:text-[11px] tablet:text-[15px] desktop:text-[15px]">
-                            <font color="#a28b68">${{ $item['price'] - $item['sales'] }}</font>
+                            <font color="#a28b68">${{ $item->price - $item->sales }}</font>
                         </h4>
                     </a>
                 </div>
@@ -136,7 +91,5 @@
     </section>
 </section>
 
-<script type="module" src="/src/resources/scripts/menu.js"></script>
-<script type="module" src="/src/resources/scripts/slide.js"></script>
 
 @endsection

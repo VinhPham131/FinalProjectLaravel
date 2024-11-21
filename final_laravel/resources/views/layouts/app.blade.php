@@ -37,6 +37,10 @@
     @yield('content')
 
     <x-footer />
+    @section('scripts')
+    <script src="{{ asset('js/menu.js') }}"></script>
+    <script src="{{ asset('js/productslide.js') }}"></script>
+    <script src="{{ asset('js/slide.js') }}"></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J7QBN2WL4D"></script>
