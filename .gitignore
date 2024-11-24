@@ -1,6 +1,7 @@
 # Laravel 11 Specific
 /vendor/
 /node_modules/
+/webapp/
 
 # Laravel Environment Files
 .env

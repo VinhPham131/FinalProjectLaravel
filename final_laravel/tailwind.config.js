@@ -1,4 +1,4 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
+const forms = require('@tailwindcss/forms');
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,12 +9,26 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+
     theme: {
+        screens: {
+            phone: '320px',
+            tablet: '640px',
+            laptop: '1400px',
+            desktop: '1920px',
+            sm: '576px',
+            md: '960px',
+            lg: '1440px',
+        },
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', 'sans-serif'],
+            },
+            width: {
+                'calc-1/2': 'calc(50% - 1rem)',
             },
         },
     },
-    plugins: [],
+
+    plugins: [forms],
 };
