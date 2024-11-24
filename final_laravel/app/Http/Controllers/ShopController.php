@@ -9,7 +9,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('images')->get();
         return view('shop', compact('products'));
     }
 }

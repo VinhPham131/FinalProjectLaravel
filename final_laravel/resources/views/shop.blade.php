@@ -74,24 +74,23 @@
     <section class="phone:max-tablet:grid phone:max-tablet:justify-center">
       <section class="grid h-full phone:grid-cols-2 phone:max-tablet:justify-center tablet:grid-cols-2 laptop:grid-cols-3 tablet:w-[calc(1200px-650px)] laptop:w-[calc(1200px-370px)] phone:mx-[10px] phone:w-[calc(500px-120px)] gap-2.5">
         @foreach ($products as $item)
-        <div class="mb-28 phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px] shadow-md">
-          <a href="/product?id={{ $item->id }}">
-            <div class="bg-gray-100 rounded-lg phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px]">
-              <img src="{{ $item->image}}" alt="{{ $item->name }}" class="rounded w-full h-full object-cover">
-            </div>
-            <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">{{ $item->name }}</h3>
-            <h4 class="text-center font-roboto phone:text-[11px] tablet:text-[15px] desktop:text-[15px]">
-              <font color="#a28b68">${{ $item->price - $item->sales }}</font>
-            </h4>
-          </a>
-        </div>
-        @endforeach
+          <div class="mb-32 phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px] shadow-md">
+            <a href="{{ route('detail', $item->id) }}">
+              <div class="bg-gray-100 rounded-lg phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px]">
+                <img src="{{ $item->images->first()->first_url }}" alt="{{ $item->name }}" class="rounded w-full h-full object-cover" onerror="this.onerror=null;this.src='/path/to/fallback-image.jpg';">                        
+              </div>
+                <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">{{ $item->name }}</h3>
+                <h4 class="text-center font-roboto phone:text-[11px] tablet:text-[15px] desktop:text-[15px]">
+                    <font color="#a28b68">${{ $item->price - $item->sales }}</font>
+                </h4>
+            </a>
+          </div>
+          @endforeach
       </section>
     </section>
   </main>
 
 </section>
 
-<script type="module" src="/src/resources/scripts/menu.js"></script>
-<script type="module" src="/src/resources/scripts/dropdown.js"></script>
+<script src = "{{assert('js/search.js')}}"></script>
 @endsection
