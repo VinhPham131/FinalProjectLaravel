@@ -46,3 +46,6 @@ Thumbs.db
 Homestead.json
 Homestead.yaml
 .nitro/
+
+#remove  .DS_Store (specifically for mac)
+.DS_Store
