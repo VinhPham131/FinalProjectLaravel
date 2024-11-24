@@ -1,0 +1,48 @@
+# Laravel 11 Specific
+/vendor/
+/node_modules/
+
+# Laravel Environment Files
+.env
+.env.*
+
+# Log Files
+/storage/logs/*.log
+
+# Cache
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Composer and NPM Files
+composer.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Ignoring IDE-specific files
+.idea/
+*.sublime-workspace
+*.sublime-project
+.vscode/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Debug and Backup Files
+*.bak
+*.backup
+*.tmp
+
+# Deployment Specific
+/public/hot
+/public/storage
+/public/mix-manifest.json
+
+# Other Laravel-generated files
+Homestead.json
+Homestead.yaml
+.nitro/
