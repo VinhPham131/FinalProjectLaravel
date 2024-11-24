@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string(column: 'collection');
             $table->string(column:'productcode');
             $table->string(column:'color');
-
         });
     }
 

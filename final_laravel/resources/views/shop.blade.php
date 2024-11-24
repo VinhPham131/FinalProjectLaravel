@@ -93,4 +93,5 @@
 </section>
 
 <script src = "{{assert('js/search.js')}}"></script>
+<script src = "{{assert('js/dropdown.js')}}"></script>
 @endsection
