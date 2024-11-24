@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 const forms = require('@tailwindcss/forms');
-=======
-import defaultTheme from 'tailwindcss/defaultTheme';
->>>>>>> origin/main
 
 /** @type {import('tailwindcss').Config} */
 export default {
