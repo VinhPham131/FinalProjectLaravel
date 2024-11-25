@@ -27,29 +27,31 @@
 
       <!-- Filter -->
       <section class="select-none phone:max-tablet:grid phone:max-tablet:justify-center">
-        <div class="phone:max-tablet:flex gap-3 relative" id="dropdownButton">
-          <div id="shopBy" class="border-solid border-gray-350 border-[1px] px-5 py-2 phone:max-tablet:mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-[full] phone:max-tablet:max-w-[180px]">
-            Shop By
-            <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="" class="fill-black" />
-          </div>
-          <div id="dropdownShop" class="rounded border-[1px] border-gray-300 bg-white absolute top-[50px] phone:max-tablet:top-[80px] phone:max-tablet:w-[full] phone:max-tablet:max-w-[180px] w-[220px] shadow-md hidden z-20">
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Bronze</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Silver</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Gold</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Diamond</div>
-          </div>
-          <div id="sortBy" class="border-solid border-gray-350 border-[1px] px-5 py-2 mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-[full] phone:max-tablet:max-w-[180px]">
-            Sort By
-            <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="" class="fill-black" />
-          </div>
-          <div id="dropdownSort" class="rounded border-[1px] border-gray-300 bg-white absolute top-[130px] phone:max-tablet:top-[80px] phone:max-tablet:w-[full] phone:max-tablet:max-w-[180px] phone:max-tablet:start-[190px] w-[220px] shadow-md hidden z-10">
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Lowest</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Highest</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">Best Seller</div>
-            <div class="cursor-pointer hover:bg-gray-300 p-4 text-[14px]">New Arrival</div>
-          </div>
-        </div>
-      </section>
+  <div class="phone:max-tablet:flex gap-3 relative" id="dropdownButton">
+    <!-- Shop By -->
+    <div id="shopBy" class="border border-gray-300 px-5 py-2 phone:max-tablet:mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]">
+      Shop By
+      <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="Dropdown Icon" />
+    </div>
+    <div id="dropdownShop" class="hidden rounded border border-gray-300 bg-white absolute top-[50px] phone:max-tablet:top-[80px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-20">
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Bronze</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Silver</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Gold</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Diamond</div>
+    </div>
+    <!-- Sort By -->
+    <div id="sortBy" class="border border-gray-300 px-5 py-2 mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]">
+      Sort By
+      <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="Dropdown Icon" />
+    </div>
+    <div id="dropdownSort" class="hidden rounded border border-gray-300 bg-white absolute top-[130px] phone:max-tablet:top-[110px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-10">
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Lowest</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Highest</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Best Seller</div>
+      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">New Arrival</div>
+    </div>
+  </div>
+</section>
 
       <!-- On Sale and In stock-->
       <section class="phone:max-tablet:flex phone:max-tablet:justify-center phone:max-tablet:gap-10">
@@ -92,6 +94,6 @@
 
 </section>
 
-<script src = "{{assert('js/search.js')}}"></script>
-<script src = "{{assert('js/dropdown.js')}}"></script>
+<script src = "{{asset('js/search.js')}}"></script>
+<script src="{{ asset('js/dropdown.js') }}"></script>
 @endsection
