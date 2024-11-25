@@ -2,7 +2,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\ProductImage;
 
 class ProductImagesSeeder extends Seeder
 {
@@ -11,7 +11,7 @@ class ProductImagesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_images')->insert([
+        $images = [
             [
                 'urls' => json_encode([
                     'https://cdn.pnj.io/images/detailed/199/sp-gvpaxmw000044-vong-tay-vang-trang-14k-dinh-ngoc-trai-akoya-pnj-1.png',
@@ -35,6 +35,10 @@ class ProductImagesSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);
+        ];
+
+        foreach ($images as $image) {
+            ProductImage::create($image);
+        }
     }
 }

@@ -8,12 +8,9 @@ class ProductImage extends Model
 {
     protected $fillable = ['urls', 'product_id'];
 
-    /**
-     * Relationship with Product.
-     */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     /**
