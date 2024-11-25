@@ -1,21 +1,15 @@
 let slideIndex = 1;
 showSlides(slideIndex);
 
-// Next/previous controls
+// Điều hướng slide trước/sau
 function plusSlides(n) {
     showSlides((slideIndex += n));
 }
 
-// Thumbnail image controls
-// eslint-disable-next-line
-function currentSlide(n) {
-    showSlides((slideIndex = n));
-}
-
+// Hiển thị slide theo index
 function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName('mySlides');
-    let dots = document.getElementsByClassName('dot');
     if (n > slides.length) {
         slideIndex = 1;
     }
@@ -23,12 +17,17 @@ function showSlides(n) {
         slideIndex = slides.length;
     }
     for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
+        slides[i].style.display = 'none'; // Ẩn tất cả các slide
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(' active', '');
-    }
-    slides[slideIndex - 1].style.display = 'block';
+    slides[slideIndex - 1].style.display = 'block'; // Hiển thị slide được chọn
 }
-document.getElementById('prev').addEventListener('click', () => plusSlides(-1));
-document.getElementById('next').addEventListener('click', () => plusSlides(1));
+
+// Chuyển slide khi click vào ảnh nhỏ
+function showSlide(n) {
+    slideIndex = n + 1; // Cập nhật slideIndex
+    showSlides(slideIndex); // Gọi hàm hiển thị
+}
+
+// Xử lý sự kiện cho nút điều hướng
+document.querySelector('.prev').addEventListener('click', () => plusSlides(-1));
+document.querySelector('.next').addEventListener('click', () => plusSlides(1));
