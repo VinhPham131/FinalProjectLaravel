@@ -58,7 +58,7 @@
 
             <!-- Product Details -->
             <p class="tracking-wide font-roboto mt-4 text-lg">
-                Collection: {{ $product->collection }}<br>
+                Collection: {{ $product->collection->name }}<br>
                 Product Code: {{ $product->productcode }}<br>
                 Classification: {{ $product->category->name ?? 'N/A' }}<br>
                 Material: {{ $product->material }}<br>
@@ -80,7 +80,7 @@
                 {{ $product->description }}
             </p>
             <p class="tracking-wide font-roboto mt-2.5 text-lg mb-5">
-                Collection: {{ $product->collection }}<br>
+                Collection: {{ $product->collection->name }}<br>
                 Product Code: {{ $product->productcode }}<br>
                 Classification: {{ $product->category->name ?? 'N/A' }}<br>
                 Material: {{ $product->material }}<br>
@@ -105,7 +105,8 @@
                                 onerror="this.onerror=null;this.src='/path/to/fallback-image.jpg';">
                         </div>
                         <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">
-                            {{ $item->name }}</h3>
+                            {{ $item->name }}
+                        </h3>
                         <h4 class="text-center font-roboto phone:text-[11px] tablet:text-[15px] desktop:text-[15px]">
                             @if ($item->highest_sale)
                                 <font color="red">{{ $item->highest_sale }}% Off</font><br>

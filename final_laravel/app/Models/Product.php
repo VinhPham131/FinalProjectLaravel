@@ -14,7 +14,7 @@ class Product extends Model
         'material',
         'size',
         'stylecode',
-        'collection',
+        'collection_id',
         'productcode',
         'color',
         'category_id'
@@ -25,6 +25,10 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 
+    public function collection()
+    {
+        return $this->belongsTo(Collection::class, 'collection_id');
+    }
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');
@@ -33,8 +37,7 @@ class Product extends Model
     public function applicableSales()
     {
         return Sale::where('name', $this->category->name)
-            // ->orWhere('name', $this->collection)
-            ->get();
+            ->orWhere('name', $this->collection)->get();
     }
 
     public function highestSale()

@@ -11,7 +11,7 @@ class ShopController extends Controller
     {
         $search = $request->input('search');
 
-        $products = Product::with(['images', 'category']) // Eager load relationships
+        $products = Product::with(['images', 'category', 'collection']) // Eager load relationships
             ->when($search, function ($query, $search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             })

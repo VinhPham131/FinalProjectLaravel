@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('material')->nullable();
             $table->string('size', 50)->nullable();
             $table->string('stylecode', 50)->nullable();
-            $table->string('collection')->nullable();
+            $table->foreignId('collection_id')->nullable()->constrained('collections')->onDelete('cascade');
             $table->string('productcode', 50)->unique();
             $table->string('color', 50)->nullable();
             $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');

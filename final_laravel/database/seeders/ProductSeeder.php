@@ -5,9 +5,15 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Collection;
 
 class ProductSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         $products = [
@@ -19,7 +25,7 @@ class ProductSeeder extends Seeder
                 'material' => 'Akoya Pearl',
                 'size' => '51',
                 'stylecode' => 'SP123',
-                'collection' => 'Summer 2024',
+                'collection_id' => Collection::where('name', 'Summer 2024')->first()->id,
                 'productcode' => 'GVPAXMW000044',
                 'color' => 'White',
                 'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
@@ -28,13 +34,13 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => '18K Gold Bracelet with Citrine PNJ Spring CTXMY000059',
-                'description' => "With its bright yellow color, Citrine is a gemstone that holds optimistic and warm energy. By harmoniously combining Citrine and the shimmer of 18K gold, PNJ brings a bracelet product that praises the optimistic spirit and freedom in women's souls, as bright as the morning sun.",
+                'description' => "With its bright yellow color, Citrine is a gemstone that holds optimistic and warm energy...",
                 'price' => 40.00,
                 'quantity' => 20,
                 'material' => 'Citrine',
                 'size' => '52',
                 'stylecode' => 'TS456',
-                'collection' => 'Spring 2024',
+                'collection_id' => Collection::where('name', 'Spring 2024')->first()->id,
                 'productcode' => 'GVCTXMY000059',
                 'color' => 'Blue',
                 'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
@@ -48,4 +54,3 @@ class ProductSeeder extends Seeder
         }
     }
 }
-
