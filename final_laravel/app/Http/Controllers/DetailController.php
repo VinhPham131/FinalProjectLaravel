@@ -17,8 +17,16 @@ class DetailController extends Controller
             abort(404, 'Product not found');
         }
 
-        // Get all products for the "Related Products" section
-        $products = Product::with('images')->get();
+        // Calculate sale-related attributes for the main product
+        $product->highest_sale = $product->highestSale();
+        $product->discounted_price = $product->salePrice();
+
+        // Get all related products and calculate their sale prices
+        $products = Product::with('images')->get()->map(function ($item) {
+            $item->highest_sale = $item->highestSale();
+            $item->discounted_price = $item->salePrice();
+            return $item;
+        });
 
         return view('detail', compact('product', 'products'));
     }

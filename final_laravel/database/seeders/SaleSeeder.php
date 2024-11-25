@@ -12,14 +12,14 @@ class SaleSeeder extends Seeder
         $sales = [
             [
                 'name' => 'Bracelet',
-                'type' => 'category',
+                'sale_target' => 'category',
                 'percentage' => 10.00,
                 'start_date' => '2024-12-01',
                 'end_date' => '2024-12-31',
             ],
             [
                 'name' => 'Summer 2024',
-                'type' => 'collection',
+                'sale_target' => 'collection',
                 'percentage' => 15.00,
                 'start_date' => '2024-06-01',
                 'end_date' => '2024-08-31',

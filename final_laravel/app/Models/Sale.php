@@ -18,10 +18,4 @@ class Sale extends Model
     {
         return $this->hasOne(ProductCategory::class, 'name', 'name');
     }
-
-    public function collection()
-    {
-        return $this->hasMany(Product::class, 'collection', 'name');
-    }
-
 }

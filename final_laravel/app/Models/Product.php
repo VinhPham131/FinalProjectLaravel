@@ -10,7 +10,6 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'sale_price',
         'quantity',
         'material',
         'size',
@@ -31,9 +30,23 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
-    public function sales()
+    public function applicableSales()
     {
-        return $this->hasMany(Sale::class, 'name', 'name');
+        return Sale::where('name', $this->category->name)
+            // ->orWhere('name', $this->collection)
+            ->get();
+    }
+
+    public function highestSale()
+    {
+        $sales = $this->applicableSales();
+        return $sales->max('percentage');
+    }
+
+    public function salePrice()
+    {
+        $highestSale = $this->highestSale();
+        return $highestSale ? $this->price * (1 - $highestSale / 100) : $this->price;
     }
 }
 

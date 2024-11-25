@@ -18,8 +18,12 @@ class HomeController extends Controller
             'https://cms-live-rc.pandora.net/resource/responsive-image/2994966/m66-feature-module/lg/5/q124-editorial-aprilmay-mostloved-model-summercelebration-twoimageoverlap.jpg',
         ];
 
-        // Fetch products from the database
-        $products = Product::with('images')->get();
+        // Fetch products with dynamic pricing and sale calculations
+        $products = Product::with('images')->get()->map(function ($product) {
+            $product->highest_sale = $product->highestSale();
+            $product->discounted_price = $product->salePrice();
+            return $product;
+        });
 
         return view('home', compact('slideshowImages', 'products'));
     }
