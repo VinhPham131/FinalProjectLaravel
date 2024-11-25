@@ -23,10 +23,10 @@
             </div>
 
             <!-- Thumbnails -->
-            <div class="flex gap-2 justify-center mt-4">
+            <div class="justify-center flex gap-6 phone:mb-10 mt-5 ml-5">
                 @foreach ($product->images as $image)
                     @foreach ($image->urls as $index => $url)
-                        <img src="{{ $url }}" alt="Thumbnail {{ $index + 1 }}" class="thumbnail cursor-pointer w-[80px] h-[80px] object-cover border-2 border-gray-300 hover:border-yellow-500" data-slide="{{ $index }}" onclick="showSlide({{ $index }})">
+                        <img src="{{ $url }}" alt="Thumbnail {{ $index + 1 }}" class="thumbnail w-[100px] h-[100px] object-cover opacity-40 hover:opacity-100 hover:border hover:border-gray-700" data-slide="{{ $index }}" onclick="showSlide({{ $index }})">
                     @endforeach
                 @endforeach
             </div>
