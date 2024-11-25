@@ -1,24 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('default-search');
-    const searchForm = document.getElementById('search-form');
-    const productItems = document.querySelectorAll('.product-item');
+    const searchResultsContainer = document.querySelector('main .grid');
 
-    const filterProducts = () => {
-        const filter = searchInput.value.toLowerCase();
-        productItems.forEach((item) => {
-            const productName = item.querySelector('.product-name').innerText.toLowerCase();
-            if (productName.includes(filter)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
+    const fetchFilteredProducts = async (query) => {
+        try {
+            const response = await fetch(`/shop?search=${encodeURIComponent(query)}`);
+            const html = await response.text();
+            
+            // Parse the response and replace the product section
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newProducts = doc.querySelector('main .grid');
+
+            if (newProducts) {
+                searchResultsContainer.innerHTML = newProducts.innerHTML;
             }
-        });
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
     };
 
-    searchInput.addEventListener('input', filterProducts);
-
-    searchForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent the form from submitting
-        filterProducts();
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        fetchFilteredProducts(query);
     });
 });
