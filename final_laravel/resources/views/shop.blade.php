@@ -27,18 +27,44 @@
 
       <!-- Filter -->
       <section class="select-none phone:max-tablet:grid phone:max-tablet:justify-center">
-  <div class="phone:max-tablet:flex gap-3 relative" id="dropdownButton">
+  <div class="phone:max-tablet:flex gap-3 relative" id="dropdownArea">
     <!-- Shop By -->
-    <div id="shopBy" class="border border-gray-300 px-5 py-2 phone:max-tablet:mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]">
-      Shop By
-      <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="Dropdown Icon" />
-    </div>
-    <div id="dropdownShop" class="hidden rounded border border-gray-300 bg-white absolute top-[50px] phone:max-tablet:top-[80px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-20">
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Bronze</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Silver</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Gold</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Diamond</div>
-    </div>
+<!-- Checkbox Category -->
+<div id="checkBoxCategory" class="relative">
+  <div
+    id="categoryToggle"
+    class="border border-gray-300 px-5 py-2 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]"
+  >
+    Select Category
+    <img
+      width="10"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
+      alt="Dropdown Icon"
+    />
+  </div>
+  <div
+    id="dropdownCategory"
+    class="hidden rounded border border-gray-300 bg-white absolute top-[50px] phone:max-tablet:top-[80px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-20"
+  >
+    <label class="cursor-pointer hover:bg-gray-200 p-4 text-sm flex items-center">
+      <input type="checkbox" class="mr-2 category-checkbox" value="Bronze" />
+      Bronze
+    </label>
+    <label class="cursor-pointer hover:bg-gray-200 p-4 text-sm flex items-center">
+      <input type="checkbox" class="mr-2 category-checkbox" value="Silver" />
+      Silver
+    </label>
+    <label class="cursor-pointer hover:bg-gray-200 p-4 text-sm flex items-center">
+      <input type="checkbox" class="mr-2 category-checkbox" value="Gold" />
+      Gold
+    </label>
+    <label class="cursor-pointer hover:bg-gray-200 p-4 text-sm flex items-center">
+      <input type="checkbox" class="mr-2 category-checkbox" value="Diamond" />
+      Diamond
+    </label>
+  </div>
+</div>
+
     <!-- Sort By -->
     <div id="sortBy" class="border border-gray-300 px-5 py-2 mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]">
       Sort By
@@ -96,4 +122,6 @@
 
 <script src = "{{asset('js/search.js')}}"></script>
 <script src="{{ asset('js/dropdown.js') }}"></script>
+<script src="{{ asset('js/checkbox.js') }}"></script>
+
 @endsection
