@@ -29,11 +29,10 @@
       <section class="select-none phone:max-tablet:grid phone:max-tablet:justify-center">
   <div class="phone:max-tablet:flex gap-3 relative" id="dropdownArea">
     <!-- Shop By -->
-<!-- Checkbox Category -->
 <div id="checkBoxCategory" class="relative">
   <div
     id="categoryToggle"
-    class="border border-gray-300 px-5 py-2 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]"
+    class="border border-gray-300 mb-5 px-5 py-2 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]"
   >
     Select Category
     <img
@@ -65,17 +64,28 @@
   </div>
 </div>
 
-    <!-- Sort By -->
-    <div id="sortBy" class="border border-gray-300 px-5 py-2 mt-10 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]">
-      Sort By
-      <img width="10" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&" alt="Dropdown Icon" />
-    </div>
-    <div id="dropdownSort" class="hidden rounded border border-gray-300 bg-white absolute top-[130px] phone:max-tablet:top-[110px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-10">
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Lowest</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Highest</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Best Seller</div>
-      <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">New Arrival</div>
-    </div>
+<!-- Sort By Dropdown -->
+<div id="sortBy" class="relative">
+  <div
+    class="border border-gray-300 px-5 py-2 rounded cursor-pointer text-sm flex justify-between w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px]"
+  >
+    Sort By
+    <img
+      width="10"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/e94ec9341bd16f6adc455126d5a4c0f9b93274f8dd2680479859e3afea8c2f6a?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
+      alt="Dropdown Icon"
+    />
+  </div>
+  <div
+    id="dropdownSort"
+    class="hidden rounded border border-gray-300 bg-white absolute top-[50px] phone:max-tablet:top-[80px] w-[220px] phone:max-tablet:w-full phone:max-tablet:max-w-[180px] shadow-md z-20"
+  >
+    <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Lowest</div>
+    <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Highest</div>
+    <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">Best Seller</div>
+    <div class="cursor-pointer hover:bg-gray-200 p-4 text-sm">New Arrival</div>
+  </div>
+</div>
   </div>
 </section>
 
