@@ -65,7 +65,7 @@
                 class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 mx-auto max-w-[1200px] gap-4 px-4">
                 @foreach ($products as $item)
                     <div class="mb-32 phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px] shadow-md">
-                        <a href="{{ route('detail', $item->id) }}">
+                        <a href="{{ route('detail', $item) }}">
                             <div
                                 class="bg-gray-100 rounded-lg phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px]">
                                 <img src="{{ $item->images->first()->first_url ?? '/path/to/fallback-image.jpg' }}"
