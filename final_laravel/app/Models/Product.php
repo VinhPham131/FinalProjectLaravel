@@ -63,5 +63,10 @@ class Product extends Model
         $highestSale = $this->highestSale();
         return $highestSale ? $this->price * (1 - $highestSale / 100) : $this->price;
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
 
