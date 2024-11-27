@@ -11,11 +11,17 @@ class ShopController extends Controller
     {
         $search = $request->input('search');
 
-        $products = Product::with('images')
+        $products = Product::with(['images', 'category', 'collection']) // Eager load relationships
             ->when($search, function ($query, $search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             })
-            ->get();
+            ->get()
+            ->map(function ($product) {
+                // Attach the highest sale percentage and discounted price
+                $product->highest_sale = $product->highestSale();
+                $product->discounted_price = $product->salePrice();
+                return $product;
+            });
 
         // Check if the request is an AJAX call
         if ($request->ajax()) {
@@ -24,7 +30,4 @@ class ShopController extends Controller
 
         return view('shop', compact('products'));
     }
-
-
-    
 }

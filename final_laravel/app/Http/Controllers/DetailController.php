@@ -5,21 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-
 class DetailController extends Controller
 {
-    public function index($id)
+    public function show($slug)
     {
-        $product = Product::with('images')->find($id);
+        $product = Product::where('slug', $slug)->firstOrFail();
 
-        // Handle case where product doesn't exist
-        if (!$product) {
-            abort(404, 'Product not found');
-        }
+        // Calculate sale-related attributes for the main product
+        $this->calculateSaleAttributes($product);
 
-        // Get all products for the "Related Products" section
-        $products = Product::with('images')->get();
+        // Get all related products and calculate their sale prices
+        $products = Product::with('images')->get()->each(function ($item) {
+            $this->calculateSaleAttributes($item);
+        });
 
         return view('detail', compact('product', 'products'));
+    }
+
+    private function calculateSaleAttributes($product)
+    {
+        $product->highest_sale = $product->highestSale();
+        $product->discounted_price = $product->salePrice();
     }
 }

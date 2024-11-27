@@ -21,9 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::get('/product/{id}', [DetailController::class, 'index'])->name('detail');
+Route::get('/product/{product:slug}', [DetailController::class, 'show'])->name('detail');
 Route::get('/about',[AboutController::class, 'index']) ->name('about');
 
 require __DIR__.'/auth.php';
