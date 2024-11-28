@@ -23,7 +23,7 @@ export default {
         },
         extend: {
             fontFamily: {
-                roboto: ['Roboto', 'sans-serif'],
+                garamond: ['"EB Garamond"', 'serif'],
             },
             width: {
                 'calc-1/2': 'calc(50% - 1rem)',
