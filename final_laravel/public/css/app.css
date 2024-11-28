@@ -1723,8 +1723,8 @@ select {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.font-roboto {
-  font-family: Roboto, sans-serif;
+.font-garamond {
+  font-family: "EB Garamond", serif;
 }
 
 .font-sans {

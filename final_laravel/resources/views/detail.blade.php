@@ -39,7 +39,7 @@
 
         <!-- Right Column: Product Info -->
         <div class="new-product-info">
-            <h1 class="font-roboto new-product-title font-bold text-[25px] mt-2.5">{{ $product->name }}</h1>
+            <h1 class="font-garamond new-product-title font-bold text-[25px] mt-2.5">{{ $product->name }}</h1>
             <div class="new-product-info-prices flex justify-start items-center text-sm mt-4">
                 @if ($product->highest_sale)
                     <b class="bg-pink-200 text-gray-800 inline-block px-2.5 py-1 font-bold mx-1.5">
@@ -57,7 +57,7 @@
             </div>
 
             <!-- Product Details -->
-            <p class="tracking-wide font-roboto mt-4 text-lg">
+            <p class="tracking-wide font-garamond mt-4 text-lg">
                 Collection: {{ $product->collection->name }}<br>
                 Product Code: {{ $product->productcode }}<br>
                 Classification: {{ $product->category->name ?? 'N/A' }}<br>
@@ -69,17 +69,17 @@
     </div>
 
     <!-- Product Description -->
-    <h3 class="font-roboto cursor-pointer font-bold text-2xl pb-3.75 max-[431px]:mx-5">
+    <h3 class="font-garamond cursor-pointer font-bold text-2xl pb-3.75 max-[431px]:mx-5">
         <a class="border-b-2 border-yellow-700 my-3">Product Information</a>
     </h3>
     <div class="new-container mx-[50px] max-w-[1200px] max-[431px]:mx-10">
 
         <div class="new-product-content border-b border-gray-300 tablet:my-10">
 
-            <p class="tracking-wide font-roboto mt-2 mb-3 leading-5 text-lg max-w-[1100px]">
+            <p class="tracking-wide font-garamond mt-2 mb-3 leading-5 text-lg max-w-[1100px]">
                 {{ $product->description }}
             </p>
-            <p class="tracking-wide font-roboto mt-2.5 text-lg mb-5">
+            <p class="tracking-wide font-garamond mt-2.5 text-lg mb-5">
                 Collection: {{ $product->collection->name }}<br>
                 Product Code: {{ $product->productcode }}<br>
                 Classification: {{ $product->category->name ?? 'N/A' }}<br>
@@ -90,7 +90,7 @@
     </div>
 
     <!-- Related Products -->
-    <h3 class="font-roboto cursor-pointer font-bold text-[25px] pb-3.75 mb-10 mt-10 max-[431px]:mx-5">
+    <h3 class="font-garamond cursor-pointer font-bold text-[25px] pb-3.75 mb-10 mt-10 max-[431px]:mx-5">
         <a class="border-b-2 border-yellow-700">Related Products</a>
     </h3>
     <section class="grid justify-center">
