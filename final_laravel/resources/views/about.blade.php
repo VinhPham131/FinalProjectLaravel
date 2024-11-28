@@ -3,6 +3,7 @@
 @section('title', 'About Us')
 
 @section('content')
+<x-breadcrumbs />
 
 <section class="grid justify-center">
 <div class="flex flex-col max-w-[1200px] tablet:mx-[100px] laptop:mx-[200px] phone:mx-[20px]">

@@ -3,6 +3,7 @@
 @section('title', 'Product Detail')
 
 @section('content')
+<x-breadcrumbs />   
 <section class="grid justify-center laptop:ml-28">
     <div class="grid grid-cols-1 laptop:grid-cols-2 gap-10 max-w-[1200px] mx-auto laptop:mt-5">
         <!-- Left Column: Slideshow and Thumbnails -->
