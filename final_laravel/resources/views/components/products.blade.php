@@ -1,4 +1,4 @@
-<div class="mb-32 phone:h-[180px] phone:w-[180px] tablet:w-[240px] tablet:h-[240px] shadow-md">
+<div class="mb-32 phone:h-[180px] phone:w-[180px] tablet:w-[260px] tablet:h-[260px] shadow-md">
     <a href="{{ route('detail', $item) }}">
         <div class="bg-gray-100 rounded-lg phone:h-[180px] phone:w-[180px] tablet:w-[240px] tablet:h-[240px]">
             <img src="{{ $item->images->first()->first_url ?? '/path/to/fallback-image.jpg' }}" alt="{{ $item->name }}"
