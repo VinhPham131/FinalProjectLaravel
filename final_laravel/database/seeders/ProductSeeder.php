@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'collection_id' => Collection::where('name', 'Summer 2024')->first()->id,
                 'productcode' => 'GVPAXMW000044',
                 'color' => 'White',
-                'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
+                'category_id' => ProductCategory::where('name', 'Ring')->first()->id,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -47,6 +47,21 @@ class ProductSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => '18K Gold Bracelet with Ruby PNJ Spring RBXMY000180',
+                'description' => "Refreshing the classic standard of 18K gold with a delicate Ruby stone, the PNJ bracelet embodies a fresh look, perfectly fitting to brighten the optimistic beauty of ladies. The perfect combination creates a luxurious gold bracelet, highlighting the wrist with a delicately set Ruby. This brilliance enhances the beauty of ladies, making them look charming and radiant when worn.",
+                'price' => 50.00,
+                'quantity' => 0,
+                'material' => 'Ruby',
+                'size' => '53',
+                'stylecode' => 'BK789',
+                'collection_id' => Collection::where('name', 'Winter 2023')->first()->id,
+                'productcode' => 'GVRBXMY000180',
+                'color' => 'Gold',
+                'category_id' => ProductCategory::where('name', 'Necklace')->first()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ];
 
         foreach ($products as $product) {

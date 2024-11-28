@@ -33,6 +33,12 @@ class CollectionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Winter 2023',
+                'description' => 'Warm and cozy styles for Winter 2023.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ];
 
         foreach ($collections as $collection) {
