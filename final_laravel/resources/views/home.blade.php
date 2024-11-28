@@ -49,11 +49,11 @@
         <section class="grid justify-center">
             <section
                 class="flex justify-between mt-14 font-medium my-10 mx-auto max-w-[1200px] phone:w-[calc(400px-20px)] tablet:w-[calc(1000px-100px)] laptop:w-[calc(1200px-50px)]">
-                <h2 class="font-roboto flex-auto tablet:text-4xl phone:text-2xl leading-10 text-black">
+                <h2 class="font-garamond flex-auto tablet:text-4xl phone:text-2xl leading-10 text-black">
                     Shop The Latest
                 </h2>
                 <a href="/shop"
-                    class="font-roboto my-auto tablet:text-xl leading-7 capitalize text-stone-500 phone:text-sm">
+                    class="font-garamond my-auto tablet:text-xl leading-7 capitalize text-stone-500 phone:text-sm">
                     View All
                 </a>
             </section>
