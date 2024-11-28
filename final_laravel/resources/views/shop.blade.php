@@ -13,27 +13,28 @@
     class="grid tablet:grid-cols-3 laptop:grid-cols-4 tablet:mx-[200px] max-w-[1200px] laptop:w-[calc(1200px-100px)] tablet:max-laptop:w-[calc(1200px-350px)] phone:max-tablet:mb-5 phone:max-tablet:w-screen">
     <!-- Sidebar -->
     <section
-      class="grid flex-col phone:max-tablet:justify-center tablet:flex phone:max-tablet:border-gray-200 phone:max-tablet:border-b-2 phone:max-tablet:p-4 gap-5 phone:max-tablet:mb-5 phone:max-tablet:w-screen">
+      class="grid flex-col phone:max-tablet:justify-center tablet:flex phone:max-tablet:border-gray-200 phone:max-tablet:border-b-2 phone:max-tablet:p-4 phone:max-tablet:mb-5 phone:max-tablet:w-screen ">
 
-        @include('components/side-bar')
+      @include('components/side-bar')
     </section>
 
     <!-- Products -->
     <section class="phone:max-tablet:grid phone:max-tablet:justify-center">
+
       <section
-          class="grid h-full phone:grid-cols-2 phone:max-tablet:justify-center tablet:grid-cols-2 laptop:grid-cols-3 tablet:w-[calc(1200px-650px)] laptop:w-[calc(1200px-370px)] phone:mx-[10px] phone:w-[calc(500px-120px)] gap-2.5">
-            @foreach ($products as $item)
-              @include('components.products', ['item' => $item])
-            @endforeach
+        class="grid h-full phone:grid-cols-2 phone:max-tablet:justify-center tablet:grid-cols-2 laptop:grid-cols-3 tablet:w-[calc(1200px-650px)] laptop:w-[calc(1200px-350px)] phone:w-[calc(500px-70px)] border-l border-gray-600 pl-9 phone:max-tablet:border-hidden">
+        @foreach ($products as $item)
+      @include('components.products', ['item' => $item])
+    @endforeach
       </section>
 
     </section>
   </main>
 
+
 </section>
 
 <script src="{{asset('js/search.js')}}"></script>
-<script src="{{ asset('js/dropdown.js') }}"></script>
-<script src="{{ asset('js/checkbox.js') }}"></script>
+
 
 @endsection

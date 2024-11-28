@@ -35,6 +35,18 @@ class ProductImagesSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'urls' => json_encode([
+                    'https://cdn.pnj.io/images/detailed/69/gvrbxmy000180-vong-tay-vang-18k-dinh-da-ruby-pnj-sac-xuan-01.png',
+                    'https://cdn.pnj.io/images/detailed/132/gvrbxmy000180-vong-tay-vang-18k-dinh-da-ruby-pnj-sac-xuan-02.png',
+                    'https://cdn.pnj.io/images/detailed/132/gvrbxmy000180-vong-tay-vang-18k-dinh-da-ruby-pnj-sac-xuan-03.jpg',
+                    'https://cdn.pnj.io/images/detailed/132/gvrbxmy000180-vong-tay-vang-18k-dinh-da-ruby-pnj-sac-xuan-04.jpg',
+                    'https://cdn.pnj.io/images/detailed/132/gvrbxmy000180-vong-tay-vang-18k-dinh-da-ruby-pnj-sac-xuan-05.jpg'
+                ]),
+                'product_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ];
 
         foreach ($images as $image) {

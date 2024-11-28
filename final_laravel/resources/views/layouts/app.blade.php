@@ -11,6 +11,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="manifest" href="/site.webmanifest">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.css" rel="stylesheet">
+
     @vite('resources/css/app.css')
 
     <style>
@@ -40,6 +42,8 @@
     <x-footer />
     @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
+
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J7QBN2WL4D"></script>
