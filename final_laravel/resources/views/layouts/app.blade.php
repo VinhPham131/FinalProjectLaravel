@@ -34,8 +34,10 @@
     </style>
    
 </head>
-<body>
+<body class = "overflow-x-hidden">
     <x-header />
+
+
 
     @yield('content')
 
