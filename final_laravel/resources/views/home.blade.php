@@ -63,7 +63,7 @@
         <section class="grid justify-center">
             <section
                 class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 mx-auto max-w-[1200px] gap-4 px-4">
-                <
+                
                 @foreach ($products as $item)
                     @include('components.products', ['item' => $item])
                 @endforeach
