@@ -38,15 +38,15 @@
         </div>
 
         <!-- Right Column: Product Info -->
-        <div class="new-product-info">
-            <h1 class="font-garamond new-product-title font-bold text-[25px] mt-2.5">{{ $product->name }}</h1>
-            <div class="new-product-info-prices flex justify-start items-center text-sm mt-4">
+        <div class="new-product-info ">
+            <h1 class="font-garamond new-product-title font-bold text-[25px] mt-7 max-w-[500px]" >{{ $product->name }}</h1>
+            <div class="new-product-info-prices flex justify-center items-center text-sm mt-4 border-b border-grey-600 pb-4 max-w-[450px] mb-6">
                 @if ($product->highest_sale)
-                    <b class="bg-pink-200 text-gray-800 inline-block px-2.5 py-1 font-bold mx-1.5">
+                    <b class="bg-a28b68 text-white inline-block px-2.5 py-1 font-bold mx-1.5">
                         ${{ number_format($product->discounted_price, 2) }}
                     </b>
-                    <del class="mx-1.5">${{ number_format($product->price, 2) }}</del>
-                    <span class="bg-gray-800 text-white inline-block px-2.5 py-1 font-medium mx-1.5">
+                    <del class="mx-1.5 text-a28b68">${{ number_format($product->price, 2) }}</del>
+                    <span class="bg-red-800 text-white inline-block px-2.5 py-1 font-medium mx-1.5">
                         -{{ $product->highest_sale }}%
                     </span>
                 @else
@@ -57,19 +57,36 @@
             </div>
 
             <!-- Product Details -->
-            <p class="tracking-wide font-garamond mt-4 text-lg">
-                Collection: {{ $product->collection->name }}<br>
-                Product Code: {{ $product->productcode }}<br>
-                Classification: {{ $product->category->name ?? 'N/A' }}<br>
-                Material: {{ $product->material }}<br>
-                Color: {{ $product->color }}
-            </p>
+            <div class="mt-4 max-w-[450px]">
+                <p class="tracking-wide font-garamond text-lg mb-7">
+                    <label class="block font-bold">Material</label>
+                    <span class="block border p-2 text-center text-[15px] ">{{ $product->material }}</span>
+                </p>
+                <p class="tracking-wide font-garamond text-lg mb-7">
+                    <label class="block font-bold">Size</label>
+                    <span class="block border p-2 text-center text-[15px]">{{ $product->size ?? 'N/A' }}</span>
+                </p>
+                <p class="tracking-wide font-garamond text-lg mb-12">
+                    <label class="block font-bold">Stylecode</label>
+                    <span class="block border p-2 text-center text-[15px]">{{ $product->stylecode ?? 'N/A' }}</span>
+                </p>
+            </div>
+
+            <!-- Add to Cart button -->
+            <div class="new-product-action mt-6">
+                <button
+                     id="addcart"
+                    class="w-full bg-gray-800 text-white flex justify-center items-center h-11 max-w-[470px]"
+                >
+                    Add to cart
+                </button>
+            </div>
         </div>
 
     </div>
 
     <!-- Product Description -->
-    <h3 class="font-garamond cursor-pointer font-bold text-2xl pb-3.75 max-[431px]:mx-5">
+    <h3 class="font-garamond cursor-pointer font-bold text-2xl pb-3.75 max-[431 px]:mx-5">
         <a class="border-b-2 border-yellow-700 my-3">Product Information</a>
     </h3>
     <div class="new-container mx-[50px] max-w-[1200px] max-[431px]:mx-10">
