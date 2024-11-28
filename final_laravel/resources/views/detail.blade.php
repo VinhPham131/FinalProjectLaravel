@@ -39,8 +39,10 @@
 
         <!-- Right Column: Product Info -->
         <div class="new-product-info ">
-            <h1 class="font-garamond new-product-title font-bold text-[25px] mt-7 max-w-[500px]" >{{ $product->name }}</h1>
-            <div class="new-product-info-prices flex justify-center items-center text-sm mt-4 border-b border-grey-600 pb-4 max-w-[450px] mb-6">
+            <h1 class="font-garamond new-product-title font-bold text-[25px] mt-7 max-w-[500px]">{{ $product->name }}
+            </h1>
+            <div
+                class="new-product-info-prices flex justify-center items-center text-sm mt-4 border-b border-grey-600 pb-4 max-w-[450px] mb-6">
                 @if ($product->highest_sale)
                     <b class="bg-a28b68 text-white inline-block px-2.5 py-1 font-bold mx-1.5">
                         ${{ number_format($product->discounted_price, 2) }}
@@ -74,10 +76,8 @@
 
             <!-- Add to Cart button -->
             <div class="new-product-action mt-6">
-                <button
-                     id="addcart"
-                    class="w-full bg-gray-800 text-white flex justify-center items-center h-11 max-w-[470px]"
-                >
+                <button id="addcart"
+                    class="w-full bg-gray-800 text-white flex justify-center items-center h-11 max-w-[470px]">
                     Add to cart
                 </button>
             </div>
@@ -89,21 +89,17 @@
     <h3 class="font-garamond cursor-pointer font-bold text-2xl pb-3.75 max-[431 px]:mx-5">
         <a class="border-b-2 border-yellow-700 my-3">Product Information</a>
     </h3>
-    <div class="new-container mx-[50px] max-w-[1200px] max-[431px]:mx-10">
-
-        <div class="new-product-content border-b border-gray-300 tablet:my-10">
-
-            <p class="tracking-wide font-garamond mt-2 mb-3 leading-5 text-lg max-w-[1100px]">
-                {{ $product->description }}
-            </p>
-            <p class="tracking-wide font-garamond mt-2.5 text-lg mb-5">
-                Collection: {{ $product->collection->name }}<br>
-                Product Code: {{ $product->productcode }}<br>
-                Classification: {{ $product->category->name ?? 'N/A' }}<br>
-                Material: {{ $product->material }}<br>
-                Color: {{ $product->color }}
-            </p>
-        </div>
+    <div class="new-container  max-w-[1200px] max-[431px]:mx-10">
+        <p class="tracking-wide font-garamond mt-8 mb-3 leading-5 text-[20px] max-w-[1200px]">
+            {{ $product->description }}
+        </p>
+        <p class="tracking-wide font-garamond mt-2.5 text-[20px] mb-5">
+            Collection: {{ $product->collection->name }}<br>
+            Product Code: {{ $product->productcode }}<br>
+            Classification: {{ $product->category->name ?? 'N/A' }}<br>
+            Material: {{ $product->material }}<br>
+            Color: {{ $product->color }}
+        </p>
     </div>
 
     <!-- Related Products -->
@@ -111,7 +107,7 @@
         <a class="border-b-2 border-yellow-700">Related Products</a>
     </h3>
     <section class="grid justify-center">
-        <section class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 mx-auto max-w-[1200px] gap-4 px-4">
+        <section class="grid phone:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 max-w-[1200px] gap-4 px-4">
             @foreach ($products as $item)
                 @include('components.products', ['item' => $item])
             @endforeach
