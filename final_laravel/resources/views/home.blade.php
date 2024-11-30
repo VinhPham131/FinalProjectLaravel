@@ -95,12 +95,6 @@
         </section>
 
     </main>
-    <!-- Banner Section -->
-    <!-- <section class="tablet:grid tablet:justify-center">
-        <div class="phone:mx-auto tablet:mx-[200px] max-w-[1300px] phone:w-full phone:h-[200px] tablet:w-[800px] tablet:h-[350px] laptop:w-[1200px] laptop:h-[500px] bg-cover bg-center  "
-            style="background-image: url('https://file.hstatic.net/200000103143/file/2880x1040_08e287342f01452c9a706ec67d1f592a.jpg">
-        </div>
-    </section> -->
     
 </section>
 
