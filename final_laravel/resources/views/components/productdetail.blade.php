@@ -1,5 +1,5 @@
 <div>
-<div class="grid grid-cols-1 laptop:grid-cols-2 gap-10 max-w-[1200px] mx-auto laptop:mt-5">
+    <div class="grid grid-cols-1 laptop:grid-cols-2 gap-10 max-w-[1200px] mx-auto laptop:mt-5">
         <!-- Left Column: Slideshow and Thumbnails -->
         <div class="slideshow-container relative">
             <!-- Slideshow -->
@@ -89,11 +89,11 @@
             {{ $product->description }}
         </p>
         <p class="tracking-wide font-garamond mt-2.5 text-[20px] mb-5">
-            Collection: {{ $product->collection->name }}<br>
-            Product Code: {{ $product->productcode }}<br>
-            Classification: {{ $product->category->name ?? 'N/A' }}<br>
-            Material: {{ $product->material }}<br>
-            Color: {{ $product->color }}
+            <span style="font-weight: bold;">Collection:</span> {{ $product->collection->name }}<br>
+            <span style="font-weight: bold;">Product Code:</span> {{ $product->productcode }}<br>
+            <span style="font-weight: bold;">Classification:</span> {{ $product->category->name ?? 'N/A' }}<br>
+            <span style="font-weight: bold;">Material:</span> {{ $product->material }}<br>
+            <span style="font-weight: bold;">Color:</span> {{ $product->color }}
         </p>
     </div>
 </div>
