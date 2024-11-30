@@ -11,11 +11,11 @@ class HomeController extends Controller
     public function index()
     {
         $slideshowImages = [
-            'https://asset.swarovski.com/c_crop,g_xy_center,w_11455,h_3877,x_5728,y_3892/f_auto,q_auto,dpr_2.0/swa-cms/LOOKBOOKSS24_LOOK06-1_OF_GL_72DPI_RGB_SALE.jpg',
-            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_11348,h_3842,x_5669,y_4529/dpr_2.0,f_auto,q_auto,c_lfill,w_1449,h_830/swa-cms/LOOKBOOKSS24_LOOK06-2_OF_GL_72DPI_RGB_EXT2/.jpg',
-            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_6649,h_2251,x_3325,y_1126/dpr_2.0,f_auto,q_auto,c_lfill,w_1449,h_830/swa-cms/2024_MOL-MILAN_ARCHSHOT_VISUAL_FUTURE-HISTORY-2_GL_72DPI_RGB/.jpg',
-            'https://media.tiffany.com/is/image/tiffanydm/2024-TITAN-HP-Stories-1?$tile$&wid=736&hei=920&fmt=webp',
-            'https://cms-live-rc.pandora.net/resource/responsive-image/2994966/m66-feature-module/lg/5/q124-editorial-aprilmay-mostloved-model-summercelebration-twoimageoverlap.jpg',
+            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_2411,h_1356,x_2869,y_1683/dpr_2.0,f_auto,q_auto,c_lfill,w_1450,h_815/swa-cms/20242025_T1_HOLIDAY_KV_STILL_LIFE_MATRIX_CRASH_72_RGB/.jpg',
+            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_3031,h_1705,x_1580,y_1300/dpr_2.0,f_auto,q_auto,c_lfill,w_1450,h_815/swa-cms/20242025_T1_HOLIDAY_KV_STILL_LIFE_MILLENIA_OMNICHANNEL_72_RGB/.jpg',
+            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_3031,h_1705,x_1580,y_1300/dpr_2.0,f_auto,q_auto,c_lfill,w_1450,h_815/swa-cms/20242025_T1_HOLIDAY_KV_STILL_LIFE_MILLENIA_OMNICHANNEL_72_RGB/.jpg',
+            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_1192,h_1589,x_1449,y_1143/dpr_2.0,f_auto,q_auto,c_lfill,w_604,h_905/swa-cms/20242025_T1_HOLIDAY_KV_ON_MODEL_MILLENIA_200DPI_RGB/.jpg',
+            'https://asset.swarovski.com/images/c_crop,g_xy_center,w_1458,h_1944,x_1526,y_1689/dpr_2.0,f_auto,q_auto,c_lfill,w_725,h_966/swa-cms/20242025_T1_HOLIDAY_KV_ON_MODEL_MATRIX_CRASH_200DPI_RGB/.jpg',
         ];
 
         // Fetch products with dynamic pricing and sale calculations

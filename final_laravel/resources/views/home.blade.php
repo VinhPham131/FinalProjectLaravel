@@ -3,21 +3,22 @@
 @section('title', 'Homepage')
 
 @section('content')
-
 <style>
-    .slideshow-container {
-        display: flex;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    }
+   #carousel-container {
+    width: 100%;
+    overflow: hidden; /* Ẩn nội dung ngoài khung */
+}
 
-    .mySlides {
-        flex: 0 0 auto;
-    }
+#carousel-images {
+    display: flex;
+    transition: transform 0.7s ease-in-out; /* Hiệu ứng chuyển slide */
+}
 
-    .fade {
-        transition: opacity 3s ease-in-out;
-    }
+#carousel-images > div {
+    flex: 0 0 33.3333%; /* Mỗi ảnh chiếm 1/3 chiều rộng container */
+    max-width: 33.3333%; /* Đảm bảo luôn hiển thị 3 ảnh */
+}
+
 </style>
 
 <section class="grid justify-center">
@@ -28,21 +29,45 @@
         </video>
     </div>
 
-    <!-- Slideshow Section -->
-
-    <div
-        class="slideshow-container relative tablet:mt-3 phone:mt-2 tablet:mx-auto max-w-[1200px] tablet:gap-7 phone:gap-2 phone:mx-[10px] sha">
+    <div id="carousel-container" class="relative w-full overflow-hidden">
+    <!-- Wrapper for images -->
+    <div id="carousel-images" class="flex transition-transform duration-700 ease-in-out gap-5 max-w-[1200px] mt-5 ">
         @foreach ($slideshowImages as $url)
-            <div class="mySlides fade hidden">
-                <div class="tablet:w-[500px] tablet:h-[250px] phone:w-[170px] phone:h-[110px] bg-cover bg-center"
-                    style="background-image: url('{{ $url }}');"></div>
+            <div class="flex-shrink-0 w-1/3">
+                <img src="{{ $url }}" 
+                     class="w-full h-[300px] object-cover" 
+                     alt="Slideshow image">
             </div>
         @endforeach
-        <a class="prev cursor-pointer absolute top-1/2 transform -translate-y-1/2 left-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out rounded-r-md hover:bg-black hover:text-white select-none"
-            id="prev">&#10094;</a>
-        <a class="next cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-l-md select-none"
-            id="next">&#10095;</a>
     </div>
+
+    <!-- Indicators -->
+    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
+        @foreach ($slideshowImages as $index => $url)
+            <button type="button" class="w-3 h-3 rounded-full bg-white"
+                    aria-current="{{ $index === 0 ? 'true' : 'false' }}" 
+                    data-carousel-slide-to="{{ $index }}" 
+                    onclick="goToSlide({{ $index }})"></button>
+        @endforeach
+    </div>
+
+    <!-- Navigation controls -->
+    <button class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer" onclick="prevSlide()">
+        <span class="inline-flex items-center justify-center w-10 h-10 bg-white/30 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </span>
+    </button>
+    <button class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer" onclick="nextSlide()">
+        <span class="inline-flex items-center justify-center w-10 h-10 bg-white/30 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </button>
+</div>
+
 
     <!-- Shop Section -->
     <main>
@@ -70,13 +95,62 @@
         </section>
 
     </main>
-
     <!-- Banner Section -->
-    <section class="tablet:grid tablet:justify-center">
-        <div class="phone:mx-auto tablet:mx-[200px] max-w-[1200px] phone:w-full phone:h-[200px] tablet:w-[800px] tablet:h-[350px] laptop:w-[1200px] laptop:h-[500px]"
-            style="background-image: url('https://images.unsplash.com/photo-1531303435785-3853ba035cda?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;">
+    <!-- <section class="tablet:grid tablet:justify-center">
+        <div class="phone:mx-auto tablet:mx-[200px] max-w-[1300px] phone:w-full phone:h-[200px] tablet:w-[800px] tablet:h-[350px] laptop:w-[1200px] laptop:h-[500px] bg-cover bg-center  "
+            style="background-image: url('https://file.hstatic.net/200000103143/file/2880x1040_08e287342f01452c9a706ec67d1f592a.jpg">
         </div>
-    </section>
+    </section> -->
+    
 </section>
-<script src="{{ asset('js/slide.js') }}"></script>
+
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-24 mx-auto max-w-[1200px] phone:w-[calc(400px-20px)] tablet:w-[calc(1000px-100px)] laptop:w-[calc(1250px-50px)]">
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5700418_ms1/matrix-drop-earrings--mixed-cuts--white--rhodium-plated-swarovski-5700418.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5693154_ms1/matrix-bracelet--mixed-cuts--white--rhodium-plated-swarovski-5693154.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5692533_ms1/matrix-y-necklace--mixed-cuts--white--rhodium-plated-swarovski-5692533.jpg" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_2000/t_swa002/c_scale,dpr_2.0,f_auto,w_2000/5698546_ms1/hyperbola-necklace--mixed-cuts--white--rhodium-plated-swarovski-5698546.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_2000/t_swa002/c_scale,dpr_2.0,f_auto,w_2000/5469989_ms1/swan-necklace--swan--pink--rose-gold-tone-plated-swarovski-5469989.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5472271_ms1/swan-bracelet--magnetic-closure--swan--pink--rose-gold-tone-plated-swarovski-5472271.jpg" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5642978_ms1/teddy-bracelet--bear--pink--rose-gold-tone-plated-swarovski-5642978.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5662114_ms1/bella-v-drop-earrings--round-cut--pink--rose-gold-tone-plated-swarovski-5662114.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5662088_ms1/bella-v-pendant--round-cut--pink--rose-gold-tone-plated-swarovski-5662088.jpg" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5662918_ms1/chroma-necklace--mixed-cuts--multicolored--gold-tone-plated-swarovski-5662918.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5652822_ms1/gema-bracelet--mixed-cuts--green--gold-tone-plated-swarovski-5652822.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://asset.swarovski.com/images/$size_1450/t_swa002/c_scale,dpr_2.0,f_auto,w_675/5652801_ms1/gema-drop-earrings--mixed-cuts--green--gold-tone-plated-swarovski-5652801.jpg" alt="">
+        </div>
+    </div>
+</div>
+<script src="/js/slide.js"> </script>
+
 @endsection
