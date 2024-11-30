@@ -1,14 +1,15 @@
-const forms = require('@tailwindcss/forms');
+import forms from '@tailwindcss/forms';
+import flowbitePlugin from 'flowbite/plugin';
 
-/** @type {import('tailwindcss').Config} */
+/ @type {import('tailwindcss').Config} /
 export default {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/.blade.php',
         './storage/framework/views/*.php',
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
-        "./node_modules/flowbite/**/*.js",
+        './resources//.blade.php',
+        './resources/**/.js',
+        './resources//*.vue',
+        './node_modules/flowbite//*.js',
     ],
 
     theme: {
@@ -31,12 +32,11 @@ export default {
             colors: {
                 'a28b68': '#a28b68',
             }
-
         },
     },
 
     plugins: [
         forms,
-        require('flowbite/plugin')
+        flowbitePlugin,
     ],
 };

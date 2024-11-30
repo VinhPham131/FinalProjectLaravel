@@ -1,45 +1,45 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".mySlides");
-    const prevButton = document.getElementById("prev");
-    const nextButton = document.getElementById("next");
+let currentIndex = 0; // Chỉ số slide hiện tại
+const imagesContainer = document.getElementById('carousel-images');
+const totalSlides = imagesContainer.children.length; // Tổng số ảnh
+const visibleSlides = 3; // Số ảnh hiển thị cùng lúc
 
-    // Show the first 3 slides
-    function showSlides() {
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (let i = 0; i < 3; i++) {
-            let currentIndex = (slideIndex + i) % slides.length;
-            slides[currentIndex].style.display = "block";
-        }
+// Chuyển đến slide chỉ định
+function goToSlide(index) {
+    if (index >= 0 && index <= totalSlides - visibleSlides) {
+        currentIndex = index;
+        const offset = -100 / visibleSlides * currentIndex; // Tính khoảng cách theo %
+        imagesContainer.style.transform = `translateX(${offset}%)`;
+        updateIndicators();
     }
+}
 
-    showSlides(); // Initial display of slides
-
-    // Automatic slide change
-    function autoSlides() {
-        slideIndex = (slideIndex + 1) % slides.length;
-        showSlides();
+// Chuyển đến slide tiếp theo
+function nextSlide() {
+    if (currentIndex < totalSlides - visibleSlides) {
+        goToSlide(currentIndex + 1);
+    } else {
+        goToSlide(0); // Quay lại slide đầu tiên
     }
+}
 
-    let slideInterval = setInterval(autoSlides, 5000); // Change slide every 3 seconds
-
-    // Next/previous controls
-    function plusSlides(n) {
-        slideIndex = (slideIndex + n + slides.length) % slides.length;
-        showSlides();
+// Chuyển đến slide trước đó
+function prevSlide() {
+    if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+    } else {
+        goToSlide(totalSlides - visibleSlides); // Quay lại slide cuối cùng
     }
+}
 
-    prevButton.addEventListener("click", function() {
-        plusSlides(-1);
-        clearInterval(slideInterval); // Stop automatic sliding when button is clicked
-        slideInterval = setInterval(autoSlides, 5000); // Restart automatic sliding
+// Cập nhật trạng thái của các nút chỉ báo
+function updateIndicators() {
+    const buttons = document.querySelectorAll('[data-carousel-slide-to]');
+    buttons.forEach((button, index) => {
+        button.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
     });
+}
 
-    nextButton.addEventListener("click", function() {
-        plusSlides(1);
-        clearInterval(slideInterval); // Stop automatic sliding when button is clicked
-        slideInterval = setInterval(autoSlides, 5000); // Restart automatic sliding
-    });
-});
+// Tự động chuyển slide
+setInterval(() => {
+    nextSlide();
+}, 5000);
