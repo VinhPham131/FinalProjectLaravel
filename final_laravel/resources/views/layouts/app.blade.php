@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="LBJ Jewlery Luxury"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LBJ Jewlery Luxury" />
     <title>LBJ</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -32,14 +33,17 @@
             margin-right: auto;
         }
     </style>
-   
+
 </head>
-<body class = "overflow-x-hidden">
+
+<body class="overflow-x-hidden">
     <x-header />
 
 
+    <main class ="">
+        @yield('content')
+    </main>
 
-    @yield('content')
 
     <x-footer />
     @section('scripts')
@@ -47,22 +51,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
 
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J7QBN2WL4D"></script>
-<script>
-    // OLD code is: src/scripts/gganalytics.js
-    window.dataLayer = window.dataLayer || [];
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J7QBN2WL4D"></script>
+    <script>
+        // OLD code is: src/scripts/gganalytics.js
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
-    gtag('config', 'G-J7QBN2WL4D');
-</script>
+        gtag('js', new Date());
+        gtag('config', 'G-J7QBN2WL4D');
+    </script>
 
-<!-- Additional scripts customized for specific screens -->
-@yield('script')
+    <!-- Additional scripts customized for specific screens -->
+    @yield('script')
 
 </body>
+
 </html>
