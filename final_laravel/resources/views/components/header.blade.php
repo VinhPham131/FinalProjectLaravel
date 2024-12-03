@@ -64,45 +64,8 @@
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/324b097b3a26f24da080c52561d900b13bf05f0d28848eed44fbb39ad816c1d1?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
                     alt="Image description" class="shrink-0 self-start aspect-square w-[21px]" />
 
-
-                <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
-                    class="flex text-sm md:me-0 "
-                    type="button">
-                    <span class="sr-only">Open user menu</span>
-                    <img loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f730e5942965a07e5a2ab20fe941c2b09c71126a0ad6a759c38c6b0eaefa36d?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
-                        alt="Image description"
-                        class="shrink-0 self-start w-5 border border-white border-solid aspect-[0.95] fill-black stroke-[1px] stroke-white" />
-                </button>
-
-                <!-- Dropdown menu -->
-                <div id="dropdownAvatar"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                        <div>Bonnie Green</div>
-                        <div class="font-medium truncate">name@flowbite.com</div>
-                    </div>
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownUserAvatarButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Account</a>
-                        </li>
-                    </ul>
-                    <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                            out</a>
-                    </div>
-                </div>
+                <!-- User -->
+                <x-user />
 
             </div>
         </div>
