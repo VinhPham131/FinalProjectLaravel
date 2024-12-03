@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
     public function profile()
@@ -17,8 +19,9 @@ class UserController extends Controller
     {
         return view('accountedit');
     }
-    public function wishlist()
+    public function whishlist()
     {
-        return view('accountwishlist');
+        return view('accountwhishlist');
     }
 }
+

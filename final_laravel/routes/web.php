@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\DetailController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\DetailController;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -25,10 +26,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product}', [DetailController::class, 'show'])->name('detail');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/about',[AboutController::class, 'index']) ->name('about');
 Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
 Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
-Route::get('/user/wishlist', [UserController::class, 'wishlist'])->name('user.wishlist');
+Route::get('/user/whishlist', [UserController::class, 'whishlist'])->name('user.whishlist');
 
-require __DIR__ . '/auth.php';
+
+require __DIR__.'/auth.php';

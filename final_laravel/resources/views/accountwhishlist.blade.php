@@ -23,9 +23,10 @@
                 class="inline-block w-max p-4 border-b-2 border-transparent rounded-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 active">
                 Account
             </a>
-            <a href="{{ route('user.wishlist') }}"
+            <!-- Nút Whishlist -->
+            <a href="{{ route('user.whishlist') }}"
                 class="inline-block w-max p-4 border-b-2 border-transparent rounded-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                Wish list
+                Whishlist
             </a>
         </div>
     </div>
