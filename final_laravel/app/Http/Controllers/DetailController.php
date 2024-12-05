@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
@@ -12,14 +12,28 @@ class DetailController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
 
         // Calculate sale-related attributes for the main product
-        $this->calculateSaleAttributes($product);
+        $this->calculateSaleAttributes($product); // TODO: SHOULD IMPROVE THIS
 
-        // Get all related products and calculate their sale prices
-        $products = Product::with('images')->get()->each(function ($item) {
-            $this->calculateSaleAttributes($item);
-        });
+        $related_products = Product::with('images')
+            ->select([
+                'products.*',
+                DB::raw('MAX(sales.percentage) as highest_sale'),
+            ])
+            ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
+            ->join('sales', 'sales.name', '=', 'product_categories.name')
+            ->groupBy('products.id')
+            ->get()
+            ->each(function (Product $product) {
+                if ($product->highest_sale) {
+                    $product->discounted_price = $product->highest_sale
+                    ? $product->price * (1 - $product->highest_sale / 100)
+                    : $product->price;
+                } else {
+                    $product->discounted_price = null;
+                }
+            });
 
-        return view('detail', compact('product', 'products'));
+        return view('detail', compact('product', 'related_products'));
     }
 
     private function calculateSaleAttributes($product)
