@@ -22,9 +22,9 @@ class LoginModal extends ModalComponent
     public function mount()
     {
         $this->currentPath = request()->header('Referer');
-        if (Auth::viaRemember()) {
-            $this->email = Auth::user()->email;
-        } 
+
+        $this->email = session('remembered_email', ''); // Default to empty string if not found
+   
     }
 
     public function login(Request $request)
@@ -37,16 +37,17 @@ class LoginModal extends ModalComponent
 
             if ($this->remember) {
                 session(['remembered_email' => $this->email]);
+
             }
 
-            return redirect()->intended(); // Redirect to the current page
+            return redirect($this->currentPath); // Redirect to the current path
         }
 
         // Authentication failed
         session()->flash('error', __('auth.login_failed'));
 
         // Clear the password field for security
-        $this->password = null;
+        // $this->password = null;
 
         return;
     }

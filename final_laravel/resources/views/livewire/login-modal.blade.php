@@ -1,9 +1,9 @@
 <div class="block">
     <div class="flex justify-center pt-6">
-        <x-logo-shop />
+        <x-logo-icon />
     </div>
 
-    <div class="flex justify-center py-8">
+    <div class="flex justify-center py-6">
         <form wire:submit.prevent="login">
             @csrf
             <!-- Email Address -->
@@ -36,21 +36,24 @@
 
             <!-- Error Message -->
             @if (session()->has('error'))
-                <x-input-error :messages="session('error')" class="mb-4" />
+                <div class="mt-4">
+                    <x-input-error :messages="session('error')" class="mb-4" />
+                </div>
             @endif
 
 
-            <div class="flex items-center pt-6 justify-between"></div>
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <div class="flex items-center justify-between">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
 
-            <x-primary-button class="ms-3" wire:click="login" wire:loading.attr="disabled" loading="Logging..">
-                {{ __('Log in') }}
-            </x-primary-button>
+                <x-primary-button class="ms-3" wire:loading.attr="disabled" loading="Logging..">
+                    {{ __('Log in') }}
+                </x-primary-button>
+            </div>
     </div>
     </form>
 </div>

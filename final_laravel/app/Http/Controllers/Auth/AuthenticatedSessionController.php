@@ -28,9 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // return redirect()->intended(route('/', absolute: false));
-        return redirect()->intended();
-
+        $currentPath = request()->header('Referer');
+        return redirect()->to($currentPath);
     }
 
     /**
@@ -38,12 +37,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $currentPath = request()->header('Referer');
+
+        // Preserve the remembered email before logging out
+        $rememberedEmail = session('remembered_email');
+
+        // Log out the user
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Restore the remembered email from session before redirecting
+        if ($rememberedEmail) {
+            session(['remembered_email' => $rememberedEmail]);
+        }
+
+        // return redirect('/');
+        return redirect()->to($currentPath);
     }
 }
