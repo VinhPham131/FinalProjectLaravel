@@ -9,6 +9,7 @@
         "cviebrock/eloquent-sluggable": "^11.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "livewire-ui/modal": "^2.0",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {
