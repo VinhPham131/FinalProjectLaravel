@@ -3,42 +3,63 @@
 namespace App\Livewire;
 
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginModal extends ModalComponent
 {
     public $email;
     public $password;
-    public $remember = false;
+    public $remember=false;
+    public $currentPath;
 
-    public function login()
+    protected $rules = [
+        'email' => 'required|email|string',
+        'password' => 'required|string',
+        'remember' => 'boolean',
+    ];
+
+    public function mount()
     {
-        $this->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-        ]);
-    
-        // Attempt to authenticate the user
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
-            return redirect()->intended('/'); // Redirect on success
-        } else {
-            // Add specific error messages based on conditions
-            $user = \App\Models\User::where('email', $this->email)->first();
-    
-            if (!$user) {
-                // If the email doesn't exist in the database
-                $this->addError('email', __('login.email_not_found'));
-            } elseif (!Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-                // If the password is incorrect
-                $this->addError('password', __('login.incorrect_password'));
-            } else {
-                // A fallback error message (should not be triggered in normal cases)
-                $this->addError('email', __('login.invalid_credentials'));
+        $this->currentPath = request()->header('Referer');
+        if (Auth::viaRemember()) {
+            $this->email = Auth::user()->email;
+        } 
+    }
+
+    public function login(Request $request)
+    {
+        // Validate inputs
+        $this->validate();
+
+        if ($this->attemptLogin()) {
+            $request->session()->regenerate();
+
+            if ($this->remember) {
+                session(['remembered_email' => $this->email]);
             }
+
+            return redirect()->intended(); // Redirect to the current page
         }
-    }    
-    
+
+        // Authentication failed
+        session()->flash('error', __('auth.login_failed'));
+
+        // Clear the password field for security
+        $this->password = null;
+
+        return;
+    }
+
+    protected function attemptLogin()
+    {
+        return $this->guard()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
+    }
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+
     public function render()
     {
         return view('livewire.login-modal');
