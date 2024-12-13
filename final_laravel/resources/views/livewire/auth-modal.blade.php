@@ -1,13 +1,13 @@
-<div class="block">
+<div class="flex-row justify-between">
     <div class="flex justify-center pt-6">
-        <x-logo-icon></x-logo-icon>
+        <x-logo-icon />
     </div>
 
-    <div class="flex justify-center py-6">
+    <div class="flex justify-center">
         @if ($mode == 'login')
-            <x-login-form />
-        @else
-            <x-register-form />
+            <x-auth.login-form />
+        @elseif ($mode == 'register')
+            <x-auth.register-form />
         @endif
     </div>
 </div>

@@ -15,27 +15,55 @@ class AuthModal extends ModalComponent
     public $name = ''; // For registration
     public $password_confirmation = ''; // For registration
     public $mode = 'login'; // Default mode is login
-    public $currentPath;
 
-    protected $rules = [
-        'email' => 'required|email|string',
-        'password' => 'required|string',
-        'remember' => 'boolean',
-    ];
-
-    public function switchMode($mode)
+    protected function rules()
     {
-        $this->resetValidation();
-        $this->mode = $mode;
+        return match ($this->mode) {
+            'login' => [
+            'email' => 'required|email|string',
+            'password' => 'required|string',
+            'remember' => 'boolean',
+            ],
+            'register' => [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password'
+            ],
+            default => [],
+        };
     }
 
     public function mount($mode)
     {
-        $this->currentPath = request()->header('Referer');
-
         $this->mode = $mode;
+        
+        if ($this->mode === 'login') {
+            $this->email = session('remembered_email', ''); // Default to empty string if not found
+        }
+    }
 
-        $this->email = session('remembered_email', ''); // Default to empty string if not found
+    public function switchMode($mode)
+    {
+        $this->resetForm();
+        $this->mode = $mode;
+    }
+
+    protected function resetForm()
+    {
+        // Reset fields based on the mode
+        if ($this->mode === 'login') {
+            $this->name = '';
+            $this->email = '';
+            $this->password = '';
+            $this->password_confirmation = '';
+        } elseif ($this->mode === 'register') {
+            $this->email = '';
+            $this->password = '';
+            $this->remember = false;
+        }
+        
+        $this->resetValidation();  // Reset validation state
     }
 
     public function login(Request $request)
@@ -51,7 +79,7 @@ class AuthModal extends ModalComponent
 
             }
 
-            return redirect($this->currentPath); // Redirect to the current path
+            return redirect()->intended(); // Redirect to the current path
         }
 
         // Authentication failed
@@ -65,18 +93,14 @@ class AuthModal extends ModalComponent
 
     protected function attemptLogin()
     {
-        // return $this->guard()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
+        return $this->guard()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
 
-        return Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
+        // return Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
     }
 
     public function register()
     {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-        ]);
+        $this->validate();
 
         $user = User::create([
             'name' => $this->name,
@@ -85,7 +109,7 @@ class AuthModal extends ModalComponent
         ]);
 
         Auth::login($user);
-        return redirect(request()->header('Referer') ?? '/');
+        return redirect()->intended();
     }
 
     protected function guard()
