@@ -37,7 +37,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $currentPath = request()->header('Referer');
 
         // Preserve the remembered email before logging out
         $rememberedEmail = session('remembered_email');
@@ -52,7 +51,6 @@ class AuthenticatedSessionController extends Controller
             session(['remembered_email' => $rememberedEmail]);
         }
 
-        // return redirect('/');
-        return redirect()->to($currentPath);
+        return redirect('/');
     }
 }
