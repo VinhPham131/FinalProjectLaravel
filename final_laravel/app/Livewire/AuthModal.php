@@ -20,15 +20,15 @@ class AuthModal extends ModalComponent
     {
         return match ($this->mode) {
             'login' => [
-            'email' => 'required|email|string',
-            'password' => 'required|string',
-            'remember' => 'boolean',
+                'email' => 'required|email|string',
+                'password' => 'required|string',
+                'remember' => 'boolean',
             ],
             'register' => [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'password_confirmation' => 'required|same:password'
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8',
+                'password_confirmation' => 'required|same:password'
             ],
             default => [],
         };
@@ -37,10 +37,15 @@ class AuthModal extends ModalComponent
     public function mount($mode)
     {
         $this->mode = $mode;
-        
-        if ($this->mode === 'login') {
-            $this->email = session('remembered_email', ''); // Default to empty string if not found
-        }
+
+
+        if ($this->mode === 'login')
+            $this->loadRememberedEmail();
+    }
+
+    protected function loadRememberedEmail()
+    {
+        $this->email = session('remembered_email', '');
     }
 
     public function switchMode($mode)
@@ -61,8 +66,9 @@ class AuthModal extends ModalComponent
             $this->email = '';
             $this->password = '';
             $this->remember = false;
+            $this->loadRememberedEmail();
         }
-        
+
         $this->resetValidation();  // Reset validation state
     }
 

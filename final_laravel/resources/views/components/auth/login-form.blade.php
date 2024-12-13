@@ -50,7 +50,7 @@
         <div class="flex justify-between items-baseline space-y-4">
             <a wire:click.prevent="switchMode('register')" wire:loading.attr="disabled"
                 class="text-base text-amber-600 hover:text-amber-800 cursor-pointer">{{ __("Don't have an account'? Sign up") }}</a>
-            <x-primary-button type="submit" wire:loading.attr="disabled" loading="Logging in..."
+            <x-primary-button type="submit" wire:loading.attr="disabled" loading="Logging in..." target="login"
                 class="bg-stone-950 text-white px-4 rounded-lg hover:bg-stone-800 focus:ring focus:ring-stone-500 focus:ring-opacity-50">
                 {{ __('Log in') }}
             </x-primary-button>

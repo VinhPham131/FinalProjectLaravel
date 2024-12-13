@@ -42,7 +42,7 @@
             <x-input-label for="password_confirmation"
                 class="block text-sm font-medium text-gray-700">{{ __('Confirm Password') }}</x-input-label>
             <x-text-input id="password_confirmation" type="password" placeholder="Re-enter your password"
-                wire:model.defer="password_confirmation" wire:loading.attr="disabled"
+                wire:model="password_confirmation" wire:loading.attr="disabled"
                 class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
                 required />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
@@ -58,7 +58,7 @@
         <div class="flex justify-between items-baseline space-y-4">
             <a type="button" wire:click.prevent="switchMode('login')" wire:loading.attr="disabled"
                 class="text-base text-amber-600 hover:text-amber-800 cursor-pointer">{{ __('Already registered? Login') }}</a>
-            <x-primary-button type="submit" wire:loading.attr="disabled" loading="Please wait..."
+            <x-primary-button type="submit" wire:loading.attr="disabled" loading="Please wait..." target="register"
                 class="bg-stone-950 text-white px-4 rounded-lg hover:bg-stone-800 focus:ring focus:ring-stone-500 focus:ring-opacity-50">
                 {{ __('Register') }}
             </x-primary-button>
