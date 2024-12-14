@@ -4,8 +4,6 @@
             <img src="{{ $item->images->first()->first_url ?? '/path/to/fallback-image.jpg' }}" alt="{{ $item->name }}"
                 class=" w-full h-full object-cover">
             <h3 class="text-bold font-roboto phone:text-[13px] tablet:text-[16px] text-center mt-3">
-
-
                 {{ $item->name }}
             </h3>
             <h4 class="text-center font-garamond phone:text-[11px] tablet:text-[15px] desktop:text-[15px]">
