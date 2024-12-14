@@ -15,26 +15,15 @@
     <section
       class="grid flex-col phone:max-tablet:justify-center tablet:flex phone:max-tablet:border-gray-200 phone:max-tablet:border-b-2 phone:max-tablet:p-4 phone:max-tablet:mb-5 phone:max-tablet:w-screen ">
 
-      @include('components/side-bar')
+      @livewire('sidebar')
     </section>
 
     <!-- Products -->
     <section class="phone:max-tablet:grid phone:max-tablet:justify-center">
-
-      <section
-        class="grid h-full phone:grid-cols-2 phone:max-tablet:justify-center tablet:grid-cols-2 laptop:grid-cols-3 tablet:w-[calc(1200px-650px)] laptop:w-[calc(1200px-350px)] phone:w-[calc(500px-70px)] border-l border-gray-600 pl-9 phone:max-tablet:border-hidden">
-        @foreach ($products as $item)
-      @include('components.products', ['item' => $item])
-    @endforeach
-      </section>
-
+      @livewire('products')
     </section>
   </main>
-
-
 </section>
-
-<script src="{{asset('js/search.js')}}"></script>
 
 
 @endsection
