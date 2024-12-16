@@ -16,15 +16,8 @@ class ProductCategorySeeder extends Seeder
             'Necklace',
             'Pendant',
             'Charm',
-            'Bangle',
-            'Cufflinks',
-            'Brooch',
             'Anklet',
-            'Tiara',
-            'Wedding Band',
-            'Engagement Ring',
-            'Gemstone Jewelry',
-            'Pearl Jewelry',
+            'Watch'
         ];
 
         foreach ($categories as $name) {

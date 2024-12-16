@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->string('productcode', 50)->unique();
             $table->string('color', 50)->nullable();
             $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');
+            $table->integer('sale_count')->default(0);
+
             $table->timestamps();
         });
     }

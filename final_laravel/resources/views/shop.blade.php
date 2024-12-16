@@ -19,8 +19,9 @@
     </section>
 
     <!-- Products -->
-    <section class="phone:max-tablet:grid phone:max-tablet:justify-center">
-      @livewire('products')
+    <section class="phone:max-tablet:grid phone:max-tablet:justify-center border-l border-gray-600 pl-9">
+      @livewire('filtered-products')
+      
     </section>
   </main>
 </section>

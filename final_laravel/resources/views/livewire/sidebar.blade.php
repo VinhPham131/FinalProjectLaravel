@@ -1,4 +1,5 @@
-<section class="grid flex-col phone:max-tablet:justify-center tablet:flex phone:max-tablet:border-gray-200 phone:max-tablet:border-b-2 phone:max-tablet:p-4 phone:max-tablet:mb-5 phone:max-tablet:w-screen">
+<section
+    class="grid flex-col phone:max-tablet:justify-center tablet:flex phone:max-tablet:border-gray-200 phone:max-tablet:border-b-2 phone:max-tablet:p-4 phone:max-tablet:mb-5 phone:max-tablet:w-screen">
     <!-- Search Bar -->
     <form class="max-w-[1200px] w-[220px] mb-5">
         <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -33,19 +34,18 @@
                     @foreach ($categories as $category)
                         <li>
                             <div class="flex items-center">
-                                <input type="checkbox" wire:model="selectedCategories" value="{{ $category->id }}"
-                                    id="checkbox-item-{{ $category->id }}"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded ...">
-                                <label for="checkbox-item-{{ $category->id }}"
-                                    class="ms-2 text-sm font-medium text-gray-900 ...">
+                                <input type="checkbox" wire:model.live='selectedCategories' value="{{ $category->id }}"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+                                <div for="category"
+                                    class="ms-2 text-sm font-medium text-gray-900 ">
                                     {{ $category->name }}
-                                </label>
+                                </div>
                             </div>
                         </li>
                     @endforeach
                 </ul>
-            </div>
 
+            </div>
             <!-- Sort By -->
             <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500"
                 data-dropdown-trigger="hover"
@@ -88,22 +88,24 @@
             class="flex justify-between phone:max-tablet:my-4 my-5 phone:max-tablet:w-[full] phone:max-tablet:max-w-[150px] w-[220px] z-0">
             <a>On sale</a>
             <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" wire:model="onSale" class="sr-only peer">
+                <input type="checkbox" wire:model.live="onSale" class="sr-only peer">
                 <div
-                    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                    class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                 </div>
             </label>
         </div>
+
         <div
             class="flex justify-between phone:max-tablet:w-[full] phone:max-tablet:max-w-[150px] w-[220px] z-0 items-center">
             <a>In stock</a>
             <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" wire:model="inStock" class="sr-only peer">
+                <input type="checkbox" wire:model.live="inStock" class="sr-only peer">
                 <div
-                    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
+                    class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                 </div>
             </label>
         </div>
+
     </section>
 
 </section>
