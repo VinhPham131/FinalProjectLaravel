@@ -18,13 +18,18 @@ class Sidebar extends Component
 
     public function updated($propertyName)
     {
-        $this->dispatch('filterUpdated', [
-            'search' => $this->search,
-            'sortBy' => $this->sortBy,
-            'selectedCategories' => $this->selectedCategories,
-            'onSale' => $this->onSale,
-            'inStock' => $this->inStock,
-        ]);
+        // Check if the property name starts with 'selectedCategories'
+        $isSelectedCategory = strpos($propertyName, 'selectedCategories') === 0;
+    
+        if (in_array($propertyName, ['search', 'sortBy', 'onSale', 'inStock']) || $isSelectedCategory) {
+            $this->dispatch('filterUpdated', [
+                'search' => $this->search,
+                'sortBy' => $this->sortBy,
+                'selectedCategories' => $this->selectedCategories,
+                'onSale' => $this->onSale,
+                'inStock' => $this->inStock,
+            ]);
+        }
     }
     public function render()
     {
