@@ -6,6 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Validation\Rules;
+use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class AuthModal extends ModalComponent
 {
@@ -25,9 +32,9 @@ class AuthModal extends ModalComponent
                 'remember' => 'boolean',
             ],
             'register' => [
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:8',
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'lowercase', 'max:255', 'unique:users'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'password_confirmation' => 'required|same:password'
             ],
             default => [],
@@ -77,19 +84,24 @@ class AuthModal extends ModalComponent
         // Validate inputs
         $this->validate();
 
-        if ($this->attemptLogin()) {
-            $request->session()->regenerate();
+        $request = new LoginRequest([
+            'email' => $this->email,
+            'password' => $this->password,
+            'remember' => $this->remember,
+        ]);
 
-            if ($this->remember) {
-                session(['remembered_email' => $this->email]);
+        $request->validate($request->rules());
 
-            }
+        try {
+            // Proceed with registration if validation passes
+            $controller = new AuthenticatedSessionController();
+            $controller->store($request);
+            
+            return redirect()->intended();
 
-            return redirect()->intended(); // Redirect to the current path
+        } catch (ValidationException $e) {
+            $this->setErrorBag($e->errors());
         }
-
-        // Authentication failed
-        session()->flash('error', __('auth.login_failed'));
 
         // Clear the password field for security
         $this->password = null;
@@ -97,30 +109,33 @@ class AuthModal extends ModalComponent
         return;
     }
 
-    protected function attemptLogin()
-    {
-        return $this->guard()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
-
-        // return Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember);
-    }
 
     public function register()
     {
         $this->validate();
 
-        $user = User::create([
+        $request = new RegisterUserRequest([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => bcrypt($this->password),
+            'password' => $this->password,
+            'password_confirmation' => $this->password_confirmation,
         ]);
 
-        Auth::login($user);
-        return redirect()->intended();
-    }
+        // Validate the request using the rules defined in RegisterUserRequest
+        $validated = $request->validate($request->rules());
 
-    protected function guard()
-    {
-        return Auth::guard();
+        try {
+            // Proceed with registration if validation passes
+            $controller = new RegisteredUserController();
+            $controller->store($request);
+
+            return redirect()->intended();
+        } catch (ValidationException $e) {
+            // Pass back validation errors to Livewire
+            $this->setErrorBag($e->errors());
+        }
+
+        return;
     }
 
     public function render()

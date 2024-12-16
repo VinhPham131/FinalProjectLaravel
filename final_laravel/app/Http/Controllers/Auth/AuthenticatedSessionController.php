@@ -7,29 +7,25 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create()
     {
-        return view('auth.login');
+        return redirect()->to(route('home'));
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        $currentPath = request()->header('Referer');
-        return redirect()->to($currentPath);
+        if ($request->authenticate()) {
+            $request->session()->regenerate();
+        }
     }
 
     /**
@@ -51,6 +47,6 @@ class AuthenticatedSessionController extends Controller
             session(['remembered_email' => $rememberedEmail]);
         }
 
-        return redirect('/');
+        return redirect()->to(route('home'));
     }
 }

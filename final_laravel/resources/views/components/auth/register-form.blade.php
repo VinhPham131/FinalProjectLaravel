@@ -48,10 +48,9 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- Error Message -->
-        @if (session()->has('error'))
-            <div>
-                <x-input-error :messages="session('error')" class="mb-4" />
+        @if ($errors->has('auth.failed'))
+            <div class="mt-4">
+                <x-input-error :messages="$errors->get('auth.failed')" class="mb-4" />
             </div>
         @endif
 

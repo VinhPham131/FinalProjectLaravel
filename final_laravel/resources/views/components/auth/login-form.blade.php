@@ -30,21 +30,20 @@
                 class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500 focus:ring-opacity-50"
                 wire:model.defer="remember" wire:loading.attr="disabled">
             <label for="remember_me" class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</label>
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <!-- Error Message -->
-        @if (session()->has('error'))
+        @if ($errors->has('login.failed'))
             <div class="mt-4">
-                <x-input-error :messages="session('error')" class="mb-4" />
+                <x-input-error :messages="$errors->get('login.failed')" class="mb-4" />
             </div>
         @endif
 
+
         <!-- Forgot Password -->
         @if (Route::has('password.request'))
-            <a class="text-base text-amber-600 hover:text-amber-800 cursor-pointer"
-            href="{{ route('password.request') }}"
-            wire:loading.attr="disabled">
+            <a class="text-base text-amber-600 hover:text-amber-800 cursor-pointer" href="{{ route('password.request') }}"
+                wire:loading.attr="disabled">
                 {{ __('Forgot your password?') }}
             </a>
         @endif
