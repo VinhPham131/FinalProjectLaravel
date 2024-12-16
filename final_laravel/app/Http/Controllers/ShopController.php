@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProductCategoryController;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    protected $productCategoryController;
+
+    // Inject ProductCategoryController into the constructor
+    public function __construct(ProductCategoryController $productCategoryController)
+    {
+        $this->productCategoryController = $productCategoryController;
+    }
+
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -25,9 +33,6 @@ class ShopController extends Controller
                     case 'highest_to_lowest':
                         $query->orderBy('price', 'desc');
                         break;
-                    // case 'best_seller':
-                    //     $query->orderBy('sales_count', 'desc'); // Replace with the actual field name
-                    //     break;
                 }
             })
             ->get()
@@ -37,15 +42,12 @@ class ShopController extends Controller
                 return $product;
             });
 
-        $categories = ProductCategory::all();
+        $categories = $this->productCategoryController->index();
 
-        // Check if the request is an AJAX call
         if ($request->ajax()) {
             return view('partials.products', compact('products'))->render();
         }
 
         return view('shop', compact('products', 'categories'));
     }
-
-
 }

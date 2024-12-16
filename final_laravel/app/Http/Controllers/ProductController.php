@@ -14,13 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'collection', 'images'])
-            ->when(request('search'), function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            })
-            ->simplePaginate();
-
-        return response()->json($products, 200);
+        $products = Product::all();
+        return $products;
     }
 
     /**
