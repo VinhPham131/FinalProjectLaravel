@@ -34,7 +34,7 @@
                     @foreach ($categories as $category)
                         <li>
                             <div class="flex items-center">
-                                <input type="checkbox" wire:model.live='selectedCategories' value="{{ $category->id }}"
+                                <input type="checkbox" wire:key="category-{{ $category->id }}" wire:model.live='selectedCategories' value="{{ $category->id }}"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
                                 <div for="category"
                                     class="ms-2 text-sm font-medium text-gray-900 ">

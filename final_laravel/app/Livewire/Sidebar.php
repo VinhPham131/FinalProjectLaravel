@@ -18,16 +18,13 @@ class Sidebar extends Component
 
     public function updated($propertyName)
     {
-        if (in_array($propertyName, ['search', 'sortBy', 'selectedCategories', 'onSale', 'inStock'])) {
-            $this->dispatch('filterUpdated', [
-                'search' => $this->search,
-                'sortBy' => $this->sortBy,
-                'selectedCategories'=> $this->selectedCategories,
-                'onSale' => $this->onSale,
-                'inStock' => $this->inStock,
-            ]);
-            
-        }
+        $this->dispatch('filterUpdated', [
+            'search' => $this->search,
+            'sortBy' => $this->sortBy,
+            'selectedCategories' => $this->selectedCategories,
+            'onSale' => $this->onSale,
+            'inStock' => $this->inStock,
+        ]);
     }
     public function render()
     {
@@ -39,7 +36,7 @@ class Sidebar extends Component
             'inStock' => $this->inStock,
         ]);
         $this->categories = ProductCategory::all();
-        
+
         return view('livewire.sidebar', ['categories' => $this->categories]);
 
     }
