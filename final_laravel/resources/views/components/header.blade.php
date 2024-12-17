@@ -60,9 +60,7 @@
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/b53ad79a5e4ea34706fc375724ee506199b29340c27f09c40ae777a95cc73c28?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
                     alt="Image description"
                     class="shrink-0 self-start border border-white border-solid aspect-square fill-black stroke-[0.75px] stroke-white w-[19px]" />
-                <img loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/324b097b3a26f24da080c52561d900b13bf05f0d28848eed44fbb39ad816c1d1?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
-                    alt="Image description" class="shrink-0 self-start aspect-square w-[21px]" />
+                @livewire('cart')
 
                 <!-- User -->
                 <x-user />

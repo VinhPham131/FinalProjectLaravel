@@ -10,7 +10,7 @@
                 @if ($item->highest_sale)
                     <font color="red">{{ $item->highest_sale }}% Off</font><br>
                     <font color="#a28b68">
-                        <s>${{ number_format($item->price, 2) }}</s>
+                        <s>${{ number_format($item->price, decimals: 2) }}</s>
                         ${{ number_format($item->discounted_price, 2) }}
                     </font>
                 @else

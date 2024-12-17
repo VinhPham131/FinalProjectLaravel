@@ -64,9 +64,9 @@
             </p>
 
             <!-- Add to Cart button -->
-            <button id="addcart"
-                class="w-full bg-gray-800 text-white flex justify-center items-center h-11 max-w-[470px]">
-                Add to cart
+            <button wire:click="addToCart"
+                class="w-full bg-gray-800 text-white flex justify-center items-center h-11 max-w-[470px] hover:bg-gray-900 transition">
+                Add to Cart
             </button>
 
         </section>
@@ -90,14 +90,14 @@
     </section>
 
 
-<!-- Related Products Section -->
-<section class="related-products mt-10">
-    <h3 class="font-garamond font-bold text-2xl pb-3.75">
-        <a class="border-b-2 border-yellow-700">Related Products</a>
-    </h3>
-    <section class="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 px-4 max-w-[1200px] mx-auto">
-        <!-- Product livewire Card -->
+    <!-- Related Products Section -->
+    <section class="related-products mt-10">
+        <h3 class="font-garamond font-bold text-2xl pb-3.75">
+            <a class="border-b-2 border-yellow-700">Related Products</a>
+        </h3>
+        <section class="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 px-4 max-w-[1200px] mx-auto">
+            <!-- Product livewire Card -->
+        </section>
     </section>
-</section>
 
 </section>
