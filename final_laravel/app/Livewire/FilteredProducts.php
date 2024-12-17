@@ -5,7 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class FilteredProducts extends Component
 {
@@ -19,50 +20,70 @@ class FilteredProducts extends Component
 
     protected $listeners = ['filterUpdated' => 'onFilterUpdated'];
 
+    /**
+     * Reset pagination when search input changes.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    /**
+     * Update filters dynamically via Livewire events.
+     *
+     * @param array $filters
+     */
     public function onFilterUpdated($filters)
     {
         $this->search = $filters['search'] ?? '';
         $this->sortBy = $filters['sortBy'] ?? '';
-        $this->selectedCategories = array_filter(array: $filters['selectedCategories'] ?? []); // Filter empty values
+        $this->selectedCategories = array_filter($filters['selectedCategories'] ?? []);
         $this->onSale = $filters['onSale'] ?? false;
         $this->inStock = $filters['inStock'] ?? false;
-        
-
 
         $this->resetPage();
     }
 
+    /**
+     * Render the Livewire component.
+     *
+     * @return \Illuminate\View\View
+     */
     public function render()
     {
-        // Filter out any invalid or empty category IDs
-        logger()->info('Applied Filters:', [
-            'search' => $this->search,
-            'sortBy' => $this->sortBy,
-            'selectedCategories' => $this->selectedCategories,
-            'onSale' => $this->onSale,
-            'inStock' => $this->inStock,
+        // Build the query for filtering products
+        $products = Product::with(['images', 'category', 'collection'])
+            ->when($this->search, fn($query) => $query->where('products.name', 'LIKE', '%' . $this->search . '%'))
+            ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
+            ->when($this->onSale, function ($query) {
+                $query->whereHas('category.sales', function ($saleQuery) {
+                    $saleQuery->where('percentage', '>', 0);
+                });
+            })
+            ->when($this->inStock, fn($query) => $query->where('quantity', '>', 0))
+            ->when($this->sortBy, function ($query) {
+                match ($this->sortBy) {
+                    'lowest_to_highest' => $query->orderBy('price', 'asc'),
+                    'highest_to_lowest' => $query->orderBy('price', 'desc'),
+                    'best_seller' => $query->orderBy('sale_count', 'desc'),
+                    default => null,
+                };
+            })
+            ->select(
+                'products.*',
+                DB::raw('MAX(sales.percentage) as highest_sale'),
+                DB::raw('products.price - (products.price * MAX(sales.percentage) / 100) as discounted_price')
+            )
+            ->leftJoin('product_categories', 'product_categories.id', '=', 'products.category_id')
+            ->leftJoin('sales', function ($join) {
+                $join->on('sales.name', '=', 'product_categories.name')
+                     ->where('sales.sale_target', '=', 'category');
+            })
+            ->groupBy('products.id')
+            ->paginate(9);
+
+        return view('livewire.filtered-products', [
+            'products' => $products,
         ]);
-
-        $products = Product::query()
-            ->when($this->search, fn($q) => $q->where('name', 'like', "%{$this->search}%"))
-            ->when(!empty($this->selectedCategories), fn($q) => $q->whereIn('category_id', $this->selectedCategories))
-            ->when($this->onSale, fn($q) => $q->whereHas('category.sales', fn($sale) => $sale->where('percentage', '>', 0)))
-            ->when($this->inStock, fn($q) => $q->where('quantity', '>', 0))
-            ->when($this->sortBy === 'lowest_to_highest', fn($q) => $q->orderBy('price'))
-            ->when($this->sortBy === 'highest_to_lowest', fn($q) => $q->orderByDesc('price'))
-            ->when($this->sortBy === 'best_seller', fn($q) => $q->orderByDesc('sale_count'))
-            ->paginate(9)
-            ->through(function ($product) {
-                $product->highest_sale = $product->highestSale();
-                $product->discounted_price = $product->salePrice();
-                return $product;
-            });
-
-        return view('livewire.filtered-products', compact('products'));
     }
 }

@@ -34,10 +34,10 @@
                     @foreach ($categories as $category)
                         <li>
                             <div class="flex items-center">
-                                <input type="checkbox" wire:key="category-{{ $category->id }}" wire:model.live='selectedCategories' value="{{ $category->id }}"
+                                <input type="checkbox" wire:key="category-{{ $category->id }}"
+                                    wire:model.live='selectedCategories' value="{{ $category->id }}"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
-                                <div for="category"
-                                    class="ms-2 text-sm font-medium text-gray-900 ">
+                                <div for="category" class="ms-2 text-sm font-medium text-gray-900 ">
                                     {{ $category->name }}
                                 </div>
                             </div>
@@ -108,4 +108,65 @@
 
     </section>
 
+    <div class="flex flex-wrap gap-2 mt-4 w-[220px]">
+        @foreach ($selectedCategories as $categoryId)
+            @php
+                $category = $categories->firstWhere('id', $categoryId);
+            @endphp
+            @if ($category)
+                <span
+                    class="inline-flex items-center px-2.5 py-1.5 text-[15px] font-medium text-gray-800 bg-gray-100 rounded-sm dark:bg-gray-600 dark:text-gray-200">
+                    {{ $category->name }}
+                    <button wire:click="removeCategory({{ $categoryId }})" type="button"
+                        class="flex-shrink-0 ms-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                        <span class="sr-only">Remove small</span>
+                        <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                            <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7"></path>
+                        </svg>
+                    </button>
+                </span>
+            @endif
+        @endforeach
+        @if ($onSale)
+            <span
+                class="inline-flex items-center px-2.5 py-1.5 text-[15px] font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-600 dark:text-gray-200">
+                On Sale
+                <button wire:click="toggleOnSale" type="button"
+                    class="flex-shrink-0 ms-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                    <span class="sr-only">Remove On Sale</span>
+                    <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7"></path>
+                    </svg>
+                </button>
+            </span>
+        @endif
+
+        @if ($inStock)
+            <span
+                class="inline-flex items-center px-2.5 py-1.5 text-[15px] font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-600 dark:text-gray-200">
+                In Stock
+                <button wire:click="toggleInStock" type="button"
+                    class="flex-shrink-0 ms-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                    <span class="sr-only">Remove In Stock</span>
+                    <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7"></path>
+                    </svg>
+                </button>
+            </span>
+        @endif
+
+        @if ($sortBy)
+            <span
+                class="inline-flex items-center px-2.5 py-1.5 text-[15px] font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-600 dark:text-gray-200">
+                {{ ucfirst(str_replace('_', ' ', $sortBy)) }}
+                <button wire:click="clearSortBy" type="button"
+                    class="flex-shrink-0 ms-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200">
+                    <span class="sr-only">Remove Sort By</span>
+                    <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7"></path>
+                    </svg>
+                </button>
+            </span>
+        @endif
+    </div>
 </section>

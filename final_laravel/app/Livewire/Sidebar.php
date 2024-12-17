@@ -4,15 +4,15 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Cache;
 
 class Sidebar extends Component
 {
     public $search = '';
     public $sortBy = '';
-    public $categories = [];
     public $selectedCategories = [];
-    public $onSale = false; // Add this line
-    public $inStock = false; // Add this line
+    public $onSale = false;
+    public $inStock = false;
 
     protected $listeners = ['filterUpdated'];
 
@@ -26,6 +26,33 @@ class Sidebar extends Component
             'inStock' => $this->inStock,
         ]);
     }
+
+    public function removeCategory($categoryId)
+    {
+        $this->selectedCategories = array_filter($this->selectedCategories, function ($id) use ($categoryId) {
+            return $id != $categoryId;
+        });
+        $this->updated('selectedCategories');
+    }
+
+    public function clearSortBy()
+    {
+        $this->sortBy = '';
+        $this->updated('sortBy');
+    }
+
+    public function toggleOnSale()
+    {
+        $this->onSale = !$this->onSale;
+        $this->updated('onSale');
+    }
+
+    public function toggleInStock()
+    {
+        $this->inStock = !$this->inStock;
+        $this->updated('inStock');
+    }
+
     public function render()
     {
         logger()->info('Emitting filters:', [
@@ -35,9 +62,9 @@ class Sidebar extends Component
             'onSale' => $this->onSale,
             'inStock' => $this->inStock,
         ]);
-        $this->categories = ProductCategory::all();
-
-        return view('livewire.sidebar', ['categories' => $this->categories]);
-
+        $categories = Cache::remember('categories', 60, function () {
+            return ProductCategory::all();
+        });
+        return view('livewire.sidebar', ['categories' => $categories, 'sortBy' => $this->sortBy, 'selectedCategories' => $this->selectedCategories]);
     }
 }

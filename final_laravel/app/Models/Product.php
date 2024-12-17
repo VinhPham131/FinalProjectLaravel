@@ -59,6 +59,7 @@ class Product extends Model
         $sales = $this->applicableSales();
         return $sales->max('percentage');
     }
+    
 
     public function salePrice()
     {
