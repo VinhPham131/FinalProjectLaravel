@@ -7,5 +7,6 @@
     <section class="grid justify-center laptop:ml-28">
         @livewire('product-detail', ['product' => $product])
     </section>
+    
     <script src="{{ asset('js/productslide.js') }}"></script>
 @endsection

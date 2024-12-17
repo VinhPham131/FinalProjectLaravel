@@ -38,6 +38,13 @@ class ProductDetail extends Component
                     : $product->price;
             });
     }
+    public function addToCart()
+    {
+        $this->dispatch('addToCart', $this->product->id); // Emit event to Cart component
+        $this->dispatch('cartUpdated'); // Dispatch for UI updates
+        session()->flash('success', 'Product added to cart.');
+        $this->skipRender(); 
+    }
 
     private function calculateSaleAttributes($product)
     {
