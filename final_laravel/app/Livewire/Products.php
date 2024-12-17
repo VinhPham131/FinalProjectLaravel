@@ -19,7 +19,11 @@ class Products extends Component
 
     public function loadProducts()
     {
-        $this->products = Product::with('images')->take($this->limit)->get();
+        $this->products = Product::with('images')->take($this->limit)->get()->map(function ($product) {
+            $product->highest_sale = $product->highestSale();
+            $product->discounted_price = $product->salePrice();
+            return $product;
+        });
     }
 
     public function showMore()
