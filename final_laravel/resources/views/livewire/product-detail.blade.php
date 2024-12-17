@@ -95,9 +95,7 @@
         <h3 class="font-garamond font-bold text-2xl pb-3.75">
             <a class="border-b-2 border-yellow-700">Related Products</a>
         </h3>
-        <section class="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 px-4 max-w-[1200px] mx-auto">
-            <!-- Product livewire Card -->
-        </section>
+        @livewire('products')
     </section>
 
 </section>
