@@ -21,6 +21,7 @@ class Product extends Model
         'color',
         'category_id',
         'slug',
+        'sale_count',
     ];
 
     public function sluggable(): array
@@ -49,7 +50,8 @@ class Product extends Model
     public function applicableSales()
     {
         return Sale::where('name', $this->category->name)
-            ->orWhere('name', $this->collection)->get();
+            ->orWhere('name', $this->collection->name)
+            ->get();
     }
 
     public function highestSale()
@@ -57,6 +59,7 @@ class Product extends Model
         $sales = $this->applicableSales();
         return $sales->max('percentage');
     }
+    
 
     public function salePrice()
     {
