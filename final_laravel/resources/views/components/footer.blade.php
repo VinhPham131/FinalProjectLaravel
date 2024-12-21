@@ -1,7 +1,7 @@
 
 <!-- Footer -->
 <section class="grid justify-items-center ">
-    <footer class="border-t-2 mt-60 phone:max-tablet:mb-10 phone:max-tablet:border-b-0 tablet:mx-[200px] tablet:max-w-[1200px] phone:mx-[10px] tablet:w-[calc(1200px-350px)] laptop:w-[calc(1200px-100px)]">
+    <footer class="border-t-2 mt-20 phone:max-tablet:mb-10 phone:max-tablet:border-b-0 tablet:mx-[200px] tablet:max-w-[1200px] phone:mx-[10px] tablet:w-[calc(1200px-350px)] laptop:w-[calc(1200px-100px)]">
         <section class="grid justify-between mx-10 phone:max-tablet:grid-cols-1 phone:grid-cols-1 tablet:flex">
             <div class="flex gap-5 mt-10 phone:flex-col">
                 <div>

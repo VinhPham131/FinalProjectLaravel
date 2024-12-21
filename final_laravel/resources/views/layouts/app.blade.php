@@ -40,12 +40,10 @@
 <body class="overflow-x-hidden">
     <x-header />
 
-
     <main class ="">
         @yield('content')
     </main>
-
-
+    
     <x-footer />
     @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
@@ -65,6 +63,8 @@
         gtag('js', new Date());
         gtag('config', 'G-J7QBN2WL4D');
     </script>
+        <script src="{{ asset('js/menu.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
 
     <!-- Additional scripts customized for specific screens -->
     @yield('script')
@@ -74,3 +74,4 @@
 </body>
 
 </html>
+
