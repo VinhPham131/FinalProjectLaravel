@@ -93,8 +93,7 @@ class AuthModal extends ModalComponent
         }
 
         // Authentication failed
-        session()->flash('error', __('auth.login_failed'));
-
+        $this->addError('login.failed', trans('auth.login_failed'));
         // Clear the password field for security
         $this->password = null;
 

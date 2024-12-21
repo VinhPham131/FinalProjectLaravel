@@ -39,10 +39,9 @@
             </div>
         @endif
 
-
         <!-- Forgot Password -->
         @if (Route::has('password.request'))
-            <a class="text-base text-amber-600 hover:text-amber-800 cursor-pointer" href="{{ route('password.request') }}"
+            <a class="text-base text-amber-600 hover:text-amber-800 cursor-pointer mt-4" href="{{ route('password.request') }}"
                 wire:loading.attr="disabled">
                 {{ __('Forgot your password?') }}
             </a>
