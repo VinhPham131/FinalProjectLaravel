@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
-    public function profile()
+    public function profile(Request $request)
     {
-        return view('user');
+        return view('user', [
+            'user' => $request->user(),
+        ]);
     }
 
     public function order()
     {
         return view('accountorder');
     }
-    public function account()
+    public function account(Request $request)
     {
-        return view('accountedit');
+        return view('accountedit', [
+            'user' => $request->user(),
+        ]);
     }
     public function wishlist()
     {

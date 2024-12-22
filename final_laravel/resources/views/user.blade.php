@@ -36,18 +36,15 @@
 
         <div class="mb-4">
             <h2 class="text-lg font-semibold">Preferred Name</h2>
-            <p class="text-gray-600">Minh Pham</p>
+            <p class="text-gray-600">{{ $user->name }}</p>
             <a href="#" class="text-blue-500 hover:underline text-sm">EDIT PREFERRED NAME</a>
         </div>
 
         <div class="mb-4">
             <h2 class="text-lg font-semibold">Email</h2>
-            <p class="text-gray-600">comeheretnt@gmail.com</p>
+            <p class="text-gray-600">{{ $user->email }}</p>
             <a href="#" class="text-blue-500 hover:underline text-sm">EDIT PASSWORD</a>
         </div>
-
-
     </div>
-
 </section>
 @endsection
