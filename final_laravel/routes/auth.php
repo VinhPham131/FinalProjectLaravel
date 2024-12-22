@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\VerifyRegistrationController;
 use App\Http\Controllers\Auth\LogoutUserController;
+use App\Http\Controllers\Auth\VerifyRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
