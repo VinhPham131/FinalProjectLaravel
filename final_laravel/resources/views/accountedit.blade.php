@@ -9,7 +9,7 @@
         class="grid tablet:grid-cols-3 laptop:grid-cols-4 tablet:mx-[200px] max-w-[1200px] laptop:w-[calc(1200px-100px)] tablet:max-laptop:w-[calc(1200px-350px)] phone:max-tablet:mb-5 phone:max-tablet:w-screen">
         <div class="flex space-x-2">
             <!-- Nút Profile -->
-            <a href="{{ route('profile.edit') }}"
+            <a href="{{ route('user.profile') }}"
                 class="inline-block w-max p-4 border-b-2 border-transparent rounded-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
                 Profile
             </a>
@@ -62,7 +62,7 @@
                         x-show="show"
                         x-transition
                         x-init="setTimeout(() => show = false, 2000)"
-                        class="text-sm text-gray-600 dark:text-gray-400"
+                        class="text-sm font-bold text-green-600 dark:text-green-400"
                     >{{ __('Saved.') }}</p>
                 @endif
             </div>
@@ -102,13 +102,13 @@
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">{{ __('Save') }}</button>
                     
                     @if (session('status') === 'password-updated')
-                    <p
-                        x-data="{ show: true }"
-                        x-show="show"
-                        x-transition
-                        x-init="setTimeout(() => show = false, 2000)"
-                        class="text-sm text-gray-600 dark:text-gray-400"
-                    >{{ __('Password updated.') }}</p>
+                        <p
+                            x-data="{ show: true }"
+                            x-show="show"
+                            x-transition
+                            x-init="setTimeout(() => show = false, 2000)"
+                            class="text-sm font-bold text-green-600 dark:text-green-400"
+                        >{{ __('Password updated.') }}</p>
                 @endif
     
                 </div>
