@@ -1,0 +1,521 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "af2ca10e-f161-4a53-a2d8-9d3fd67e462f",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET api\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "vero",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "facere",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "[{\"id\":1,\"name\":\"Bracelet\",\"slug\":\"bracelet\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":2,\"name\":\"Ring\",\"slug\":\"ring\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":4,\"name\":\"Necklace\",\"slug\":\"necklace\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":5,\"name\":\"Pendant\",\"slug\":\"pendant\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":6,\"name\":\"Charm\",\"slug\":\"charm\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":7,\"name\":\"Anklet\",\"slug\":\"anklet\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":8,\"name\":\"Watch\",\"slug\":\"watch\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/category\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/category\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "recusandae",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 404,
+                            "body": "{\"error\":\"Category not found.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Display a listing of the resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "[{\"id\":1,\"name\":\"14K White Gold Bracelet with Akoya Pearl PNJ PAXMW000044\",\"slug\":\"14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044\",\"description\":\"This bracelet attracts attention with its simple yet elegant design, featuring an Akoya Pearl.\",\"price\":\"30.00\",\"quantity\":10,\"material\":\"Akoya Pearl\",\"size\":\"51\",\"stylecode\":\"SP123\",\"collection_id\":1,\"productcode\":\"GVPAXMW000044\",\"color\":\"White\",\"category_id\":1,\"sale_count\":10,\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":2,\"name\":\"18K Gold Bracelet with Citrine PNJ Spring CTXMY000059\",\"slug\":\"18k-gold-bracelet-with-citrine-pnj-spring-ctxmy000059\",\"description\":\"Citrine's bright yellow color symbolizes optimism and warmth, making it a perfect gift.\",\"price\":\"40.00\",\"quantity\":20,\"material\":\"Citrine\",\"size\":\"52\",\"stylecode\":\"TS456\",\"collection_id\":2,\"productcode\":\"GVCTXMY000059\",\"color\":\"Yellow\",\"category_id\":1,\"sale_count\":20,\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":3,\"name\":\"18K Gold Necklace with Ruby PNJ Spring RBXMY000180\",\"slug\":\"18k-gold-necklace-with-ruby-pnj-spring-rbxmy000180\",\"description\":\"This luxurious necklace with a Ruby centerpiece complements the wearer's elegance.\",\"price\":\"50.00\",\"quantity\":0,\"material\":\"Ruby\",\"size\":\"53\",\"stylecode\":\"BK789\",\"collection_id\":4,\"productcode\":\"GVRBXMY000180\",\"color\":\"Gold\",\"category_id\":4,\"sale_count\":30,\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},{\"id\":6,\"name\":\"Rose Gold Anklet with Diamonds PNJ ANKRDW000501\",\"slug\":\"rose-gold-anklet-with-diamonds-pnj-ankrdw000501\",\"description\":\"A graceful anklet featuring sparkling diamonds and a rose gold finish.\",\"price\":\"70.00\",\"quantity\":5,\"material\":\"Diamond\",\"size\":\"9\",\"stylecode\":\"ANK123\",\"collection_id\":4,\"productcode\":\"GVANKRDW000501\",\"color\":\"Rose Gold\",\"category_id\":7,\"sale_count\":18,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":7,\"name\":\"Platinum Pendant with Topaz PNJ PDTXMY000712\",\"slug\":\"platinum-pendant-with-topaz-pnj-pdtxmy000712\",\"description\":\"A sleek pendant with a stunning Topaz centerpiece, perfect for daily wear.\",\"price\":\"90.00\",\"quantity\":3,\"material\":\"Topaz\",\"size\":\"One Size\",\"stylecode\":\"PD345\",\"collection_id\":1,\"productcode\":\"GVPDTXMY000712\",\"color\":\"Silver\",\"category_id\":5,\"sale_count\":8,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":8,\"name\":\"Gold Chain Necklace PNJ CHGWM000820\",\"slug\":\"gold-chain-necklace-pnj-chgwm000820\",\"description\":\"A classic gold chain necklace, suitable for all occasions.\",\"price\":\"100.00\",\"quantity\":10,\"material\":\"Gold\",\"size\":\"24 inches\",\"stylecode\":\"CH567\",\"collection_id\":2,\"productcode\":\"GVCHGWM000820\",\"color\":\"Gold\",\"category_id\":4,\"sale_count\":15,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":10,\"name\":\"White Gold Ring with Diamonds PNJ WRGDW000954\",\"slug\":\"white-gold-ring-with-diamonds-pnj-wrgdw000954\",\"description\":\"A statement ring crafted with white gold and dazzling diamonds.\",\"price\":\"150.00\",\"quantity\":4,\"material\":\"Diamond\",\"size\":\"6\",\"stylecode\":\"WR001\",\"collection_id\":4,\"productcode\":\"GVWRGDW000954\",\"color\":\"White\",\"category_id\":2,\"sale_count\":40,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":11,\"name\":\"Yellow Gold Cuff Bracelet PNJ BRYGW000600\",\"slug\":\"yellow-gold-cuff-bracelet-pnj-brygw000600\",\"description\":\"A bold yellow gold cuff bracelet that adds elegance to any outfit.\",\"price\":\"200.00\",\"quantity\":7,\"material\":\"Gold\",\"size\":\"Adjustable\",\"stylecode\":\"CF567\",\"collection_id\":2,\"productcode\":\"GVBRYGW000600\",\"color\":\"Gold\",\"category_id\":1,\"sale_count\":35,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":12,\"name\":\"Titanium Watch with Sapphire Glass PNJ WTTSG000340\",\"slug\":\"titanium-watch-with-sapphire-glass-pnj-wttsg000340\",\"description\":\"Durable titanium watch with scratch-resistant sapphire glass.\",\"price\":\"250.00\",\"quantity\":12,\"material\":\"Titanium\",\"size\":\"One Size\",\"stylecode\":\"WT123\",\"collection_id\":1,\"productcode\":\"GVWTTSG000340\",\"color\":\"Gray\",\"category_id\":8,\"sale_count\":50,\"created_at\":\"2024-12-23T10:00:20.000000Z\",\"updated_at\":\"2024-12-23T10:00:20.000000Z\"},{\"id\":13,\"name\":\"????\",\"slug\":\"\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"UP123\",\"collection_id\":2,\"productcode\":\"vcxvxcvbvcbcvbvc\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:00:22.000000Z\",\"updated_at\":\"2024-12-23T10:00:22.000000Z\"},{\"id\":14,\"name\":\"????\",\"slug\":\"-2\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"zcxzczx\",\"collection_id\":2,\"productcode\":\"v\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:00:39.000000Z\",\"updated_at\":\"2024-12-23T10:00:39.000000Z\"},{\"id\":15,\"name\":\"????\",\"slug\":\"-3\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"zcxzczx\",\"collection_id\":2,\"productcode\":\"cxvbcvbvc\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:01:16.000000Z\",\"updated_at\":\"2024-12-23T10:01:16.000000Z\"},{\"id\":16,\"name\":\"????\",\"slug\":\"-4\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"zcxzczx\",\"collection_id\":2,\"productcode\":\"bfdb\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:02:48.000000Z\",\"updated_at\":\"2024-12-23T10:02:48.000000Z\"},{\"id\":17,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"zcxzczx\",\"collection_id\":2,\"productcode\":\"bvcbnn bnbv\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:03:46.000000Z\",\"updated_at\":\"2024-12-23T10:03:46.000000Z\"},{\"id\":18,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-2\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"vsdvwevw34v3w\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:05:54.000000Z\",\"updated_at\":\"2024-12-23T10:05:54.000000Z\"},{\"id\":19,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-3\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"bxbvcbvc\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:06:52.000000Z\",\"updated_at\":\"2024-12-23T10:06:52.000000Z\"},{\"id\":20,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-4\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"h45eh45eh54h45h45h45\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:06:56.000000Z\",\"updated_at\":\"2024-12-23T10:06:56.000000Z\"},{\"id\":21,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-5\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"bfvxcbtdbt\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:08:09.000000Z\",\"updated_at\":\"2024-12-23T10:08:09.000000Z\"},{\"id\":22,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-6\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"erher\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:10:18.000000Z\",\"updated_at\":\"2024-12-23T10:10:18.000000Z\"},{\"id\":23,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-7\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"opewqiopeqwiop\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:10:34.000000Z\",\"updated_at\":\"2024-12-23T10:10:34.000000Z\"},{\"id\":24,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-8\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"cxz\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:11:00.000000Z\",\"updated_at\":\"2024-12-23T10:11:00.000000Z\"},{\"id\":25,\"name\":\"djsajkldasjkl\",\"slug\":\"djsajkldasjkl-9\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"vcxvdsgsge\",\"collection_id\":2,\"productcode\":\"bv\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:12:38.000000Z\",\"updated_at\":\"2024-12-23T10:12:38.000000Z\"}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"aq\",\"description\":\"Et est vel et cumque doloribus voluptate quo consequatur.\",\"price\":33,\"quantity\":55,\"material\":\"soluta\",\"size\":\"omnis\",\"stylecode\":\"sint\",\"productcode\":\"cumque\",\"color\":\"praesentium\",\"category_id\":\"rerum\",\"images\":[{\"urls\":[\"http:\\\/\\\/pagac.info\\\/quaerat-odit-quo-eum\"]}]}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Display the specified resource.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044",
+                                    "description": "The ID of the product."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":14,\"name\":\"????\",\"slug\":\"-2\",\"description\":\"This is an updated product.\",\"price\":\"89.99\",\"quantity\":5,\"material\":\"Polyester\",\"size\":\"M\",\"stylecode\":\"zcxzczx\",\"collection_id\":2,\"productcode\":\"v\",\"color\":\"Blue\",\"category_id\":2,\"sale_count\":0,\"created_at\":\"2024-12-23T10:00:39.000000Z\",\"updated_at\":\"2024-12-23T10:00:39.000000Z\",\"category\":{\"id\":2,\"name\":\"Ring\",\"slug\":\"ring\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},\"collection\":{\"id\":2,\"name\":\"Spring 2024\",\"slug\":\"spring-2024\",\"description\":\"Refreshing and vibrant styles for Spring 2024.\",\"created_at\":\"2024-12-23T10:00:19.000000Z\",\"updated_at\":\"2024-12-23T10:00:19.000000Z\"},\"images\":[]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update the specified resource in storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product\/:slug",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product\/:slug",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044",
+                                    "description": "The slug of the product."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"cutbh\",\"description\":\"Et quo impedit quae sint est quisquam quas impedit.\",\"price\":48,\"quantity\":74,\"material\":\"quia\",\"size\":\"voluptatem\",\"stylecode\":\"impedit\",\"color\":\"modi\",\"category_id\":\"est\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove the specified resource from storage.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/product\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/product\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044",
+                                    "description": "The ID of the product."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"ruecker.ford@example.net\",\"password\":\"quasi\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
