@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\ProductController;
 use Illuminate\Http\Request;
@@ -17,3 +18,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::apiResource('/category', ProductCategoryController::class)->only(['index', 'show']);
 Route::apiResource('/product', ProductController::class);
+Route::post('/login', [AuthController::class, 'login']);
