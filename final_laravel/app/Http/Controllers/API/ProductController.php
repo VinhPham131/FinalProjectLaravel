@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -35,23 +36,53 @@ class ProductController extends Controller
             'productcode' => 'nullable|string|unique:products,productcode',
             'color' => 'nullable|string',
             'category_id' => 'required|exists:product_categories,id',
+            'images' => 'nullable|array',
+            'images.*.urls' => 'required|array',
+            'images.*.urls.*' => 'required|url',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $product = Product::create($request->all());
-        return response()->json(['data' => $product], 201);
+        try {
+            $product = Product::create($request->except('images'));
+
+            if ($request->has('images')) {
+                foreach ($request->images as $imageData) {
+                    $product->images()->create([
+                        'urls' => $imageData['urls'],
+                        'product_id' => $product->id,
+                    ]);
+                }
+            }
+
+            return response()->json(['data' => $product->load('images')], 201);
+        } catch (\Exception $e) {
+            Log::error('Error creating product: ' . $e->getMessage(), ['exception' => $e]);
+            return response()->json(['error' => 'An error occurred while creating the product.'], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        $product->load(['category', 'collection', 'images']);
-        return response()->json(['data' => $product], 200);
+        try {
+            $product = Product::findOrFail($id);
+
+            // Load related models
+            $product->load(['category', 'collection', 'images']);
+
+            return response()->json(['data' => $product], 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('Product not found: ' . $e->getMessage());
+            return response()->json(['error' => 'Product not found.'], 404);
+        } catch (\Exception $e) {
+            Log::error('Error retrieving product: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while retrieving the product.'], 500);
+        }
     }
 
     /**
@@ -84,9 +115,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        $product->delete();
-        return $product;
+        try {
+            $product = Product::findOrFail($id);
+            $product->delete();
+            return response()->json(['message' => 'Product deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            Log::error('Error deleting product: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while deleting the product.'], 500);
+        }
     }
 }

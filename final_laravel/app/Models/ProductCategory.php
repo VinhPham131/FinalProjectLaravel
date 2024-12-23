@@ -15,6 +15,8 @@ class ProductCategory extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => true,
+
             ],
         ];
     }
