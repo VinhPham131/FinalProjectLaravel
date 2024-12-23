@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
-    public function show($slug)
+    public function show(Product $product)
     {
         try {
             $product = Product::where('slug', $slug)->firstOrFail();

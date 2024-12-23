@@ -15,6 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.css" rel="stylesheet">
 
     @vite('resources/css/app.css')
+    
 
     <style>
         @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
@@ -39,12 +40,10 @@
 <body class="overflow-x-hidden">
     <x-header />
 
-
     <main class ="">
         @yield('content')
     </main>
-
-
+    
     <x-footer />
     @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
@@ -64,10 +63,15 @@
         gtag('js', new Date());
         gtag('config', 'G-J7QBN2WL4D');
     </script>
+        <script src="{{ asset('js/menu.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
 
     <!-- Additional scripts customized for specific screens -->
     @yield('script')
-
+    @livewireStyles 
+    @livewireScripts 
+    @livewire('wire-elements-modal')
 </body>
 
 </html>
+
