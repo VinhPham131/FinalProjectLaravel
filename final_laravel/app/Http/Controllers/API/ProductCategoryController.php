@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -81,11 +82,21 @@ class ProductCategoryController extends Controller
     public function destroy($id)
     {
         try {
-            // Find the product category by ID and delete it
+            // Find the product category by ID
             $category = ProductCategory::findOrFail($id);
-            $category->delete();
 
-            return response()->json(['message' => 'Category deleted successfully.'], 200);
+            // Attempt to delete the category
+            $deleted = $category->delete();
+
+            if ($deleted) {
+                return response()->json(['message' => 'Category deleted successfully.'], 200);
+            } else {
+                Log::error('Failed to delete product category: ' . $id);
+                return response()->json(['error' => 'Failed to delete the product category.'], 500);
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('Product category not found: ' . $id);
+            return response()->json(['error' => 'Category not found.'], 404);
         } catch (\Exception $e) {
             Log::error('Error deleting product category: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while deleting the product category.'], 500);
