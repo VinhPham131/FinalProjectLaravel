@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +17,15 @@ class ProductImage extends Model
      */
     public function getUrlsAttribute($value)
     {
-        return json_decode($value, true); 
+        return json_decode($value, true);
+    }
+
+    /**
+     * Mutator to encode the URLs as JSON.
+     */
+    public function setUrlsAttribute($value)
+    {
+        $this->attributes['urls'] = json_encode($value);
     }
 
     /**
@@ -30,5 +37,3 @@ class ProductImage extends Model
         return $urls ? $urls[0] : '/images/default-product.jpg'; // Return the first URL or a default image
     }
 }
-
-

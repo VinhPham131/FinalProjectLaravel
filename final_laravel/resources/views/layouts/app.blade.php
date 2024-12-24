@@ -15,7 +15,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.css" rel="stylesheet">
 
     @vite('resources/css/app.css')
-    @livewireStyles
+    
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
 
@@ -67,8 +68,9 @@
 
     <!-- Additional scripts customized for specific screens -->
     @yield('script')
-    @livewireScripts
-
+    @livewireStyles 
+    @livewireScripts 
+    @livewire('wire-elements-modal')
 </body>
 
 </html>

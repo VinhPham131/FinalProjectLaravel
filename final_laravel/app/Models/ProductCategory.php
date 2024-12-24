@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductCategory extends Model
 {
@@ -15,6 +15,8 @@ class ProductCategory extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => true,
+
             ],
         ];
     }
@@ -28,4 +30,3 @@ class ProductCategory extends Model
         return $this->hasMany(Sale::class, 'name', 'name');
     }
 }
-
