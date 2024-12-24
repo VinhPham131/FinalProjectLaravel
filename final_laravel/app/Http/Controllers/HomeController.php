@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\ProductImage;
 
 class HomeController extends Controller
 {
@@ -18,13 +15,7 @@ class HomeController extends Controller
             'https://asset.swarovski.com/images/c_crop,g_xy_center,w_1458,h_1944,x_1526,y_1689/dpr_2.0,f_auto,q_auto,c_lfill,w_725,h_966/swa-cms/20242025_T1_HOLIDAY_KV_ON_MODEL_MATRIX_CRASH_200DPI_RGB/.jpg',
         ];
 
-        // Fetch products with dynamic pricing and sale calculations
-        $products = Product::with('images')->get()->map(function ($product) {
-            $product->highest_sale = $product->highestSale();
-            $product->discounted_price = $product->salePrice();
-            return $product;
-        });
 
-        return view('home', compact('slideshowImages', 'products'));
+        return view('home', compact('slideshowImages'));
     }
 }

@@ -17,7 +17,13 @@ class ProductImage extends Model
      */
     public function getUrlsAttribute($value)
     {
-        return json_decode($value, true);
+        $decoded = json_decode($value, true);
+
+        if (is_string($decoded)) {
+            $decoded = json_decode($decoded, true);
+        }
+
+        return $decoded;
     }
 
     /**
