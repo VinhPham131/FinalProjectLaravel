@@ -3,7 +3,6 @@
 @section('title', 'About Us')
 
 @section('content')
-<x-breadcrumbs />
 <style>
     .container {
   display: grid;
