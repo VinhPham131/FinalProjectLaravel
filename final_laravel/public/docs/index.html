@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel Documentation</title>
+    <title>RIZZLER Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -118,7 +118,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: December 23, 2024</li>
+        <li>Last updated: December 24, 2024</li>
     </ul>
 </div>
 
@@ -385,14 +385,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/category/vero" \
+    "http://localhost/api/category/magni" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/vero"
+    "http://localhost/api/category/magni"
 );
 
 const headers = {
@@ -485,10 +485,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-category--id-"
-               value="vero"
+               value="magni"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>vero</code></p>
+<p>The ID of the category. Example: <code>magni</code></p>
             </div>
                     </form>
 
@@ -505,14 +505,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/category/facere" \
+    "http://localhost/api/category/autem" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/facere"
+    "http://localhost/api/category/autem"
 );
 
 const headers = {
@@ -605,10 +605,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-category--id-"
-               value="facere"
+               value="autem"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>facere</code></p>
+<p>The ID of the category. Example: <code>autem</code></p>
             </div>
                     </form>
 
@@ -665,50 +665,106 @@ access-control-allow-origin: *
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;Bracelet&quot;,
         &quot;slug&quot;: &quot;bracelet&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 2,
         &quot;name&quot;: &quot;Ring&quot;,
         &quot;slug&quot;: &quot;ring&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 3,
+        &quot;name&quot;: &quot;Earrings&quot;,
+        &quot;slug&quot;: &quot;earrings&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 4,
         &quot;name&quot;: &quot;Necklace&quot;,
         &quot;slug&quot;: &quot;necklace&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 5,
         &quot;name&quot;: &quot;Pendant&quot;,
         &quot;slug&quot;: &quot;pendant&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 6,
         &quot;name&quot;: &quot;Charm&quot;,
         &quot;slug&quot;: &quot;charm&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 7,
-        &quot;name&quot;: &quot;Anklet&quot;,
-        &quot;slug&quot;: &quot;anklet&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;name&quot;: &quot;Bangle&quot;,
+        &quot;slug&quot;: &quot;bangle&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 8,
-        &quot;name&quot;: &quot;Watch&quot;,
-        &quot;slug&quot;: &quot;watch&quot;,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;name&quot;: &quot;Cufflinks&quot;,
+        &quot;slug&quot;: &quot;cufflinks&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 9,
+        &quot;name&quot;: &quot;Brooch&quot;,
+        &quot;slug&quot;: &quot;brooch&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 10,
+        &quot;name&quot;: &quot;Anklet&quot;,
+        &quot;slug&quot;: &quot;anklet&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 11,
+        &quot;name&quot;: &quot;Tiara&quot;,
+        &quot;slug&quot;: &quot;tiara&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 12,
+        &quot;name&quot;: &quot;Wedding Band&quot;,
+        &quot;slug&quot;: &quot;wedding-band&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 13,
+        &quot;name&quot;: &quot;Engagement Ring&quot;,
+        &quot;slug&quot;: &quot;engagement-ring&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 14,
+        &quot;name&quot;: &quot;Gemstone Jewelry&quot;,
+        &quot;slug&quot;: &quot;gemstone-jewelry&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
+    },
+    {
+        &quot;id&quot;: 15,
+        &quot;name&quot;: &quot;Pearl Jewelry&quot;,
+        &quot;slug&quot;: &quot;pearl-jewelry&quot;,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     }
 ]</code>
  </pre>
@@ -797,14 +853,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/category/recusandae" \
+    --get "http://localhost/api/category/possimus" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/category/recusandae"
+    "http://localhost/api/category/possimus"
 );
 
 const headers = {
@@ -913,10 +969,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-category--id-"
-               value="recusandae"
+               value="possimus"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>recusandae</code></p>
+<p>The ID of the category. Example: <code>possimus</code></p>
             </div>
                     </form>
 
@@ -973,7 +1029,7 @@ access-control-allow-origin: *
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;14K White Gold Bracelet with Akoya Pearl PNJ PAXMW000044&quot;,
         &quot;slug&quot;: &quot;14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044&quot;,
-        &quot;description&quot;: &quot;This bracelet attracts attention with its simple yet elegant design, featuring an Akoya Pearl.&quot;,
+        &quot;description&quot;: &quot;This bracelet attracts...&quot;,
         &quot;price&quot;: &quot;30.00&quot;,
         &quot;quantity&quot;: 10,
         &quot;material&quot;: &quot;Akoya Pearl&quot;,
@@ -982,16 +1038,15 @@ access-control-allow-origin: *
         &quot;collection_id&quot;: 1,
         &quot;productcode&quot;: &quot;GVPAXMW000044&quot;,
         &quot;color&quot;: &quot;White&quot;,
-        &quot;category_id&quot;: 1,
-        &quot;sale_count&quot;: 10,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;category_id&quot;: 2,
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 2,
         &quot;name&quot;: &quot;18K Gold Bracelet with Citrine PNJ Spring CTXMY000059&quot;,
         &quot;slug&quot;: &quot;18k-gold-bracelet-with-citrine-pnj-spring-ctxmy000059&quot;,
-        &quot;description&quot;: &quot;Citrine&#039;s bright yellow color symbolizes optimism and warmth, making it a perfect gift.&quot;,
+        &quot;description&quot;: &quot;With its bright yellow color, Citrine is a gemstone that holds optimistic and warm energy...&quot;,
         &quot;price&quot;: &quot;40.00&quot;,
         &quot;quantity&quot;: 20,
         &quot;material&quot;: &quot;Citrine&quot;,
@@ -999,17 +1054,16 @@ access-control-allow-origin: *
         &quot;stylecode&quot;: &quot;TS456&quot;,
         &quot;collection_id&quot;: 2,
         &quot;productcode&quot;: &quot;GVCTXMY000059&quot;,
-        &quot;color&quot;: &quot;Yellow&quot;,
+        &quot;color&quot;: &quot;Blue&quot;,
         &quot;category_id&quot;: 1,
-        &quot;sale_count&quot;: 20,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     },
     {
         &quot;id&quot;: 3,
-        &quot;name&quot;: &quot;18K Gold Necklace with Ruby PNJ Spring RBXMY000180&quot;,
-        &quot;slug&quot;: &quot;18k-gold-necklace-with-ruby-pnj-spring-rbxmy000180&quot;,
-        &quot;description&quot;: &quot;This luxurious necklace with a Ruby centerpiece complements the wearer&#039;s elegance.&quot;,
+        &quot;name&quot;: &quot;18K Gold Bracelet with Ruby PNJ Spring RBXMY000180&quot;,
+        &quot;slug&quot;: &quot;18k-gold-bracelet-with-ruby-pnj-spring-rbxmy000180&quot;,
+        &quot;description&quot;: &quot;Refreshing the classic standard of 18K gold with a delicate Ruby stone, the PNJ bracelet embodies a fresh look, perfectly fitting to brighten the optimistic beauty of ladies. The perfect combination creates a luxurious gold bracelet, highlighting the wrist with a delicately set Ruby. This brilliance enhances the beauty of ladies, making them look charming and radiant when worn.&quot;,
         &quot;price&quot;: &quot;50.00&quot;,
         &quot;quantity&quot;: 0,
         &quot;material&quot;: &quot;Ruby&quot;,
@@ -1019,351 +1073,8 @@ access-control-allow-origin: *
         &quot;productcode&quot;: &quot;GVRBXMY000180&quot;,
         &quot;color&quot;: &quot;Gold&quot;,
         &quot;category_id&quot;: 4,
-        &quot;sale_count&quot;: 30,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 6,
-        &quot;name&quot;: &quot;Rose Gold Anklet with Diamonds PNJ ANKRDW000501&quot;,
-        &quot;slug&quot;: &quot;rose-gold-anklet-with-diamonds-pnj-ankrdw000501&quot;,
-        &quot;description&quot;: &quot;A graceful anklet featuring sparkling diamonds and a rose gold finish.&quot;,
-        &quot;price&quot;: &quot;70.00&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Diamond&quot;,
-        &quot;size&quot;: &quot;9&quot;,
-        &quot;stylecode&quot;: &quot;ANK123&quot;,
-        &quot;collection_id&quot;: 4,
-        &quot;productcode&quot;: &quot;GVANKRDW000501&quot;,
-        &quot;color&quot;: &quot;Rose Gold&quot;,
-        &quot;category_id&quot;: 7,
-        &quot;sale_count&quot;: 18,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 7,
-        &quot;name&quot;: &quot;Platinum Pendant with Topaz PNJ PDTXMY000712&quot;,
-        &quot;slug&quot;: &quot;platinum-pendant-with-topaz-pnj-pdtxmy000712&quot;,
-        &quot;description&quot;: &quot;A sleek pendant with a stunning Topaz centerpiece, perfect for daily wear.&quot;,
-        &quot;price&quot;: &quot;90.00&quot;,
-        &quot;quantity&quot;: 3,
-        &quot;material&quot;: &quot;Topaz&quot;,
-        &quot;size&quot;: &quot;One Size&quot;,
-        &quot;stylecode&quot;: &quot;PD345&quot;,
-        &quot;collection_id&quot;: 1,
-        &quot;productcode&quot;: &quot;GVPDTXMY000712&quot;,
-        &quot;color&quot;: &quot;Silver&quot;,
-        &quot;category_id&quot;: 5,
-        &quot;sale_count&quot;: 8,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 8,
-        &quot;name&quot;: &quot;Gold Chain Necklace PNJ CHGWM000820&quot;,
-        &quot;slug&quot;: &quot;gold-chain-necklace-pnj-chgwm000820&quot;,
-        &quot;description&quot;: &quot;A classic gold chain necklace, suitable for all occasions.&quot;,
-        &quot;price&quot;: &quot;100.00&quot;,
-        &quot;quantity&quot;: 10,
-        &quot;material&quot;: &quot;Gold&quot;,
-        &quot;size&quot;: &quot;24 inches&quot;,
-        &quot;stylecode&quot;: &quot;CH567&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;GVCHGWM000820&quot;,
-        &quot;color&quot;: &quot;Gold&quot;,
-        &quot;category_id&quot;: 4,
-        &quot;sale_count&quot;: 15,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 10,
-        &quot;name&quot;: &quot;White Gold Ring with Diamonds PNJ WRGDW000954&quot;,
-        &quot;slug&quot;: &quot;white-gold-ring-with-diamonds-pnj-wrgdw000954&quot;,
-        &quot;description&quot;: &quot;A statement ring crafted with white gold and dazzling diamonds.&quot;,
-        &quot;price&quot;: &quot;150.00&quot;,
-        &quot;quantity&quot;: 4,
-        &quot;material&quot;: &quot;Diamond&quot;,
-        &quot;size&quot;: &quot;6&quot;,
-        &quot;stylecode&quot;: &quot;WR001&quot;,
-        &quot;collection_id&quot;: 4,
-        &quot;productcode&quot;: &quot;GVWRGDW000954&quot;,
-        &quot;color&quot;: &quot;White&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 40,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 11,
-        &quot;name&quot;: &quot;Yellow Gold Cuff Bracelet PNJ BRYGW000600&quot;,
-        &quot;slug&quot;: &quot;yellow-gold-cuff-bracelet-pnj-brygw000600&quot;,
-        &quot;description&quot;: &quot;A bold yellow gold cuff bracelet that adds elegance to any outfit.&quot;,
-        &quot;price&quot;: &quot;200.00&quot;,
-        &quot;quantity&quot;: 7,
-        &quot;material&quot;: &quot;Gold&quot;,
-        &quot;size&quot;: &quot;Adjustable&quot;,
-        &quot;stylecode&quot;: &quot;CF567&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;GVBRYGW000600&quot;,
-        &quot;color&quot;: &quot;Gold&quot;,
-        &quot;category_id&quot;: 1,
-        &quot;sale_count&quot;: 35,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 12,
-        &quot;name&quot;: &quot;Titanium Watch with Sapphire Glass PNJ WTTSG000340&quot;,
-        &quot;slug&quot;: &quot;titanium-watch-with-sapphire-glass-pnj-wttsg000340&quot;,
-        &quot;description&quot;: &quot;Durable titanium watch with scratch-resistant sapphire glass.&quot;,
-        &quot;price&quot;: &quot;250.00&quot;,
-        &quot;quantity&quot;: 12,
-        &quot;material&quot;: &quot;Titanium&quot;,
-        &quot;size&quot;: &quot;One Size&quot;,
-        &quot;stylecode&quot;: &quot;WT123&quot;,
-        &quot;collection_id&quot;: 1,
-        &quot;productcode&quot;: &quot;GVWTTSG000340&quot;,
-        &quot;color&quot;: &quot;Gray&quot;,
-        &quot;category_id&quot;: 8,
-        &quot;sale_count&quot;: 50,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:20.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 13,
-        &quot;name&quot;: &quot;????&quot;,
-        &quot;slug&quot;: &quot;&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;UP123&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;vcxvxcvbvcbcvbvc&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:22.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:22.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 14,
-        &quot;name&quot;: &quot;????&quot;,
-        &quot;slug&quot;: &quot;-2&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;zcxzczx&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;v&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:39.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:39.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 15,
-        &quot;name&quot;: &quot;????&quot;,
-        &quot;slug&quot;: &quot;-3&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;zcxzczx&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;cxvbcvbvc&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:01:16.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:01:16.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 16,
-        &quot;name&quot;: &quot;????&quot;,
-        &quot;slug&quot;: &quot;-4&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;zcxzczx&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;bfdb&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:02:48.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:02:48.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 17,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;zcxzczx&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;bvcbnn bnbv&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:03:46.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:03:46.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 18,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-2&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;vsdvwevw34v3w&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:05:54.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:05:54.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 19,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-3&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;bxbvcbvc&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:06:52.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:06:52.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 20,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-4&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;h45eh45eh54h45h45h45&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:06:56.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:06:56.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 21,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-5&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;bfvxcbtdbt&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:08:09.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:08:09.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 22,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-6&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;erher&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:10:18.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:10:18.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 23,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-7&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;opewqiopeqwiop&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:10:34.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:10:34.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 24,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-8&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;cxz&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:11:00.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:11:00.000000Z&quot;
-    },
-    {
-        &quot;id&quot;: 25,
-        &quot;name&quot;: &quot;djsajkldasjkl&quot;,
-        &quot;slug&quot;: &quot;djsajkldasjkl-9&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;vcxvdsgsge&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;bv&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:12:38.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:12:38.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-12-17T17:32:35.000000Z&quot;
     }
 ]</code>
  </pre>
@@ -1456,20 +1167,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"aq\",
-    \"description\": \"Et est vel et cumque doloribus voluptate quo consequatur.\",
-    \"price\": 33,
-    \"quantity\": 55,
-    \"material\": \"soluta\",
-    \"size\": \"omnis\",
-    \"stylecode\": \"sint\",
-    \"productcode\": \"cumque\",
-    \"color\": \"praesentium\",
-    \"category_id\": \"rerum\",
+    \"name\": \"qlagjkmyjucversmalrpsrwl\",
+    \"description\": \"Consequatur vero fugiat nesciunt tempore qui quia et.\",
+    \"price\": 11,
+    \"quantity\": 2,
+    \"material\": \"itaque\",
+    \"size\": \"itaque\",
+    \"stylecode\": \"voluptas\",
+    \"productcode\": \"laudantium\",
+    \"color\": \"omnis\",
+    \"category_id\": \"mollitia\",
     \"images\": [
         {
             \"urls\": [
-                \"http:\\/\\/pagac.info\\/quaerat-odit-quo-eum\"
+                \"https:\\/\\/parker.biz\\/quam-fuga-rerum-magni-laudantium-necessitatibus.html\"
             ]
         }
     ]
@@ -1488,20 +1199,20 @@ const headers = {
 };
 
 let body = {
-    "name": "aq",
-    "description": "Et est vel et cumque doloribus voluptate quo consequatur.",
-    "price": 33,
-    "quantity": 55,
-    "material": "soluta",
-    "size": "omnis",
-    "stylecode": "sint",
-    "productcode": "cumque",
-    "color": "praesentium",
-    "category_id": "rerum",
+    "name": "qlagjkmyjucversmalrpsrwl",
+    "description": "Consequatur vero fugiat nesciunt tempore qui quia et.",
+    "price": 11,
+    "quantity": 2,
+    "material": "itaque",
+    "size": "itaque",
+    "stylecode": "voluptas",
+    "productcode": "laudantium",
+    "color": "omnis",
+    "category_id": "mollitia",
     "images": [
         {
             "urls": [
-                "http:\/\/pagac.info\/quaerat-odit-quo-eum"
+                "https:\/\/parker.biz\/quam-fuga-rerum-magni-laudantium-necessitatibus.html"
             ]
         }
     ]
@@ -1593,10 +1304,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-product"
-               value="aq"
+               value="qlagjkmyjucversmalrpsrwl"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>aq</code></p>
+<p>Must not be greater than 255 characters. Example: <code>qlagjkmyjucversmalrpsrwl</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -1604,10 +1315,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="description"                data-endpoint="POSTapi-product"
-               value="Et est vel et cumque doloribus voluptate quo consequatur."
+               value="Consequatur vero fugiat nesciunt tempore qui quia et."
                data-component="body">
     <br>
-<p>Example: <code>Et est vel et cumque doloribus voluptate quo consequatur.</code></p>
+<p>Example: <code>Consequatur vero fugiat nesciunt tempore qui quia et.</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price</code></b>&nbsp;&nbsp;
@@ -1615,10 +1326,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="price"                data-endpoint="POSTapi-product"
-               value="33"
+               value="11"
                data-component="body">
     <br>
-<p>Must be at least 0. Example: <code>33</code></p>
+<p>Must be at least 0. Example: <code>11</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>quantity</code></b>&nbsp;&nbsp;
@@ -1626,10 +1337,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="quantity"                data-endpoint="POSTapi-product"
-               value="55"
+               value="2"
                data-component="body">
     <br>
-<p>Must be at least 0. Example: <code>55</code></p>
+<p>Must be at least 0. Example: <code>2</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>material</code></b>&nbsp;&nbsp;
@@ -1637,10 +1348,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="material"                data-endpoint="POSTapi-product"
-               value="soluta"
+               value="itaque"
                data-component="body">
     <br>
-<p>Example: <code>soluta</code></p>
+<p>Example: <code>itaque</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>size</code></b>&nbsp;&nbsp;
@@ -1648,10 +1359,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="size"                data-endpoint="POSTapi-product"
-               value="omnis"
+               value="itaque"
                data-component="body">
     <br>
-<p>Example: <code>omnis</code></p>
+<p>Example: <code>itaque</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>stylecode</code></b>&nbsp;&nbsp;
@@ -1659,10 +1370,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="stylecode"                data-endpoint="POSTapi-product"
-               value="sint"
+               value="voluptas"
                data-component="body">
     <br>
-<p>Example: <code>sint</code></p>
+<p>Example: <code>voluptas</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>collection_id</code></b>&nbsp;&nbsp;
@@ -1681,10 +1392,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="productcode"                data-endpoint="POSTapi-product"
-               value="cumque"
+               value="laudantium"
                data-component="body">
     <br>
-<p>Example: <code>cumque</code></p>
+<p>Example: <code>laudantium</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>color</code></b>&nbsp;&nbsp;
@@ -1692,10 +1403,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="color"                data-endpoint="POSTapi-product"
-               value="praesentium"
+               value="omnis"
                data-component="body">
     <br>
-<p>Example: <code>praesentium</code></p>
+<p>Example: <code>omnis</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
@@ -1703,10 +1414,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="category_id"                data-endpoint="POSTapi-product"
-               value="rerum"
+               value="mollitia"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the product_categories table. Example: <code>rerum</code></p>
+<p>The <code>id</code> of an existing record in the product_categories table. Example: <code>mollitia</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -1771,7 +1482,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-product--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (404):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1783,40 +1494,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 14,
-        &quot;name&quot;: &quot;????&quot;,
-        &quot;slug&quot;: &quot;-2&quot;,
-        &quot;description&quot;: &quot;This is an updated product.&quot;,
-        &quot;price&quot;: &quot;89.99&quot;,
-        &quot;quantity&quot;: 5,
-        &quot;material&quot;: &quot;Polyester&quot;,
-        &quot;size&quot;: &quot;M&quot;,
-        &quot;stylecode&quot;: &quot;zcxzczx&quot;,
-        &quot;collection_id&quot;: 2,
-        &quot;productcode&quot;: &quot;v&quot;,
-        &quot;color&quot;: &quot;Blue&quot;,
-        &quot;category_id&quot;: 2,
-        &quot;sale_count&quot;: 0,
-        &quot;created_at&quot;: &quot;2024-12-23T10:00:39.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-12-23T10:00:39.000000Z&quot;,
-        &quot;category&quot;: {
-            &quot;id&quot;: 2,
-            &quot;name&quot;: &quot;Ring&quot;,
-            &quot;slug&quot;: &quot;ring&quot;,
-            &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
-        },
-        &quot;collection&quot;: {
-            &quot;id&quot;: 2,
-            &quot;name&quot;: &quot;Spring 2024&quot;,
-            &quot;slug&quot;: &quot;spring-2024&quot;,
-            &quot;description&quot;: &quot;Refreshing and vibrant styles for Spring 2024.&quot;,
-            &quot;created_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2024-12-23T10:00:19.000000Z&quot;
-        },
-        &quot;images&quot;: []
-    }
+    &quot;error&quot;: &quot;Product not found.&quot;
 }</code>
  </pre>
     </span>
@@ -1920,15 +1598,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"cutbh\",
-    \"description\": \"Et quo impedit quae sint est quisquam quas impedit.\",
-    \"price\": 48,
-    \"quantity\": 74,
-    \"material\": \"quia\",
-    \"size\": \"voluptatem\",
-    \"stylecode\": \"impedit\",
-    \"color\": \"modi\",
-    \"category_id\": \"est\"
+    \"name\": \"hn\",
+    \"description\": \"Ut magnam qui corporis non labore ipsa est occaecati.\",
+    \"price\": 40,
+    \"quantity\": 70,
+    \"material\": \"et\",
+    \"size\": \"natus\",
+    \"stylecode\": \"fuga\",
+    \"color\": \"illum\",
+    \"category_id\": \"sapiente\"
 }"
 </code></pre></div>
 
@@ -1944,15 +1622,15 @@ const headers = {
 };
 
 let body = {
-    "name": "cutbh",
-    "description": "Et quo impedit quae sint est quisquam quas impedit.",
-    "price": 48,
-    "quantity": 74,
-    "material": "quia",
-    "size": "voluptatem",
-    "stylecode": "impedit",
-    "color": "modi",
-    "category_id": "est"
+    "name": "hn",
+    "description": "Ut magnam qui corporis non labore ipsa est occaecati.",
+    "price": 40,
+    "quantity": 70,
+    "material": "et",
+    "size": "natus",
+    "stylecode": "fuga",
+    "color": "illum",
+    "category_id": "sapiente"
 };
 
 fetch(url, {
@@ -2057,10 +1735,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTapi-product--slug-"
-               value="cutbh"
+               value="hn"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>cutbh</code></p>
+<p>Must not be greater than 255 characters. Example: <code>hn</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
@@ -2068,10 +1746,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="description"                data-endpoint="PUTapi-product--slug-"
-               value="Et quo impedit quae sint est quisquam quas impedit."
+               value="Ut magnam qui corporis non labore ipsa est occaecati."
                data-component="body">
     <br>
-<p>Example: <code>Et quo impedit quae sint est quisquam quas impedit.</code></p>
+<p>Example: <code>Ut magnam qui corporis non labore ipsa est occaecati.</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>price</code></b>&nbsp;&nbsp;
@@ -2079,10 +1757,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="price"                data-endpoint="PUTapi-product--slug-"
-               value="48"
+               value="40"
                data-component="body">
     <br>
-<p>Must be at least 0. Example: <code>48</code></p>
+<p>Must be at least 0. Example: <code>40</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>quantity</code></b>&nbsp;&nbsp;
@@ -2090,10 +1768,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="quantity"                data-endpoint="PUTapi-product--slug-"
-               value="74"
+               value="70"
                data-component="body">
     <br>
-<p>Must be at least 0. Example: <code>74</code></p>
+<p>Must be at least 0. Example: <code>70</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>material</code></b>&nbsp;&nbsp;
@@ -2101,10 +1779,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="material"                data-endpoint="PUTapi-product--slug-"
-               value="quia"
+               value="et"
                data-component="body">
     <br>
-<p>Example: <code>quia</code></p>
+<p>Example: <code>et</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>size</code></b>&nbsp;&nbsp;
@@ -2112,10 +1790,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="size"                data-endpoint="PUTapi-product--slug-"
-               value="voluptatem"
+               value="natus"
                data-component="body">
     <br>
-<p>Example: <code>voluptatem</code></p>
+<p>Example: <code>natus</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>stylecode</code></b>&nbsp;&nbsp;
@@ -2123,10 +1801,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="stylecode"                data-endpoint="PUTapi-product--slug-"
-               value="impedit"
+               value="fuga"
                data-component="body">
     <br>
-<p>Example: <code>impedit</code></p>
+<p>Example: <code>fuga</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>collection_id</code></b>&nbsp;&nbsp;
@@ -2156,10 +1834,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="color"                data-endpoint="PUTapi-product--slug-"
-               value="modi"
+               value="illum"
                data-component="body">
     <br>
-<p>Example: <code>modi</code></p>
+<p>Example: <code>illum</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
@@ -2167,10 +1845,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="category_id"                data-endpoint="PUTapi-product--slug-"
-               value="est"
+               value="sapiente"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the product_categories table. Example: <code>est</code></p>
+<p>The <code>id</code> of an existing record in the product_categories table. Example: <code>sapiente</code></p>
         </div>
         </form>
 
@@ -2311,8 +1989,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"ruecker.ford@example.net\",
-    \"password\": \"quasi\"
+    \"email\": \"amelie.brakus@example.com\",
+    \"password\": \"quia\"
 }"
 </code></pre></div>
 
@@ -2328,8 +2006,8 @@ const headers = {
 };
 
 let body = {
-    "email": "ruecker.ford@example.net",
-    "password": "quasi"
+    "email": "amelie.brakus@example.com",
+    "password": "quia"
 };
 
 fetch(url, {
@@ -2418,10 +2096,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-login"
-               value="ruecker.ford@example.net"
+               value="amelie.brakus@example.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>ruecker.ford@example.net</code></p>
+<p>Must be a valid email address. Example: <code>amelie.brakus@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -2429,10 +2107,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-login"
-               value="quasi"
+               value="quia"
                data-component="body">
     <br>
-<p>Example: <code>quasi</code></p>
+<p>Example: <code>quia</code></p>
         </div>
         </form>
 

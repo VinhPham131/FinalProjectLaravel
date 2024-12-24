@@ -74,22 +74,13 @@ return [
     ],
 
     'external' => [
-        'html_attributes' => []
+        'html_attributes' => [],
     ],
 
     'try_it_out' => [
-        // Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
-        // Don't forget to enable CORS headers for your endpoints.
         'enabled' => true,
-
-        // The base URL for the API tester to use (for example, you can set this to your staging URL).
-        // Leave as null to use the current app URL when generating (config("app.url")).
-        'base_url' => null,
-
-        // [Laravel Sanctum] Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header.
+        'base_url' => null, // Leave as null to use the current app URL when generating
         'use_csrf' => false,
-
-        // The URL to fetch the CSRF token from (if `use_csrf` is true).
         'csrf_url' => '/sanctum/csrf-cookie',
     ],
 
@@ -133,7 +124,7 @@ INTRO
     // Example requests for each endpoint will be shown in each of these languages.
     // Supported options are: bash, javascript, php, python
     // To add a language of your own, see https://scribe.knuckles.wtf/laravel/advanced/example-requests
-    'example_languages' => [
+    'example_languages'=>[
         'bash',
         'javascript',
     ],
@@ -142,10 +133,10 @@ INTRO
     // For 'static' docs, the collection will be generated to public/docs/collection.json.
     // For 'laravel' docs, it will be generated to storage/app/scribe/collection.json.
     // Setting `laravel.add_routes` to true (above) will also add a route for the collection.
-    'postman' => [
-        'enabled' => true,
+    'postman'=>[
+        'enabled'=>true,
 
-        'overrides' => [
+        'overrides'=>[
             // 'info.version' => '2.0.0',
         ],
     ],
@@ -154,22 +145,22 @@ INTRO
     // For 'static' docs, the collection will be generated to public/docs/openapi.yaml.
     // For 'laravel' docs, it will be generated to storage/app/scribe/openapi.yaml.
     // Setting `laravel.add_routes` to true (above) will also add a route for the spec.
-    'openapi' => [
-        'enabled' => true,
+    'openapi'=>[
+        'enabled'=>true,
 
-        'overrides' => [
+        'overrides'=>[
             // 'info.version' => '2.0.0',
         ],
     ],
 
-    'groups' => [
+    'groups'=>[
         // Endpoints which don't have a @group will be placed in this default group.
-        'default' => 'Endpoints',
+        'default'=>'Endpoints',
 
         // By default, Scribe will sort groups alphabetically, and endpoints in the order their routes are defined.
         // You can override this by listing the groups, subgroups and endpoints here in the order you want them.
         // See https://scribe.knuckles.wtf/blog/laravel-v4#easier-sorting and https://scribe.knuckles.wtf/laravel/reference/config#order for details
-        'order' => [],
+        'order'=>[],
     ],
 
     // Custom logo path. This will be used as the value of the src attribute for the <img> tag,
@@ -177,7 +168,7 @@ INTRO
     // For example, if your logo is in public/img:
     // - 'logo' => '../img/logo.png' // for `static` type (output folder is public/docs)
     // - 'logo' => 'img/logo.png' // for `laravel` type
-    'logo' => false,
+    'logo'=>false,
 
     // Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
     // Examples:
@@ -186,54 +177,54 @@ INTRO
     // Available tokens are `{date:<format>}` and `{git:<format>}`.
     // The format you pass to `date` will be passed to PHP's `date()` function.
     // The format you pass to `git` can be either "short" or "long".
-    'last_updated' => 'Last updated: {date:F j, Y}',
+    'last_updated'=>'Last updated: {date:F j, Y}',
 
-    'examples' => [
+    'examples'=>[
         // Set this to any number (eg. 1234) to generate the same example values for parameters on each run,
-        'faker_seed' => null,
+        'faker_seed'=>null,
 
         // With API resources and transformers, Scribe tries to generate example models to use in your API responses.
         // By default, Scribe will try the model's factory, and if that fails, try fetching the first from the database.
         // You can reorder or remove strategies here.
-        'models_source' => ['factoryCreate', 'factoryMake', 'databaseFirst'],
+        'models_source'=>['factoryCreate','factoryMake','databaseFirst'],
     ],
 
     // The strategies Scribe will use to extract information about your routes at each stage.
     // If you create or install a custom strategy, add it here.
-    'strategies' => [
-        'metadata' => [
+    'strategies'=>[
+        'metadata'=>[
             Strategies\Metadata\GetFromDocBlocks::class,
             Strategies\Metadata\GetFromMetadataAttributes::class,
         ],
-        'urlParameters' => [
+        'urlParameters'=>[
             Strategies\UrlParameters\GetFromLaravelAPI::class,
             Strategies\UrlParameters\GetFromUrlParamAttribute::class,
             Strategies\UrlParameters\GetFromUrlParamTag::class,
         ],
-        'queryParameters' => [
+        'queryParameters'=>[
             Strategies\QueryParameters\GetFromFormRequest::class,
             Strategies\QueryParameters\GetFromInlineValidator::class,
             Strategies\QueryParameters\GetFromQueryParamAttribute::class,
             Strategies\QueryParameters\GetFromQueryParamTag::class,
         ],
-        'headers' => [
+        'headers'=>[
             Strategies\Headers\GetFromHeaderAttribute::class,
             Strategies\Headers\GetFromHeaderTag::class,
             [
                 'override',
                 [
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json',
-                ]
-            ]
+                    'Content-Type'=>'application/json',
+                    'Accept'=>'application/json',
+                ],
+            ],
         ],
-        'bodyParameters' => [
+        'bodyParameters'=>[
             Strategies\BodyParameters\GetFromFormRequest::class,
             Strategies\BodyParameters\GetFromInlineValidator::class,
             Strategies\BodyParameters\GetFromBodyParamAttribute::class,
             Strategies\BodyParameters\GetFromBodyParamTag::class,
         ],
-        'responses' => [
+        'responses'=>[
             Strategies\Responses\UseResponseAttributes::class,
             Strategies\Responses\UseTransformerTags::class,
             Strategies\Responses\UseApiResourceTags::class,
@@ -242,15 +233,15 @@ INTRO
             [
                 Strategies\Responses\ResponseCalls::class,
                 [
-                    'only' => ['GET *'],
+                    'only'=>['GET *'],
                     // Disable debug mode when generating response calls to avoid error stack traces in responses
-                    'config' => [
-                        'app.debug' => false,
+                    'config'=>[
+                        'app.debug'=>false,
                     ],
-                ]
-            ]
+                ],
+            ],
         ],
-        'responseFields' => [
+        'responseFields'=>[
             Strategies\ResponseFields\GetFromResponseFieldAttribute::class,
             Strategies\ResponseFields\GetFromResponseFieldTag::class,
         ],
@@ -259,12 +250,12 @@ INTRO
     // For response calls, API resource responses and transformer responses,
     // Scribe will try to start database transactions, so no changes are persisted to your database.
     // Tell Scribe which connections should be transacted here. If you only use one db connection, you can leave this as is.
-    'database_connections_to_transact' => [config('database.default')],
+    'database_connections_to_transact'=>[config('database.default')],
 
-    'fractal' => [
+    'fractal'=>[
         // If you are using a custom serializer with league/fractal, you can specify it here.
-        'serializer' => null,
+        'serializer'=>null,
     ],
 
-    'routeMatcher' => \Knuckles\Scribe\Matching\RouteMatcher::class,
+    'routeMatcher'=>\Knuckles\Scribe\Matching\RouteMatcher::class,
 ];

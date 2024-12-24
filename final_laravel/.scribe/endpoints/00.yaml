@@ -91,14 +91,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: vero
+        example: magni
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: vero
+      id: magni
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -132,14 +132,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: facere
+        example: autem
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: facere
+      id: autem
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -178,7 +178,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '[{"id":1,"name":"Bracelet","slug":"bracelet","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":2,"name":"Ring","slug":"ring","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":4,"name":"Necklace","slug":"necklace","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":5,"name":"Pendant","slug":"pendant","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":6,"name":"Charm","slug":"charm","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":7,"name":"Anklet","slug":"anklet","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":8,"name":"Watch","slug":"watch","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"}]'
+        content: '[{"id":1,"name":"Bracelet","slug":"bracelet","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":2,"name":"Ring","slug":"ring","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":3,"name":"Earrings","slug":"earrings","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":4,"name":"Necklace","slug":"necklace","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":5,"name":"Pendant","slug":"pendant","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":6,"name":"Charm","slug":"charm","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":7,"name":"Bangle","slug":"bangle","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":8,"name":"Cufflinks","slug":"cufflinks","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":9,"name":"Brooch","slug":"brooch","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":10,"name":"Anklet","slug":"anklet","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":11,"name":"Tiara","slug":"tiara","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":12,"name":"Wedding Band","slug":"wedding-band","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":13,"name":"Engagement Ring","slug":"engagement-ring","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":14,"name":"Gemstone Jewelry","slug":"gemstone-jewelry","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":15,"name":"Pearl Jewelry","slug":"pearl-jewelry","created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"}]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -212,14 +212,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: recusandae
+        example: possimus
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: recusandae
+      id: possimus
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -267,7 +267,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '[{"id":1,"name":"14K White Gold Bracelet with Akoya Pearl PNJ PAXMW000044","slug":"14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044","description":"This bracelet attracts attention with its simple yet elegant design, featuring an Akoya Pearl.","price":"30.00","quantity":10,"material":"Akoya Pearl","size":"51","stylecode":"SP123","collection_id":1,"productcode":"GVPAXMW000044","color":"White","category_id":1,"sale_count":10,"created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":2,"name":"18K Gold Bracelet with Citrine PNJ Spring CTXMY000059","slug":"18k-gold-bracelet-with-citrine-pnj-spring-ctxmy000059","description":"Citrine''s bright yellow color symbolizes optimism and warmth, making it a perfect gift.","price":"40.00","quantity":20,"material":"Citrine","size":"52","stylecode":"TS456","collection_id":2,"productcode":"GVCTXMY000059","color":"Yellow","category_id":1,"sale_count":20,"created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":3,"name":"18K Gold Necklace with Ruby PNJ Spring RBXMY000180","slug":"18k-gold-necklace-with-ruby-pnj-spring-rbxmy000180","description":"This luxurious necklace with a Ruby centerpiece complements the wearer''s elegance.","price":"50.00","quantity":0,"material":"Ruby","size":"53","stylecode":"BK789","collection_id":4,"productcode":"GVRBXMY000180","color":"Gold","category_id":4,"sale_count":30,"created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},{"id":6,"name":"Rose Gold Anklet with Diamonds PNJ ANKRDW000501","slug":"rose-gold-anklet-with-diamonds-pnj-ankrdw000501","description":"A graceful anklet featuring sparkling diamonds and a rose gold finish.","price":"70.00","quantity":5,"material":"Diamond","size":"9","stylecode":"ANK123","collection_id":4,"productcode":"GVANKRDW000501","color":"Rose Gold","category_id":7,"sale_count":18,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":7,"name":"Platinum Pendant with Topaz PNJ PDTXMY000712","slug":"platinum-pendant-with-topaz-pnj-pdtxmy000712","description":"A sleek pendant with a stunning Topaz centerpiece, perfect for daily wear.","price":"90.00","quantity":3,"material":"Topaz","size":"One Size","stylecode":"PD345","collection_id":1,"productcode":"GVPDTXMY000712","color":"Silver","category_id":5,"sale_count":8,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":8,"name":"Gold Chain Necklace PNJ CHGWM000820","slug":"gold-chain-necklace-pnj-chgwm000820","description":"A classic gold chain necklace, suitable for all occasions.","price":"100.00","quantity":10,"material":"Gold","size":"24 inches","stylecode":"CH567","collection_id":2,"productcode":"GVCHGWM000820","color":"Gold","category_id":4,"sale_count":15,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":10,"name":"White Gold Ring with Diamonds PNJ WRGDW000954","slug":"white-gold-ring-with-diamonds-pnj-wrgdw000954","description":"A statement ring crafted with white gold and dazzling diamonds.","price":"150.00","quantity":4,"material":"Diamond","size":"6","stylecode":"WR001","collection_id":4,"productcode":"GVWRGDW000954","color":"White","category_id":2,"sale_count":40,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":11,"name":"Yellow Gold Cuff Bracelet PNJ BRYGW000600","slug":"yellow-gold-cuff-bracelet-pnj-brygw000600","description":"A bold yellow gold cuff bracelet that adds elegance to any outfit.","price":"200.00","quantity":7,"material":"Gold","size":"Adjustable","stylecode":"CF567","collection_id":2,"productcode":"GVBRYGW000600","color":"Gold","category_id":1,"sale_count":35,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":12,"name":"Titanium Watch with Sapphire Glass PNJ WTTSG000340","slug":"titanium-watch-with-sapphire-glass-pnj-wttsg000340","description":"Durable titanium watch with scratch-resistant sapphire glass.","price":"250.00","quantity":12,"material":"Titanium","size":"One Size","stylecode":"WT123","collection_id":1,"productcode":"GVWTTSG000340","color":"Gray","category_id":8,"sale_count":50,"created_at":"2024-12-23T10:00:20.000000Z","updated_at":"2024-12-23T10:00:20.000000Z"},{"id":13,"name":"????","slug":"","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"UP123","collection_id":2,"productcode":"vcxvxcvbvcbcvbvc","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:00:22.000000Z","updated_at":"2024-12-23T10:00:22.000000Z"},{"id":14,"name":"????","slug":"-2","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"zcxzczx","collection_id":2,"productcode":"v","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:00:39.000000Z","updated_at":"2024-12-23T10:00:39.000000Z"},{"id":15,"name":"????","slug":"-3","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"zcxzczx","collection_id":2,"productcode":"cxvbcvbvc","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:01:16.000000Z","updated_at":"2024-12-23T10:01:16.000000Z"},{"id":16,"name":"????","slug":"-4","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"zcxzczx","collection_id":2,"productcode":"bfdb","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:02:48.000000Z","updated_at":"2024-12-23T10:02:48.000000Z"},{"id":17,"name":"djsajkldasjkl","slug":"djsajkldasjkl","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"zcxzczx","collection_id":2,"productcode":"bvcbnn bnbv","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:03:46.000000Z","updated_at":"2024-12-23T10:03:46.000000Z"},{"id":18,"name":"djsajkldasjkl","slug":"djsajkldasjkl-2","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"vsdvwevw34v3w","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:05:54.000000Z","updated_at":"2024-12-23T10:05:54.000000Z"},{"id":19,"name":"djsajkldasjkl","slug":"djsajkldasjkl-3","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"bxbvcbvc","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:06:52.000000Z","updated_at":"2024-12-23T10:06:52.000000Z"},{"id":20,"name":"djsajkldasjkl","slug":"djsajkldasjkl-4","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"h45eh45eh54h45h45h45","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:06:56.000000Z","updated_at":"2024-12-23T10:06:56.000000Z"},{"id":21,"name":"djsajkldasjkl","slug":"djsajkldasjkl-5","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"bfvxcbtdbt","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:08:09.000000Z","updated_at":"2024-12-23T10:08:09.000000Z"},{"id":22,"name":"djsajkldasjkl","slug":"djsajkldasjkl-6","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"erher","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:10:18.000000Z","updated_at":"2024-12-23T10:10:18.000000Z"},{"id":23,"name":"djsajkldasjkl","slug":"djsajkldasjkl-7","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"opewqiopeqwiop","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:10:34.000000Z","updated_at":"2024-12-23T10:10:34.000000Z"},{"id":24,"name":"djsajkldasjkl","slug":"djsajkldasjkl-8","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"cxz","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:11:00.000000Z","updated_at":"2024-12-23T10:11:00.000000Z"},{"id":25,"name":"djsajkldasjkl","slug":"djsajkldasjkl-9","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"vcxvdsgsge","collection_id":2,"productcode":"bv","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:12:38.000000Z","updated_at":"2024-12-23T10:12:38.000000Z"}]'
+        content: '[{"id":1,"name":"14K White Gold Bracelet with Akoya Pearl PNJ PAXMW000044","slug":"14k-white-gold-bracelet-with-akoya-pearl-pnj-paxmw000044","description":"This bracelet attracts...","price":"30.00","quantity":10,"material":"Akoya Pearl","size":"51","stylecode":"SP123","collection_id":1,"productcode":"GVPAXMW000044","color":"White","category_id":2,"created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":2,"name":"18K Gold Bracelet with Citrine PNJ Spring CTXMY000059","slug":"18k-gold-bracelet-with-citrine-pnj-spring-ctxmy000059","description":"With its bright yellow color, Citrine is a gemstone that holds optimistic and warm energy...","price":"40.00","quantity":20,"material":"Citrine","size":"52","stylecode":"TS456","collection_id":2,"productcode":"GVCTXMY000059","color":"Blue","category_id":1,"created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"},{"id":3,"name":"18K Gold Bracelet with Ruby PNJ Spring RBXMY000180","slug":"18k-gold-bracelet-with-ruby-pnj-spring-rbxmy000180","description":"Refreshing the classic standard of 18K gold with a delicate Ruby stone, the PNJ bracelet embodies a fresh look, perfectly fitting to brighten the optimistic beauty of ladies. The perfect combination creates a luxurious gold bracelet, highlighting the wrist with a delicately set Ruby. This brilliance enhances the beauty of ladies, making them look charming and radiant when worn.","price":"50.00","quantity":0,"material":"Ruby","size":"53","stylecode":"BK789","collection_id":4,"productcode":"GVRBXMY000180","color":"Gold","category_id":4,"created_at":"2024-12-17T17:32:35.000000Z","updated_at":"2024-12-17T17:32:35.000000Z"}]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -305,7 +305,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: aq
+        example: qlagjkmyjucversmalrpsrwl
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -315,7 +315,7 @@ endpoints:
         name: description
         description: ''
         required: false
-        example: 'Et est vel et cumque doloribus voluptate quo consequatur.'
+        example: 'Consequatur vero fugiat nesciunt tempore qui quia et.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -325,7 +325,7 @@ endpoints:
         name: price
         description: 'Must be at least 0.'
         required: true
-        example: 33
+        example: 11
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -335,7 +335,7 @@ endpoints:
         name: quantity
         description: 'Must be at least 0.'
         required: true
-        example: 55
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -345,7 +345,7 @@ endpoints:
         name: material
         description: ''
         required: false
-        example: soluta
+        example: itaque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -355,7 +355,7 @@ endpoints:
         name: size
         description: ''
         required: false
-        example: omnis
+        example: itaque
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -365,7 +365,7 @@ endpoints:
         name: stylecode
         description: ''
         required: false
-        example: sint
+        example: voluptas
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -385,7 +385,7 @@ endpoints:
         name: productcode
         description: ''
         required: false
-        example: cumque
+        example: laudantium
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -395,7 +395,7 @@ endpoints:
         name: color
         description: ''
         required: false
-        example: praesentium
+        example: omnis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -405,7 +405,7 @@ endpoints:
         name: category_id
         description: 'The <code>id</code> of an existing record in the product_categories table.'
         required: true
-        example: rerum
+        example: mollitia
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -426,27 +426,27 @@ endpoints:
         description: 'Must be a valid URL.'
         required: true
         example:
-          - 'http://pagac.info/quaerat-odit-quo-eum'
+          - 'https://parker.biz/quam-fuga-rerum-magni-laudantium-necessitatibus.html'
         type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: aq
-      description: 'Et est vel et cumque doloribus voluptate quo consequatur.'
-      price: 33
-      quantity: 55
-      material: soluta
-      size: omnis
-      stylecode: sint
-      productcode: cumque
-      color: praesentium
-      category_id: rerum
+      name: qlagjkmyjucversmalrpsrwl
+      description: 'Consequatur vero fugiat nesciunt tempore qui quia et.'
+      price: 11
+      quantity: 2
+      material: itaque
+      size: itaque
+      stylecode: voluptas
+      productcode: laudantium
+      color: omnis
+      category_id: mollitia
       images:
         -
           urls:
-            - 'http://pagac.info/quaerat-odit-quo-eum'
+            - 'https://parker.biz/quam-fuga-rerum-magni-laudantium-necessitatibus.html'
     fileParameters: []
     responses: []
     responseFields: []
@@ -491,8 +491,8 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 200
-        content: '{"data":{"id":14,"name":"????","slug":"-2","description":"This is an updated product.","price":"89.99","quantity":5,"material":"Polyester","size":"M","stylecode":"zcxzczx","collection_id":2,"productcode":"v","color":"Blue","category_id":2,"sale_count":0,"created_at":"2024-12-23T10:00:39.000000Z","updated_at":"2024-12-23T10:00:39.000000Z","category":{"id":2,"name":"Ring","slug":"ring","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},"collection":{"id":2,"name":"Spring 2024","slug":"spring-2024","description":"Refreshing and vibrant styles for Spring 2024.","created_at":"2024-12-23T10:00:19.000000Z","updated_at":"2024-12-23T10:00:19.000000Z"},"images":[]}}'
+        status: 404
+        content: '{"error":"Product not found."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -542,7 +542,7 @@ endpoints:
         name: name
         description: 'Must not be greater than 255 characters.'
         required: true
-        example: cutbh
+        example: hn
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -552,7 +552,7 @@ endpoints:
         name: description
         description: ''
         required: false
-        example: 'Et quo impedit quae sint est quisquam quas impedit.'
+        example: 'Ut magnam qui corporis non labore ipsa est occaecati.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -562,7 +562,7 @@ endpoints:
         name: price
         description: 'Must be at least 0.'
         required: true
-        example: 48
+        example: 40
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -572,7 +572,7 @@ endpoints:
         name: quantity
         description: 'Must be at least 0.'
         required: true
-        example: 74
+        example: 70
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -582,7 +582,7 @@ endpoints:
         name: material
         description: ''
         required: false
-        example: quia
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -592,7 +592,7 @@ endpoints:
         name: size
         description: ''
         required: false
-        example: voluptatem
+        example: natus
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -602,7 +602,7 @@ endpoints:
         name: stylecode
         description: ''
         required: false
-        example: impedit
+        example: fuga
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -632,7 +632,7 @@ endpoints:
         name: color
         description: ''
         required: false
-        example: modi
+        example: illum
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -642,22 +642,22 @@ endpoints:
         name: category_id
         description: 'The <code>id</code> of an existing record in the product_categories table.'
         required: true
-        example: est
+        example: sapiente
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: cutbh
-      description: 'Et quo impedit quae sint est quisquam quas impedit.'
-      price: 48
-      quantity: 74
-      material: quia
-      size: voluptatem
-      stylecode: impedit
-      color: modi
-      category_id: est
+      name: hn
+      description: 'Ut magnam qui corporis non labore ipsa est occaecati.'
+      price: 40
+      quantity: 70
+      material: et
+      size: natus
+      stylecode: fuga
+      color: illum
+      category_id: sapiente
     fileParameters: []
     responses: []
     responseFields: []
@@ -732,7 +732,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: ruecker.ford@example.net
+        example: amelie.brakus@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -742,15 +742,15 @@ endpoints:
         name: password
         description: ''
         required: true
-        example: quasi
+        example: quia
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: ruecker.ford@example.net
-      password: quasi
+      email: amelie.brakus@example.com
+      password: quia
     fileParameters: []
     responses: []
     responseFields: []
