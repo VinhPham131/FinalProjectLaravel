@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
@@ -59,7 +59,6 @@ class Product extends Model
         $sales = $this->applicableSales();
         return $sales->max('percentage');
     }
-    
 
     public function salePrice()
     {
@@ -72,4 +71,3 @@ class Product extends Model
         return 'slug';
     }
 }
-
