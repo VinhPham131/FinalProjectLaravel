@@ -44,7 +44,7 @@
         @yield('content')
     </main>
     
-    <x-footer />
+    @livewire('footer')
     @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.4.7/flowbite.min.js"></script>
