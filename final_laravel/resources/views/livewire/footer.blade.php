@@ -40,12 +40,6 @@
                             </div>
                         </div>
                         <!-- Full Width Submit Button -->
-                        <button type="submit" class="bg-[#a28b68] text-white py-2 px-4 hover:bg-opacity-90 w-full mt-4">
-                                    class=" border-2 border-black p-2 w-full h-[98px] resize-none"
-                                    required></textarea>
-                            </div>
-                        </div>
-                        <!-- Full Width Submit Button -->
                         <button type="submit"
                             class="bg-[#a28b68] text-white py-2 px-4 hover:bg-opacity-90 w-full mt-4">
                             Send Message
