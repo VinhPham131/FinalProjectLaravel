@@ -31,6 +31,6 @@ Route::get('/user/profile', [UserController::class, 'profile'])->name('user.prof
 Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
 Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
 Route::get('/user/wishlist', [UserController::class, 'wishlist'])->name('user.wishlist');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart', [CartController::class, 'cart'])->name('user.cart');
 
 require __DIR__ . '/auth.php';
