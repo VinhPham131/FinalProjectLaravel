@@ -12,6 +12,7 @@ class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @unauthenticated
      */
     public function index()
     {
@@ -66,6 +67,7 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
+     * @unauthenticated
      */
     public function show($id)
     {

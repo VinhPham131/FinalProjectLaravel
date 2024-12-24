@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use Dedoc\Scramble\Scramble;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,4 +28,9 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product}', [DetailController::class, 'show'])->name('detail');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+// IN THE FUTURE, UPON DEPLOYMENT, CHANGE THIS FOR SCRAMBLE
+Route::domain('docs.example.com')->group(function () {
+    Scramble::registerUiRoute('api');
+    Scramble::registerJsonSpecificationRoute('api.json');
+});
 require __DIR__ . '/auth.php';

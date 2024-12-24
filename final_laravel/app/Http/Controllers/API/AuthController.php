@@ -7,6 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * @unauthenticated
+     * @group Authentication
+     * @bodyParam email string required The email of the user. Example: user@example.com
+     * @bodyParam password string required The password of the user. Example: password
+     * @response 200 {
+     *   "success": "Login successfully"
+     * }
+     * @response 401 {
+     *   "error": "Invalid credentials"
+     * }
+     */
     public function login(Request $request)
     {
         $request->validate([
