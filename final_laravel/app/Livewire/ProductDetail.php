@@ -45,7 +45,6 @@ class ProductDetail extends Component
         session()->flash('success', 'Product added to cart.');
         $this->skipRender(); 
     }
-
     private function calculateSaleAttributes($product)
     {
         $product->highest_sale = $product->highestSale();
