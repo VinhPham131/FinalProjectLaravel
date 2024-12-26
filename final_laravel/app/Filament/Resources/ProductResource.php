@@ -15,6 +15,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
+use Outerweb\FilamentImageLibrary\Filament\Forms\Components\ImageLibraryPicker;
 
 class ProductResource extends Resource
 {
@@ -36,11 +37,12 @@ class ProductResource extends Resource
                 Select::make('collection_id')
                     ->relationship('collection', 'name')
                     ->nullable(),
-                TextInput::make('productcode')->required(),
+                TextInput::make('productcode')->required()->unique(),
                 TextInput::make('color'),
                 Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
+
                 Placeholder::make('Images')
                     ->content(function ($record): HtmlString {
                         $imagesHtml = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
@@ -52,6 +54,7 @@ class ProductResource extends Resource
                         $imagesHtml .= '</div>';
                         return new HtmlString($imagesHtml);
                     }),
+                ///// TODO: Fix the library picker
                 // Repeater::make('images')
                 //     ->relationship('images')
                 //     ->schema([
@@ -67,6 +70,9 @@ class ProductResource extends Resource
                 //     ])
                 //     ->columns(1)
                 //     ->required(),
+                ImageLibraryPicker::make('product_images.urls')
+                    ->relationship('metadata')
+                ,
             ]);
     }
 
@@ -86,7 +92,6 @@ class ProductResource extends Resource
                     ->getStateUsing(function ($record) {
                         return $record->images->first()->urls[0] ?? null;
                     })
-                    ->disk('public')
                     ->height(80)
                     ->width(80),
                 TextColumn::make('created_at')->dateTime(),
