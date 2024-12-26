@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\Notifications\VerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,4 +49,21 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function sendEmailVerificationNotification()
+{
+    try {
+        // Send the verification email
+        $this->notify(new VerifyEmail());
+
+        // Return success
+        return true;
+    } catch (\Exception $e) {
+        // Log the exception
+        Log::error('Failed to send verification email: ' . $e->getMessage());
+
+        // Return failure
+        return false;
+    }
+}
 }
