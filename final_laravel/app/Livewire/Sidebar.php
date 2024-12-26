@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class Sidebar extends Component
 {
@@ -20,7 +20,7 @@ class Sidebar extends Component
     {
         // Check if the property name starts with 'selectedCategories'
         $isSelectedCategory = strpos($propertyName, 'selectedCategories') === 0;
-    
+
         if (in_array($propertyName, ['search', 'sortBy', 'onSale', 'inStock']) || $isSelectedCategory) {
             $this->dispatch('filterUpdated', [
                 'search' => $this->search,
@@ -67,9 +67,12 @@ class Sidebar extends Component
             'onSale' => $this->onSale,
             'inStock' => $this->inStock,
         ]);
-        $categories = Cache::remember('categories', 60, function () {
+
+        //reduce cache to 5 instead of 60 to reflect changes from filament!
+        $categories = Cache::remember('categories', 5, callback: function () {
             return ProductCategory::all();
         });
+
         return view('livewire.sidebar', ['categories' => $categories, 'sortBy' => $this->sortBy, 'selectedCategories' => $this->selectedCategories]);
     }
 }
