@@ -68,5 +68,10 @@
             </div>
         </div>
     </header>
+
+    <!-- Email Verification Reminder -->
+    @if (auth()->check() && !auth()->user()->hasVerifiedEmail())
+        @include('livewire.verify-mail-reminder')
+    @endif
 </section>
 <!-- Navigation Bar -->
