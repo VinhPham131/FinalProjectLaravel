@@ -83,7 +83,7 @@
         <div class="p-4">
             <div class="flex justify-between items-center">
                 <div class="text-a28b68 font-bold text-md mb-2">Total: ${{ number_format($total, 2) }}</div>
-                <a class = "text-gray-500 hover:underline cursor-pointer">
+                <a class="text-gray-500 hover:underline cursor-pointer">
                     <span class="text-gray-500 mb-4">View all</span>
                 </a>
             </div>
