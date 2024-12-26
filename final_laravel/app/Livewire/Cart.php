@@ -23,9 +23,7 @@ class Cart extends Component
 
     public function addToCart($id)
     {
-        //Check if id exists
         $id = intval($id);
-
         $product = Product::find($id);
 
         if (!$product) {
@@ -38,9 +36,14 @@ class Cart extends Component
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += 1;
         } else {
+            $discountedPrice = $product->salePrice();
+            $discountPercentage = $product->highestSale();
+
             $cart[$id] = [
                 'name' => $product->name,
-                'price' => $product->discounted_price ?? $product->price,
+                'price' => $discountedPrice,
+                'original_price' => $product->price,
+                'discount_percentage' => $discountPercentage,
                 'image' => $product->images->first()->urls[0] ?? asset('images/placeholder.png'),
                 'quantity' => 1,
             ];
@@ -48,7 +51,9 @@ class Cart extends Component
 
         session()->put('cart', $cart);
         $this->loadCart();
-        session()->flash('success', 'Product added to cart.');
+
+        // Gửi sự kiện với tham số trực tiếp
+        $this->dispatch('cart-updated', message: "{$product->name} added to cart.");
     }
 
     public function removeFromCart($id)
@@ -61,8 +66,9 @@ class Cart extends Component
         }
 
         $this->loadCart();
-        session()->flash('success', 'Product removed from cart.');
     }
+
+
 
     public function updateQuantity($id, $action)
     {
@@ -91,9 +97,20 @@ class Cart extends Component
         }
         return $total;
     }
-
+    public function getTotalQuantity()
+    {
+        $totalQuantity = 0;
+        foreach ($this->cart as $item) {
+            $totalQuantity += $item['quantity'];
+        }
+        return $totalQuantity;
+    }
     public function render()
     {
-        return view('livewire.cart', ['total' => $this->getTotal()]);
+        return view('livewire.cart', [
+            'total' => $this->getTotal(),
+
+            'totalQuantity' => $this->getTotalQuantity(),
+        ]);
     }
 }

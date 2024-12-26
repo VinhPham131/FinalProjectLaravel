@@ -8,16 +8,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
+     * Getting User Token.
      * @unauthenticated
-     * @group Authentication
-     * @bodyParam email string required The email of the user. Example: user@example.com
-     * @bodyParam password string required The password of the user. Example: password
-     * @response 200 {
-     *   "success": "Login successfully"
-     * }
-     * @response 401 {
-     *   "error": "Invalid credentials"
-     * }
      */
     public function login(Request $request)
     {
@@ -30,9 +22,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        // $user = Auth::user();
-        // $token = $user->createToken('API Token')->plainTextToken;
+        $user = Auth::user();
+        $token = $user->createToken('API Token')->plainTextToken;
 
-        return response()->json(['success' => 'Login successfully'], 200);
+        return response()->json(['token' => $token], 200);
     }
 }

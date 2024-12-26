@@ -25,6 +25,7 @@
                     <!-- Title -->
                     <h2 class="text-xl font-garamond mb-4">Contact with LBJ:</h2>
                     <form wire:submit.prevent="submitContactForm" class="flex flex-col gap-3">
+                        @csrf
                         <div class="flex flex-wrap gap-3">
                             <!-- Left Side Inputs -->
                             <div class="flex flex-col w-[48%] gap-3">
@@ -35,8 +36,7 @@
                             </div>
                             <div class="w-[48%] flex items-stretch">
                                 <textarea wire:model="message" placeholder="Your Message"
-                                    class=" border-2 border-black p-2 w-full h-[98px] resize-none"
-                                    required></textarea>
+                                    class=" border-2 border-black p-2 w-full h-[98px] resize-none" required></textarea>
                             </div>
                         </div>
                         <!-- Full Width Submit Button -->

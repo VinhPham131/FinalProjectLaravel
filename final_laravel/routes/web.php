@@ -8,6 +8,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Dedoc\Scramble\Scramble;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('home');
@@ -27,6 +28,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product}', [DetailController::class, 'show'])->name('detail');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
+Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
+Route::get('/user/wishlist', [UserController::class, 'wishlist'])->name('user.wishlist');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 
 // IN THE FUTURE, UPON DEPLOYMENT, CHANGE THIS FOR SCRAMBLE
 Route::domain('docs.example.com')->group(function () {

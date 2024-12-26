@@ -3,7 +3,6 @@
 @section('title', 'Shop')
 
 @section('content')
-<x-breadcrumbs />
 <section class="grid justify-center w-screen">
   <div
     class="grid phone:max-tablet:text-center tablet:mx-[200px] max-w-[1200px] phone:max-tablet:max-w-screen phone:max-tablet:ml-5">
