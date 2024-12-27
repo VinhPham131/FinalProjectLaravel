@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     use Sluggable;
+
     protected $fillable = ['name', 'description', 'slug'];
 
     public function sluggable(): array
@@ -27,6 +28,7 @@ class Collection extends Model
 
     public function sales()
     {
-        return $this->hasMany(Sale::class, 'name', 'name')->where('sale_target', 'collection');
+        return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'collection');
     }
 }
+

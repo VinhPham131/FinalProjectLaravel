@@ -6,41 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
-    protected $fillable = ['urls', 'product_id'];
+    protected $fillable = ['image_path', 'alt_text', 'sort_order', 'is_primary', 'product_id'];
 
+    // Each image belongs to a product
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
     /**
-     * Accessor to decode the JSON URLs.
+     * Helper to get the path (for display purposes).
      */
-    public function getUrlsAttribute($value)
+    public function getImagePath()
     {
-        $decoded = json_decode($value, true);
-
-        if (is_string($decoded)) {
-            $decoded = json_decode($decoded, true);
-        }
-
-        return $decoded;
-    }
-
-    /**
-     * Mutator to encode the URLs as JSON.
-     */
-    public function setUrlsAttribute($value)
-    {
-        $this->attributes['urls'] = json_encode($value);
-    }
-
-    /**
-     * Helper to get the first URL (for display purposes).
-     */
-    public function getFirstUrlAttribute()
-    {
-        $urls = $this->urls; // Access the decoded JSON
-        return $urls ? $urls[0] : '/images/default-product.jpg'; // Return the first URL or a default image
+        return $this->image_path ?? '/images/default-product.jpg'; // Return the image URL or a default image
     }
 }
