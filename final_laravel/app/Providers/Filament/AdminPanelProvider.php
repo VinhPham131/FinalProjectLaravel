@@ -18,7 +18,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\CustomAuthenticate;
-use Outerweb\FilamentImageLibrary\Filament\Plugins\FilamentImageLibraryPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -56,11 +55,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 CustomAuthenticate::class,
             ])
-            ->plugins([
-                FilamentImageLibraryPlugin::make()
-                ->allowedDisks([
-                    'public' => 'Public images',
-                ]),
-            ]);
+          ;
     }
 }

@@ -14,7 +14,7 @@
                     <div class="card-header">Access Denied</div>
                     <div class="card-body">
                         <p>You do not have access to the admin panel because your account is for a user.</p>
-                        <a href="{{ url('/') }}" class="btn btn-primary">Go to Home</a>
+                        <a href="{{ url('/') }}" class="btn btn-danger">Back to Home</a>
                     </div>
                 </div>
             </div>

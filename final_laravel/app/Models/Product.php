@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use Sluggable;
+    use Sluggable, InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'description',
@@ -23,6 +26,12 @@ class Product extends Model
         'slug',
         'sale_count',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('productImages')
+            ->useDisk('public'); // Ensure the disk is set correctly
+    }
 
     public function sluggable(): array
     {
@@ -43,6 +52,7 @@ class Product extends Model
     {
         return $this->belongsTo(Collection::class, 'collection_id');
     }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');

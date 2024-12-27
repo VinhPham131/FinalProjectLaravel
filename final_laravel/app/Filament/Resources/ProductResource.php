@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -15,7 +16,6 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
-use Outerweb\FilamentImageLibrary\Filament\Forms\Components\ImageLibraryPicker;
 
 class ProductResource extends Resource
 {
@@ -36,8 +36,10 @@ class ProductResource extends Resource
                 TextInput::make('stylecode'),
                 Select::make('collection_id')
                     ->relationship('collection', 'name')
-                    ->nullable(),
-                TextInput::make('productcode')->required()->unique(),
+                    ->nullable()
+                    ->searchable()
+                    ->preload(),
+                TextInput::make('productcode')->required(),
                 TextInput::make('color'),
                 Select::make('category_id')
                     ->relationship('category', 'name')
@@ -45,33 +47,24 @@ class ProductResource extends Resource
 
                 Placeholder::make('Images')
                     ->content(function ($record): HtmlString {
+                        if (!$record) {
+                            return new HtmlString('<div>No images available.</div>');
+                        }
+
                         $imagesHtml = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
-                        foreach ($record->images as $image) {
-                            foreach ($image->urls as $url) {
-                                $imagesHtml .= "<img src='" . asset($url) . "' style='max-height: 100px;'>";
-                            }
+                        foreach ($record->getMedia('productImages') as $media) {
+                            $imagesHtml .= "<img src='" . $media->getUrl() . "' style='max-height: 100px;'>";
                         }
                         $imagesHtml .= '</div>';
                         return new HtmlString($imagesHtml);
                     }),
-                ///// TODO: Fix the library picker
-                // Repeater::make('images')
-                //     ->relationship('images')
-                //     ->schema([
-                //         FileUpload::make('urls')
-                //             ->multiple()
-                //             ->required()
-                //             ->imagePreviewHeight('100')
-                //             ->panelLayout('compact')
-                //             ->enableReordering()
-                //             ->directory('product-images')
-                //             ->disk('public')
-                //             ->preserveFilenames(),
-                //     ])
-                //     ->columns(1)
-                //     ->required(),
-                ImageLibraryPicker::make('product_images.urls')
-                    ->relationship('metadata')
+
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->collection('productImages')
+                    ->multiple()
+                    ->downloadable()
+                    ->responsiveImages()
+                    ->reorderable()
                 ,
             ]);
     }
@@ -87,10 +80,10 @@ class ProductResource extends Resource
                 TextColumn::make('quantity')->sortable(),
                 TextColumn::make('category.name')->sortable()->searchable(),
                 TextColumn::make('collection.name')->sortable()->searchable(),
-                ImageColumn::make('images.urls')
+                ImageColumn::make('productImages')
                     ->label('Image')
                     ->getStateUsing(function ($record) {
-                        return $record->images->first()->urls[0] ?? null;
+                        return $record->getFirstMediaUrl('productImages') ?? null;
                     })
                     ->height(80)
                     ->width(80),
