@@ -2,11 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Product;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class FilteredProducts extends Component
 {
@@ -56,7 +55,11 @@ class FilteredProducts extends Component
             ->when($this->search, fn($query) => $query->where('products.name', 'LIKE', '%' . $this->search . '%'))
             ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
             ->when($this->onSale, function ($query) {
-                $query->whereHas('category.sales', function ($saleQuery) {
+                $query->whereHas('product.sales', function ($saleQuery) {
+                    $saleQuery->where('percentage', '>', 0);
+                })->orWhereHas('collection.sales', function ($saleQuery) {
+                    $saleQuery->where('percentage', '>', 0);
+                })->orWhereHas('category.sales', function ($saleQuery) {
                     $saleQuery->where('percentage', '>', 0);
                 });
             })
@@ -77,7 +80,7 @@ class FilteredProducts extends Component
             ->leftJoin('product_categories', 'product_categories.id', '=', 'products.category_id')
             ->leftJoin('sales', function ($join) {
                 $join->on('sales.name', '=', 'product_categories.name')
-                     ->where('sales.sale_target', '=', 'category');
+                    ->where('sales.sale_target', '=', 'category');
             })
             ->groupBy('products.id')
             ->paginate(9);

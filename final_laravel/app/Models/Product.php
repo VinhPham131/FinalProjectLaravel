@@ -58,11 +58,18 @@ class Product extends Model implements HasMedia
         return $this->hasMany(ProductImage::class, 'product_id');
     }
 
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'name', 'name')->where('sale_target', 'product');
+    }
+
     public function applicableSales()
     {
-        return Sale::where('name', $this->category->name)
-            ->orWhere('name', $this->collection->name)
-            ->get();
+        $categorySales = $this->category ? $this->category->sales : collect();
+        $collectionSales = $this->collection ? $this->collection->sales : collect();
+        $productSales = $this->sales;
+
+        return $categorySales->merge($collectionSales)->merge($productSales);
     }
 
     public function highestSale()

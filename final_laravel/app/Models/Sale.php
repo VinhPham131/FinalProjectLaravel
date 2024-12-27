@@ -8,7 +8,7 @@ class Sale extends Model
 {
     protected $fillable = [
         'name',
-        'type',
+        'sale_target',
         'percentage',
         'start_date',
         'end_date',
@@ -18,4 +18,15 @@ class Sale extends Model
     {
         return $this->hasOne(ProductCategory::class, 'name', 'name');
     }
+
+    public function collection()
+    {
+        return $this->hasOne(Collection::class, 'name', 'name');
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'name', 'name');
+    }
+
 }

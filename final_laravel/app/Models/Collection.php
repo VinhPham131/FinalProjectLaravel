@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
@@ -15,6 +15,7 @@ class Collection extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => true,
             ],
         ];
     }
@@ -22,5 +23,10 @@ class Collection extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'name', 'name')->where('sale_target', 'collection');
     }
 }
