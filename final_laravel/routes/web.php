@@ -8,6 +8,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return view('home');
@@ -30,6 +31,9 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/product/{product}', [DetailController::class, 'show'])->name('detail');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+
+Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
+Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
 
 
 require __DIR__ . '/auth.php';

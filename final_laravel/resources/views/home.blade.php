@@ -141,6 +141,7 @@
     </div>
 </div>
 <script src="/js/slide.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js/dist/fireworks.js"></script>
 
 
 @endsection
