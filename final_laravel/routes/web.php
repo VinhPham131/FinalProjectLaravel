@@ -8,6 +8,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return view('home');
@@ -33,6 +34,9 @@ Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
 Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
 Route::get('/user/wishlist', [UserController::class, 'wishlist'])->name('user.wishlist');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
+Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
 
 
 require __DIR__ . '/auth.php';
