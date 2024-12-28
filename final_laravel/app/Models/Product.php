@@ -26,9 +26,6 @@ class Product extends Model implements HasMedia
         'slug',
     ];
 
-    // Store highest sale percentage as a cached attribute
-    protected $appends = ['highest_sale_percentage'];
-
     // Register media collections for images
     public function registerMediaCollections(): void
     {
@@ -131,5 +128,3 @@ class Product extends Model implements HasMedia
         return is_numeric(request()->route('product')) ? 'id' : 'slug';
     }
 }
-
-

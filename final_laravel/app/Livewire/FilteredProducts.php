@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
 
 class FilteredProducts extends Component
 {
@@ -54,7 +54,7 @@ class FilteredProducts extends Component
         $currentDate = now();
 
         // Build the query for filtering products
-        $products = Product::with([
+        $productsQuery = Product::with([
             'images',
             'category',
             'collection',
@@ -64,15 +64,15 @@ class FilteredProducts extends Component
                     ->where('end_date', '>=', $currentDate);
             },
             'category.sales',
-            'collection.sales'
+            'collection.sales',
         ])
-            // Search filter: Filter by product name
+        // Search filter: Filter by product name
             ->when($this->search, fn($query) => $query->where('products.name', 'LIKE', '%' . $this->search . '%'))
 
-            // Category filter: Filter by selected categories
+        // Category filter: Filter by selected categories
             ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
 
-            // On sale filter: Products that have an active sale
+        // On sale filter: Products that have an active sale
             ->when($this->onSale, function ($query) use ($currentDate) {
                 $query->whereHas('sales', function ($saleQuery) use ($currentDate) {
                     $saleQuery->where('percentage', '>', 0)
@@ -91,20 +91,42 @@ class FilteredProducts extends Component
                     });
             })
 
-            // In stock filter: Products that have a quantity greater than 0
+        // In stock filter: Products that have a quantity greater than 0
             ->when($this->inStock, fn($query) => $query->where('quantity', '>', 0))
 
-            // Sorting: Apply sorting based on selected option
+        // Select the necessary columns and calculate the discounted price
+            ->select(
+                'products.*',
+                DB::raw('products.price - (products.price * COALESCE(MAX(category_sales.percentage), MAX(collection_sales.percentage), MAX(product_sales.percentage), 0) / 100) as discounted_price')
+            )
+            ->leftJoin('product_categories', 'product_categories.id', '=', 'products.category_id')
+            ->leftJoin('sales as category_sales', function ($join) {
+                $join->on('category_sales.sale_target_id', '=', 'product_categories.id')
+                    ->where('category_sales.sale_target_type', '=', 'category');
+            })
+            ->leftJoin('collections', 'collections.id', '=', 'products.collection_id')
+            ->leftJoin('sales as collection_sales', function ($join) {
+                $join->on('collection_sales.sale_target_id', '=', 'collections.id')
+                    ->where('collection_sales.sale_target_type', '=', 'collection');
+            })
+            ->leftJoin('sales as product_sales', function ($join) {
+                $join->on('product_sales.sale_target_id', '=', 'products.id')
+                    ->where('product_sales.sale_target_type', '=', 'product');
+            })
+            ->groupBy('products.id')
+
+        // Sorting: Apply sorting based on selected option
             ->when($this->sortBy, function ($query) {
                 match ($this->sortBy) {
-                    'lowest_to_highest' => $query->orderBy('price', 'asc'),
-                    'highest_to_lowest' => $query->orderBy('price', 'desc'),
+                    'lowest_to_highest' => $query->orderBy('discounted_price', 'asc'),
+                    'highest_to_lowest' => $query->orderBy('discounted_price', 'desc'),
                     'best_seller' => $query->orderByDesc('sale_count'),
                     default => $query, // Do nothing if no sorting is selected
                 };
-            })
-            // Paginate results, 9 products per page
-            ->paginate(9);
+            });
+
+        // Paginate results, 9 products per page
+        $products = $productsQuery->paginate(9);
 
         // Return the view with the filtered products
         return view('livewire.filtered-products', [
@@ -112,4 +134,3 @@ class FilteredProducts extends Component
         ]);
     }
 }
-

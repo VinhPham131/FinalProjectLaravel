@@ -64,8 +64,7 @@ class ProductResource extends Resource
                     ->multiple()
                     ->downloadable()
                     ->responsiveImages()
-                    ->reorderable()
-                ,
+                    ->reorderable(),
             ]);
     }
 

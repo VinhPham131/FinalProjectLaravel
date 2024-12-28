@@ -26,7 +26,10 @@ class SaleResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('sale_target')
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Select::make('sale_target_type')
                     ->options([
                         'category' => 'Category',
                         'product' => 'Product',
@@ -34,21 +37,20 @@ class SaleResource extends Resource
                     ])
                     ->required()
                     ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('name', null)),
-                Select::make('name')
+                    ->afterStateUpdated(fn(callable $set) => $set('sale_target_id', null)),
+                Select::make('sale_target_id')
                     ->required()
                     ->options(function (callable $get) {
-                        $target = $get('sale_target');
-                        if ($target === 'category') {
-                            return ProductCategory::all()->pluck('name', 'name');
-                        } elseif ($target === 'product') {
-                            return Product::all()->pluck('name', 'name');
-                        } elseif ($target === 'collection') {
-                            return Collection::all()->pluck('name', 'name');
+                        $targetType = $get('sale_target_type');
+                        if ($targetType === 'category') {
+                            return ProductCategory::all()->pluck('name', 'id');
+                        } elseif ($targetType === 'product') {
+                            return Product::all()->pluck('name', 'id');
+                        } elseif ($targetType === 'collection') {
+                            return Collection::all()->pluck('name', 'id');
                         }
                         return [];
                     }),
-
                 TextInput::make('percentage')
                     ->numeric()
                     ->required(),
@@ -64,8 +66,22 @@ class SaleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('sale_target')->sortable()->searchable(),
                 TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('sale_target_type')->sortable()->searchable(),
+                TextColumn::make('sale_target_id')
+                    ->label('Sale Target')
+                    ->getStateUsing(function ($record) {
+                        if ($record->sale_target_type === 'category') {
+                            return ProductCategory::find($record->sale_target_id)->name ?? 'N/A';
+                        } elseif ($record->sale_target_type === 'product') {
+                            return Product::find($record->sale_target_id)->name ?? 'N/A';
+                        } elseif ($record->sale_target_type === 'collection') {
+                            return Collection::find($record->sale_target_id)->name ?? 'N/A';
+                        }
+                        return 'N/A';
+                    })
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('percentage')->sortable(),
                 TextColumn::make('start_date')->dateTime(),
                 TextColumn::make('end_date')->dateTime(),
@@ -77,7 +93,6 @@ class SaleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
