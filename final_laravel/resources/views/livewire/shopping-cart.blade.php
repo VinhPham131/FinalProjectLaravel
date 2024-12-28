@@ -1,4 +1,5 @@
-<div class="container mx-auto p-6 tablet:max-w-[1150px] tablet:mx-auto">
+<div x-data x-on:cart-updated-global.window="$wire.loadCart()"
+    class="container mx-auto p-6 tablet:max-w-[1150px] tablet:mx-auto">
     <h1 class="text-3xl font-semibold mb-6">Shopping Cart</h1>
     <div class="overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-gray-200">

@@ -25,9 +25,9 @@ class SaleSeeder extends Seeder
                 'end_date' => '2024-08-31',
             ],
             [
-                'name' => 'Necklace',
-                'sale_target' => 'category',
-                'percentage' => 5.00,
+                'name' => 'Winter 2023',
+                'sale_target' => 'collection',
+                'percentage' => 50.00,
                 'start_date' => '2023-12-01',
                 'end_date' => '2023-12-31',
             ],

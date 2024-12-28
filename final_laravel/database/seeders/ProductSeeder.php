@@ -154,7 +154,7 @@ class ProductSeeder extends Seeder
                 'collection_id' => Collection::where('name', 'Winter 2023')->first()->id,
                 'productcode' => 'GVWRGDW000954',
                 'color' => 'White',
-                'category_id' => ProductCategory::where('name', 'Ring')->first()->id,
+                'category_id' => ProductCategory::where('name', 'Earrings')->first()->id,
                 'sale_count' => 40,
             ],
             [

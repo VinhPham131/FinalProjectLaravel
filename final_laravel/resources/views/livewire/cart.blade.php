@@ -12,7 +12,11 @@
         this.showNotification = true;
         setTimeout(() => this.showNotification = false, 3000); 
     }
-}" x-on:cart-updated.window="triggerNotification($event)" class="relative">
+}" 
+x-on:cart-updated-global.window="$wire.loadCart()" 
+x-on:cart-updated.window="triggerNotification($event)"
+
+ class="relative">
 
     <!-- Thông báo -->
     <div x-show="showNotification" x-transition

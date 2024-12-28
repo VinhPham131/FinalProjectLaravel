@@ -20,6 +20,11 @@ class ProductDetail extends Component
 
         // Lấy các sản phẩm liên quan
         $this->relatedProducts = Product::with('images')
+            ->where('products.id', '!=', $this->product->id) // Exclude the current product
+            ->where(function ($query) {
+                $query->where('category_id', $this->product->category_id)
+                    ->orWhere('collection_id', $this->product->collection_id); // Match either category or collection
+            })
             ->select([
                 'products.id',
                 'products.slug',
@@ -29,7 +34,7 @@ class ProductDetail extends Component
                 DB::raw('MAX(sales.percentage) as highest_sale'),
             ])
             ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
-            ->join('sales', 'sales.name', '=', 'product_categories.name')
+            ->leftJoin('sales', 'sales.name', '=', 'product_categories.name')
             ->groupBy('products.id', 'products.slug', 'products.name', 'products.price', 'products.category_id')
             ->get()
             ->each(function (Product $product) {
@@ -40,10 +45,9 @@ class ProductDetail extends Component
     }
     public function addToCart()
     {
-        $this->dispatch('addToCart', $this->product->id); // Emit event to Cart component
-        $this->dispatch('cartUpdated'); // Dispatch for UI updates
+        $this->dispatch('addToCart', $this->product->id);
         session()->flash('success', 'Product added to cart.');
-        $this->skipRender(); 
+        $this->skipRender();
     }
 
     private function calculateSaleAttributes($product)
