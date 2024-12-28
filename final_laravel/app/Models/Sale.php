@@ -8,14 +8,28 @@ class Sale extends Model
 {
     protected $fillable = [
         'name',
-        'type',
+        'sale_target_type', // Product, category, or collection
+        'sale_target_id', // Foreign key to product, category, or collection
         'percentage',
         'start_date',
         'end_date',
     ];
 
+    // Sale belongs to a category
     public function category()
     {
-        return $this->hasOne(ProductCategory::class, 'name', 'name');
+        return $this->belongsTo(ProductCategory::class, 'sale_target_id')->where('sale_target_type', 'category');
+    }
+
+    // Sale belongs to a collection
+    public function collection()
+    {
+        return $this->belongsTo(Collection::class, 'sale_target_id')->where('sale_target_type', 'collection');
+    }
+
+    // Sale belongs to a product
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'sale_target_id')->where('sale_target_type', 'product');
     }
 }

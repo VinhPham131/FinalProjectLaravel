@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use Dedoc\Scramble\Scramble;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -36,4 +37,9 @@ Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])-
 Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
 
 
+// IN THE FUTURE, UPON DEPLOYMENT, CHANGE THIS FOR SCRAMBLE
+Route::domain('docs.example.com')->group(function () {
+    Scramble::registerUiRoute('api');
+    Scramble::registerJsonSpecificationRoute('api.json');
+});
 require __DIR__ . '/auth.php';

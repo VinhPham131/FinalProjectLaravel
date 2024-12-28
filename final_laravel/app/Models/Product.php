@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use Sluggable;
+    use Sluggable, InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'description',
@@ -21,14 +24,21 @@ class Product extends Model
         'color',
         'category_id',
         'slug',
-        'sale_count',
     ];
+
+    // Register media collections for images
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('productImages')
+            ->useDisk('public');
+    }
 
     public function sluggable(): array
     {
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => true,
             ],
         ];
     }
@@ -42,6 +52,7 @@ class Product extends Model
     {
         return $this->belongsTo(Collection::class, 'collection_id');
     }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');
@@ -51,27 +62,73 @@ class Product extends Model
         return $this->hasMany(CartsItem::class, 'product_id');
     }
 
-    public function applicableSales()
+    public function sales()
     {
-        return Sale::where('name', $this->category->name)
-            ->orWhere('name', $this->collection->name)
+        return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'product');
+    }
+
+    // Function to get the primary image or first image
+    public function getPrimaryImagePath()
+    {
+        $primaryImage = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
+        return $primaryImage ? $primaryImage->getImagePath() : '/path/to/fallback-image.jpg';
+    }
+
+    // Accessor for the highest sale percentage
+    public function getHighestSalePercentageAttribute()
+    {
+        // Check if we already have the highest sale percentage cached
+        if (!isset($this->attributes['highest_sale_percentage'])) {
+            $this->attributes['highest_sale_percentage'] = $this->getAllSales()->max('percentage');
+        }
+
+        return $this->attributes['highest_sale_percentage'];
+    }
+
+    // Function to calculate the sale price based on the highest sale percentage
+    public function salePrice()
+    {
+        return $this->highest_sale_percentage ? $this->price * (1 - $this->highest_sale_percentage / 100) : null;
+    }
+
+    // Function to get all active sales for the product
+    public function getAllSales()
+    {
+        $currentDate = now();
+
+        return Sale::where('start_date', '<=', $currentDate)
+            ->where('end_date', '>=', $currentDate)
+            ->where(function ($query) {
+                $query->where('sale_target_type', 'product')
+                    ->where('sale_target_id', $this->id)
+                    ->orWhere(function ($query) {
+                        $query->where('sale_target_type', 'category')
+                            ->where('sale_target_id', $this->category_id);
+                    })
+                    ->orWhere(function ($query) {
+                        $query->where('sale_target_type', 'collection')
+                            ->where('sale_target_id', $this->collection_id);
+                    });
+            })
             ->get();
     }
 
-    public function highestSale()
+    public function relatedProducts()
     {
-        $sales = $this->applicableSales();
-        return $sales->max('percentage');
-    }
-
-    public function salePrice()
-    {
-        $highestSale = $this->highestSale();
-        return $highestSale ? $this->price * (1 - $highestSale / 100) : $this->price;
+        return Product::where('id', '!=', $this->id)
+            ->where(function ($query) {
+                $query->orWhere('category_id', $this->category_id);
+                $query->orWhere('collection_id', $this->collection_id);
+                $query->orWhereHas('sales', function ($saleQuery) {
+                    $saleQuery->where('percentage', $this->highestSale());
+                });
+            })
+            ->take(5)
+            ->get();
     }
 
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return is_numeric(request()->route('product')) ? 'id' : 'slug';
     }
 }

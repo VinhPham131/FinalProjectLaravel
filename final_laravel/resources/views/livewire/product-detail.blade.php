@@ -4,44 +4,49 @@
         <!-- Left Column: Product Images -->
         <section class="slideshow-container relative">
             <section class="relative border-2 border-gray-700 tablet:w-[605px] tablet:h-[555px] mt-5">
-                @foreach ($product->images as $image)
-                    @foreach ($image->urls as $index => $url)
-                        <section class="mySlides fade hidden" data-slide="{{ $index }}">
-                            <img src="{{ $url }}" class="w-[600px] h-[550px] phone:max-tablet:w-full phone:max-tablet:h-full"
-                                alt="Image {{ $index + 1 }}">
+                @if($product->images->isNotEmpty())
+                    @foreach ($product->images as $image)
+                        <section class="mySlides fade hidden" data-slide="{{ $loop->index }}">
+                            <img src="{{ $image->getImagePath() }}"
+                                class="w-[600px] h-[550px] phone:max-tablet:w-full phone:max-tablet:h-full"
+                                alt="{{ $image->alt_text ?? 'Product Image ' . ($loop->index + 1) }}">
                         </section>
                     @endforeach
-                @endforeach
 
-                <!-- Navigation Buttons -->
-                <a class="prev cursor-pointer absolute top-1/2 transform -translate-y-1/2 left-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-r-md select-none"
-                    onclick="changeSlide(-1)">&#10094;</a>
-                <a class="next cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-l-md select-none"
-                    onclick="changeSlide(1)">&#10095;</a>
+                    <!-- Navigation Buttons -->
+                    <a class="prev cursor-pointer absolute top-1/2 transform -translate-y-1/2 left-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-r-md select-none"
+                        onclick="changeSlide(-1)">&#10094;</a>
+                    <a class="next cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-l-md select-none"
+                        onclick="changeSlide(1)">&#10095;</a>
+                @else
+                    <p class="text-gray-500 text-center mt-5">No images available for this product.</p>
+                @endif
             </section>
+
             <section class="justify-center flex gap-6 phone:mb-10 mt-5 ml-5">
-                @foreach ($product->images as $image)
-                    @foreach ($image->urls as $index => $url)
-                        <img src="{{ $url }}" alt="Thumbnail {{ $index + 1 }}"
+                @if($product->images->isNotEmpty())
+                    @foreach ($product->images as $image)
+                        <img src="{{ $image->getImagePath() }}" alt="Thumbnail {{ $loop->index + 1 }}"
                             class="thumbnail w-[100px] h-[100px] object-cover opacity-40 hover:opacity-100 hover:border hover:border-gray-700"
-                            data-slide="{{ $index }}" onclick="showSlide({{ $index }})">
+                            data-slide="{{ $loop->index }}" onclick="showSlide({{ $loop->index }})">
                     @endforeach
-                @endforeach
+                @else
+                    <p class="text-gray-500">No thumbnails available.</p>
+                @endif
             </section>
-
         </section>
 
         <!-- Right Column: Product Info -->
         <section class="product-info new-product-info ml-7 max-w-[450px]">
             <h1 class="font-garamond font-bold text-[25px] mt-7">{{ $product->name }}</h1>
             <section class="flex justify-center items-center text-sm mt-4 border-b border-grey-600 pb-4 mb-6">
-                @if ($product->highest_sale)
+                @if ($product->highest_sale_percentage)
                     <b class="bg-a28b68 text-white px-2.5 py-1 font-bold mx-1.5">
-                        ${{ number_format($product->discounted_price, 2) }}
+                        ${{ number_format($product->salePrice(), 2) }}
                     </b>
                     <del class="mx-1.5 text-a28b68">${{ number_format($product->price, 2) }}</del>
                     <span class="bg-red-800 text-white px-2.5 py-1 font-medium mx-1.5">
-                        -{{ $product->highest_sale }}%
+                        -{{ $product->highest_sale_percentage }}%
                     </span>
                 @else
                     <b class="bg-gray-800 text-white px-2.5 py-1 font-bold mx-1.5">
