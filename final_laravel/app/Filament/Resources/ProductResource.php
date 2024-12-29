@@ -48,6 +48,7 @@ class ProductResource extends Resource
                     ->collection('products')
                     ->multiple()
                     ->image()
+                    ->loadStateFromRelationshipsUsing(fn($component) => $component->state([]))
                     ->saveRelationshipsUsing(fn($component) => $component->saveUploadedFiles())]);
     }
 
