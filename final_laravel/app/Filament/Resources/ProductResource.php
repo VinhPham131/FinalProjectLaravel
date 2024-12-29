@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use App\Filament\Resources\ProductResource\RelationManagers\MediaRelationManager;
 use App\Models\Product;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -12,10 +12,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\HtmlString;
 
 class ProductResource extends Resource
 {
@@ -45,27 +44,11 @@ class ProductResource extends Resource
                     ->relationship('category', 'name')
                     ->required(),
 
-                Placeholder::make('Images')
-                    ->content(function ($record): HtmlString {
-                        if (!$record) {
-                            return new HtmlString('<div>No images available.</div>');
-                        }
-
-                        $imagesHtml = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
-                        foreach ($record->getMedia('productImages') as $media) {
-                            $imagesHtml .= "<img src='" . $media->getUrl() . "' style='max-height: 100px;'>";
-                        }
-                        $imagesHtml .= '</div>';
-                        return new HtmlString($imagesHtml);
-                    }),
-
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('productImages')
+                SpatieMediaLibraryFileUpload::make('images')
+                    ->collection('products')
                     ->multiple()
-                    ->downloadable()
-                    ->responsiveImages()
-                    ->reorderable(),
-            ]);
+                    ->image()
+                    ->saveRelationshipsUsing(fn($component) => $component->saveUploadedFiles())]);
     }
 
     public static function table(Table $table): Table
@@ -79,13 +62,8 @@ class ProductResource extends Resource
                 TextColumn::make('quantity')->sortable(),
                 TextColumn::make('category.name')->sortable()->searchable(),
                 TextColumn::make('collection.name')->sortable()->searchable(),
-                ImageColumn::make('productImages')
-                    ->label('Image')
-                    ->getStateUsing(function ($record) {
-                        return $record->getFirstMediaUrl('productImages') ?? null;
-                    })
-                    ->height(80)
-                    ->width(80),
+                SpatieMediaLibraryImageColumn::make('images')
+                    ->collection('products'),
                 TextColumn::make('created_at')->dateTime(),
                 TextColumn::make('updated_at')->dateTime(),
             ])
@@ -106,7 +84,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MediaRelationManager::class,
         ];
     }
 
