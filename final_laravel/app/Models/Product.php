@@ -10,7 +10,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Product extends Model implements HasMedia
 {
     use Sluggable, InteractsWithMedia;
-
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('products')
+            ->useDisk('public');
+    }
     protected $fillable = [
         'name',
         'description',
@@ -25,13 +29,6 @@ class Product extends Model implements HasMedia
         'category_id',
         'slug',
     ];
-
-    // Register media collections for images
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('productImages')
-            ->useDisk('public');
-    }
 
     public function sluggable(): array
     {
@@ -67,7 +64,11 @@ class Product extends Model implements HasMedia
     public function getPrimaryImagePath()
     {
         $primaryImage = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
-        return $primaryImage ? $primaryImage->getImagePath() : '/path/to/fallback-image.jpg';
+        if ($primaryImage) {
+            $imagePath = $primaryImage->image_path;
+            return filter_var($imagePath, FILTER_VALIDATE_URL) ? $imagePath : asset($imagePath);
+        }
+        return asset('images/placeholder.png'); // Fallback image
     }
 
     // Accessor for the highest sale percentage
