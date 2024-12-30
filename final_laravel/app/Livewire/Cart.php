@@ -35,24 +35,42 @@ class Cart extends Component
                 return [
                     $item->product_id => [
                         'name' => $item->product->name,
-                        'price' => $item->product->salePrice(),
-                        'image' => $item->product->images->first()->urls[0] ?? asset('images/placeholder.png'),
+                        'price' => $item->product->salePrice() ?? $item->product->price,
+                        'image' => $item->product->getPrimaryImagePath(),
                         'quantity' => $item->quantity,
-                        'discount_percentage' => $item->product->highestSale() ?? 0,
+                        'discount_percentage' => $item->product->getHighestSalePercentageAttribute() ?? 0,
                         'original_price' => $item->product->price,
                         'material' => $item->product->material,
                         'size' => $item->product->size,
-
                     ]
-                ];                      
+                ];
             })->toArray();
         } else {
             // Guest User: Fetch from session
-            $this->cart = session()->get('cart', []);
+            $cart = session()->get('cart', []);
+            $productIds = array_keys($cart);
+
+            $products = Product::whereIn('id', $productIds)->with('images')->get();
+
+            $this->cart = $products->mapWithKeys(function ($product) use ($cart) {
+                return [
+                    $product->id => [
+                        'name' => $product->name,
+                        'price' => $product->salePrice(),
+                        'image' => $product->getPrimaryImagePath(),
+                        'quantity' => $cart[$product->id] ?? 1,
+                        'discount_percentage' => $product->getHighestSalePercentageAttribute() ?? 0,
+                        'original_price' => $product->price,
+                        'material' => $product->material,
+                        'size' => $product->size,
+                    ]
+                ];
+            })->toArray();
         }
 
         $this->calculateTotals();
     }
+
 
     /**
      * Add product to cart (session or database).
@@ -78,20 +96,13 @@ class Cart extends Component
                 $cartItem->increment('quantity');
             }
         } else {
-            // Add to session
+            // Add product ID and quantity to session
             $cart = session()->get('cart', []);
 
             if (isset($cart[$id])) {
-                $cart[$id]['quantity'] += 1;
+                $cart[$id] += 1; // Increment quantity
             } else {
-                $cart[$id] = [
-                    'name' => $product->name,
-                    'price' => $product->salePrice(),
-                    'original_price' => $product->price,
-                    'discount_percentage' => $product->highestSale() ?? 0,
-                    'image' => $product->images->first()->urls[0] ?? asset('images/placeholder.png'),
-                    'quantity' => 1,
-                ];
+                $cart[$id] = 1; // Set initial quantity
             }
 
             session()->put('cart', $cart);
@@ -99,6 +110,7 @@ class Cart extends Component
 
         $this->loadCart();
         $this->dispatch('cart-updated', message: "{$product->name} added to cart.");
+        $this->dispatch("cart-updated-global");
     }
     public function updateQuantity($id, $action)
     {
@@ -120,14 +132,15 @@ class Cart extends Component
         } else {
             // Update quantity for guest user
             $cart = session()->get('cart', []);
+            
 
             if (isset($cart[$id])) {
                 if ($action === 'increase') {
-                    $cart[$id]['quantity'] += 1;
+                    $cart[$id] += 1;
                 } elseif ($action === 'decrease') {
-                    $cart[$id]['quantity'] -= 1;
+                    $cart[$id]-= 1;
 
-                    if ($cart[$id]['quantity'] < 1) {
+                    if ($cart[$id] < 1) {
                         unset($cart[$id]);
                     }
                 }
@@ -137,6 +150,7 @@ class Cart extends Component
         }
 
         $this->loadCart();
+        $this->dispatch("cart-updated-global");
     }
 
     public function removeFromCart($id)
@@ -155,6 +169,8 @@ class Cart extends Component
         }
 
         $this->loadCart();
+        $this->dispatch("cart-updated-global");
+
     }
 
     /**

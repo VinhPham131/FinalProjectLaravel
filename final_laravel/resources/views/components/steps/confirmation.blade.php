@@ -1,49 +1,87 @@
-<form  method="POST" action="{{ route('checkout.process', ['step' => $step + 1]) }}">
+<form method="POST" action="{{ route('checkout.process', ['step' => 2]) }}">
     @csrf
-    <section class="relative h-screen flex justify-center items-center mt-10 bg-slate-50 dark:bg-slate-800">
-    <div  class="container relative">
-        <div  class="md:flex justify-center">
-            <div class="lg:w-2/5">
-                <div class="relative overflow-hidden rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-800">
-                    <!-- Payment Header -->
-                    <div class="px-6 py-12 bg-emerald-600 text-center">
-                        <i class="mdi mdi-check-circle text-white text-6xl"></i>
-                        <h5 class="text-white text-xl tracking-wide uppercase font-semibold mt-2">Payment Successful</h5>
+    <div class="max-w-[1200px] mx-auto py-12 px-8 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-200 shadow-xl rounded-lg mt-[30px]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Order Details Sidebar -->
+            <div class="space-y-8">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Order Details</h2>
+                <div class="space-y-6 text-lg text-gray-600">
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Name:</span>
+                        <span class="text-gray-800">{{ session('checkout.first_name') }} {{ session('checkout.last_name') }}</span>
                     </div>
-
-                    <!-- Content Section -->
-                    <div class="px-6 py-12 text-center">
-                        <p class="text-black font-semibold text-xl dark:text-white">Thank you for your payment! 🎉</p>
-                        <p class="text-slate-400 mt-4">
-                            Your payment has been processed successfully. <br />
-                            Enjoy your trip. Thank you for choosing Tripser!
-                        </p>
-
-                        <div class="mt-6">
-                            <a href="{{ url('/') }}" class="py-2 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-black text-white rounded-md">
-                                Go to Home
-                            </a>
-                        </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Email:</span>
+                        <span class="text-gray-800">{{ session('checkout.email') }}</span>
                     </div>
-
-                    <!-- Footer -->
-                    <div class="text-center p-6 border-t border-gray-100 dark:border-gray-700">
-                        <p class="mb-0 text-slate-400">
-                            © {{ now()->year }} Tripser. Travel & Booking Tour 
-                            <i class="mdi mdi-heart text-red-600"></i> by 
-                            <a href="https://www.facebook.com/people/Vinh-Ph%E1%BA%A1m/pfbid017G65KvCaYQSTU9oiog147nAHVyXmQYqi8pjM9iPVbE3g6uA94PmDWue7wzUSkQpl/" 
-                               target="_blank" 
-                               class="text-reset">
-                                Vinh Pham
-                            </a>.
-                        </p>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Country:</span>
+                        <span class="text-gray-800">{{ session('checkout.country') }}</span>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Address:</span>
+                        <span class="text-gray-800">{{ session('checkout.address') }}</span>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Phone:</span>
+                        <span class="text-gray-800">{{ session('checkout.phone') }}</span>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Shipping:</span>
+                        <span class="text-[#A18A68] font-semibold">Free Shipping</span>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="font-semibold text-gray-700 w-40">Note:</span>
+                        <span class="text-gray-800">{{ session('checkout.note') }}</span>
                     </div>
                 </div>
             </div>
+
+            <!-- Order Summary -->
+            <div class="bg-white p-10 rounded-lg shadow-2xl space-y-8">
+                <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Your Order</h2>
+                <div class="flex justify-between text-lg font-semibold  text-gray-700">
+                    <span>Product</span>
+                    <span>Total</span>
+                </div>
+                <div class="border-t pt-6 space-y-4">
+                    @foreach ($cart as $item)
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="border border-[#A18A68] px-3 py-1 rounded-full font-medium text-[#A18A68]">x {{ $item['quantity'] }}</span>
+                                <span class="font-semibold text-gray-800 w-[220px]">{{ $item['name'] }}</span>
+                            </div>
+                            <span class="text-[#A18A68] font-semibold">${{ number_format($item['total'], 2) }}</span>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="border-t pt-6">
+                    <div class="flex justify-between font-medium text-gray-700">
+                        <span>Subtotal</span>
+                        <span class="text-[#A18A68] font-semibold">${{ number_format($totalPrice, 2) }}</span>
+                    </div>
+                    <div class="flex justify-between font-medium text-gray-700">
+                        <span>Shipping</span>
+                        <span class="text-[#A18A68]">Free Shipping</span>
+                    </div>
+                </div>
+                <div class="border-t pt-6">
+                    <div class="flex justify-between text-xl font-semibold text-gray-900">
+                        <span>Total</span>
+                        <span class="text-[#A18A68] font-bold">${{ number_format($totalPrice, 2) }}</span>
+                    </div>
+                    <div class="flex justify-between font-medium text-gray-700">
+                        <span>Payment Method</span>
+                        <span class="text-gray-800">{{ session('checkout.payment') }}</span>
+                    </div>
+                </div>
+
+                <!-- Payment Button -->
+                <button type="submit" class="w-full mt-8 py-4 px-10 bg-[#A18A68] text-white text-xl font-semibold rounded-full shadow-lg transform hover:scale-105 duration-300 transition ease-in-out">
+                    Proceed to Payment
+                </button>
+            </div>
         </div>
     </div>
-</section>
-
-
-    
 </form>

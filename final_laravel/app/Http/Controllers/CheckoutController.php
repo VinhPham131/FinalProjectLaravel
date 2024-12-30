@@ -3,81 +3,167 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CartsItem;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
+use App\Models\OrderItem;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
     public function showCheckoutStep($step)
     {
-         // Kiểm tra bước hợp lệ
-         if (!in_array($step, [1, 2, 3])) {
-            abort(404); // Nếu bước không tồn tại, trả về lỗi 404
+        if (!$this->isValidStep($step)) {
+            abort(404);
         }
 
-        // Trả về view với bước hiện tại
-        return view('checkout', ['step' => $step]);
+        if ($step == 3 && !$this->userHasOrder()) {
+            return redirect()->route('checkout.step', ['step' => 2])
+                ->with('error', 'You must create an order before proceeding to step 3.');
+        }
+
+        $cartData = $this->getCartData();
+
+        return view('checkout', [
+            'step' => $step,
+            'cart' => $cartData['cartItems'],
+            'totalPrice' => $cartData['totalPrice'],
+        ]);
     }
 
     public function processStep(Request $request, $step)
-{
-    // Kiểm tra xem bước hiện tại có hợp lệ không
-    if (!in_array($step, [1, 2, 3])) {
-        abort(404); // Nếu bước không hợp lệ, trả về lỗi 404
+    {
+        if (!$this->isValidStep($step)) {
+            abort(404);
+        }
+
+        $stepProcessors = [
+            1 => 'processStepOne',
+            2 => 'processStepTwo',
+        ];
+
+        try {
+            $nextStep = isset($stepProcessors[$step])
+                ? $this->{$stepProcessors[$step]}($request)
+                : $step + 1;
+
+            return $nextStep > 3
+                ? redirect()->route('checkout.process', ['step' => 3])
+                : redirect()->route('checkout.process', ['step' => $nextStep]);
+        } catch (Exception $e) {
+            Log::error("Error processing step {$step}: " . $e->getMessage());
+            return redirect()->route('checkout.step', ['step' => $step])
+                ->with('error', 'An error occurred. Please try again.');
+        }
     }
 
-    $nextStep = $step; // Mặc định giữ nguyên bước hiện tại
+    private function processStepOne(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'country' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'note' => 'nullable|string|max:255',
+            'payment' => 'required|string|in:Bank Transfer,COD,Paypal',
+        ]);
 
-    // Xử lý từng bước
-    switch ($step) {
-        case 1:
-            // Xử lý dữ liệu cho Step 1: Personal Info
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255',
-            ]);
+        session(['checkout' => $validated]);
 
-            // Lưu thông tin vào session
-            session([
-                'checkout.name' => $validated['name'],
-                'checkout.email' => $validated['email'],
-            ]);
+        Log::info('Step 1 processed successfully', ['user_id' => Auth::id(), 'session_data' => session('checkout')]);
 
-            // Nếu dữ liệu hợp lệ, tăng bước
-            $nextStep = 2;
-            break;
-
-        case 2:
-            // Xử lý dữ liệu cho Step 2: Order Info
-            $validated = $request->validate([
-                'delivery_address' => 'required|string|max:255',
-                'contact_number' => 'required|string|max:15',
-            ]);
-
-            // Lưu thông tin vào session
-            session([
-                'checkout.delivery_address' => $validated['delivery_address'],
-                'checkout.contact_number' => $validated['contact_number'],
-            ]);
-
-            // Nếu dữ liệu hợp lệ, tăng bước
-            $nextStep = 3;
-            break;
-
-        case 3:
-            // Bước 3: Confirmation không cần validate thêm
-            break;
-
-        default:
-            abort(404); // Trả về lỗi nếu bước không hợp lệ
+        return 2;
     }
 
-    // Kiểm tra nếu là bước cuối, chuyển đến trang hoàn tất
-    if ($nextStep > 3) {
-        return redirect()->route('checkout.complete');
+    private function processStepTwo(Request $request)
+    {
+        $checkoutData = session('checkout');
+        $cartData = $this->getCartData();
+
+
+        if (!$checkoutData) {
+            Log::error('Checkout data missing in session.');
+            throw new Exception('Checkout data not found in session.');
+        }
+
+        Log::debug('Checkout data', ['checkout_data' => $checkoutData]);
+
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'first_name' => $checkoutData['first_name'],
+            'last_name' => $checkoutData['last_name'],
+            'email' => $checkoutData['email'],
+            'country' => $checkoutData['country'],
+            'address' => $checkoutData['address'],
+            'phone' => $checkoutData['phone'],
+            'note' => $checkoutData['note'],
+            'payment' => $checkoutData['payment'],
+            'total_price' => $cartData['totalPrice'],
+        ]);
+
+        if (!$order) {
+            Log::error('Failed to create order', ['user_id' => Auth::id(), 'checkout_data' => $checkoutData]);
+            throw new Exception('Failed to create order.');
+        }
+        Log::info('Order created successfully', ['order_id' => $order->id, 'user_id' => Auth::id()]);
+
+        if (empty($cartData['cartItems'])) {
+            Log::error('Cart is empty for user', ['user_id' => Auth::id()]);
+            throw new Exception('Cart is empty. Cannot proceed with checkout.');
+        }
+
+        Log::debug('Cart data for order items', ['cart_data' => $cartData]);
+
+        foreach ($cartData['cartItems'] as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
+        session()->forget('checkout');
+        //Delete cart items
+        CartsItem::where('user_id', Auth::id())->delete();
+        return 3;
     }
 
-    // Chuyển đến bước tiếp theo
-    return redirect()->route('checkout.step', ['step' => $nextStep]);
+
+    private function isValidStep($step)
+    {
+        return in_array($step, [1, 2, 3]);
+    }
+
+    private function userHasOrder()
+    {
+        return Order::where('user_id', Auth::id())->exists();
+    }
+
+    private function getCartData()
+    {
+        $cartItems = [];
+        $totalPrice = 0;
+
+        if (Auth::check()) {
+            $cart = CartsItem::where('user_id', Auth::id())->with('product')->get();
+
+            foreach ($cart as $item) {
+                $price = $item->product->salePrice() ?? $item->product->price;
+                $cartItems[] = [
+                    'product_id' => $item->product->id,
+                    'name' => $item->product->name,
+                    'price' => $price,
+                    'quantity' => $item->quantity,
+                    'total' => $price * $item->quantity,
+                ];
+                $totalPrice += $price * $item->quantity;
+            }
+        }
+
+        return ['cartItems' => $cartItems, 'totalPrice' => $totalPrice];
+    }
 }
-
-}
-
