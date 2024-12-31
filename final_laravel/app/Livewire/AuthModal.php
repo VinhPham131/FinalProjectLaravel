@@ -124,12 +124,8 @@ class AuthModal extends ModalComponent
             $this->emailSent = true;
             $this->registrationComplete = true;
 
-            $user->sendEmailVerificationNotification();
-
             // Optionally reset the form fields
             $this->reset(['name', 'email', 'password', 'password_confirmation']);
-
-
 
         } catch (ValidationException $e) {
             // Pass validation errors back to Livewire
