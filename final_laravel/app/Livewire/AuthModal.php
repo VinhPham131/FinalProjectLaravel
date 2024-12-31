@@ -31,7 +31,7 @@ class AuthModal extends ModalComponent
             ],
             'register' => [
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email|unique:users|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,6}$/',
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required|same:password'
             ],
