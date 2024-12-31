@@ -2,5 +2,5 @@
 @section('title', 'Shopping Cart')
 
 @section('content')
-    @livewire('shopping-cart')
+@livewire('cart', ['viewType' => 'full'])
 @endsection

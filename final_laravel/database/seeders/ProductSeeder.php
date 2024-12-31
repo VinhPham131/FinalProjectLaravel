@@ -29,7 +29,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVPAXMW000044',
                 'color' => 'White',
                 'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
-                'sale_count' => 10,
             ],
             [
                 'name' => '18K Gold Bracelet with Citrine PNJ Spring CTXMY000059',
@@ -43,7 +42,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVCTXMY000059',
                 'color' => 'Yellow',
                 'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
-                'sale_count' => 20,
             ],
             [
                 'name' => '18K Gold Necklace with Ruby PNJ Spring RBXMY000180',
@@ -57,7 +55,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVRBXMY000180',
                 'color' => 'Gold',
                 'category_id' => ProductCategory::where('name', 'Necklace')->first()->id,
-                'sale_count' => 30,
             ],
             [
                 'name' => 'Sterling Silver Ring with Sapphire PNJ Autumn SAPXMR000200',
@@ -71,7 +68,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVAPMR000200',
                 'color' => 'Blue',
                 'category_id' => ProductCategory::where('name', 'Ring')->first()->id,
-                'sale_count' => 12,
             ],
             [
                 'name' => '18K Yellow Gold Earrings with Emerald PNJ EXMGW000345',
@@ -85,7 +81,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVEXMGW000345',
                 'color' => 'Green',
                 'category_id' => ProductCategory::where('name', 'Earrings')->first()->id,
-                'sale_count' => 25,
             ],
             [
                 'name' => 'Rose Gold Anklet with Diamonds PNJ ANKRDW000501',
@@ -99,7 +94,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVANKRDW000501',
                 'color' => 'Rose Gold',
                 'category_id' => ProductCategory::where('name', 'Anklet')->first()->id,
-                'sale_count' => 18,
             ],
             [
                 'name' => 'Platinum Pendant with Topaz PNJ PDTXMY000712',
@@ -113,7 +107,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVPDTXMY000712',
                 'color' => 'Silver',
                 'category_id' => ProductCategory::where('name', 'Pendant')->first()->id,
-                'sale_count' => 8,
             ],
             [
                 'name' => 'Gold Chain Necklace PNJ CHGWM000820',
@@ -127,7 +120,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVCHGWM000820',
                 'color' => 'Gold',
                 'category_id' => ProductCategory::where('name', 'Necklace')->first()->id,
-                'sale_count' => 15,
             ],
             [
                 'name' => 'Amethyst Stud Earrings PNJ STEAM000400',
@@ -141,7 +133,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVSTEAM000400',
                 'color' => 'Purple',
                 'category_id' => ProductCategory::where('name', 'Earrings')->first()->id,
-                'sale_count' => 20,
             ],
             [
                 'name' => 'White Gold Ring with Diamonds PNJ WRGDW000954',
@@ -155,7 +146,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVWRGDW000954',
                 'color' => 'White',
                 'category_id' => ProductCategory::where('name', 'Ring')->first()->id,
-                'sale_count' => 40,
             ],
             [
                 'name' => 'Yellow Gold Cuff Bracelet PNJ BRYGW000600',
@@ -169,7 +159,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVBRYGW000600',
                 'color' => 'Gold',
                 'category_id' => ProductCategory::where('name', 'Bracelet')->first()->id,
-                'sale_count' => 35,
             ],
             [
                 'name' => 'Titanium Watch with Sapphire Glass PNJ WTTSG000340',
@@ -183,7 +172,6 @@ class ProductSeeder extends Seeder
                 'productcode' => 'GVWTTSG000340',
                 'color' => 'Gray',
                 'category_id' => ProductCategory::where('name', 'Watch')->first()->id,
-                'sale_count' => 50,
             ],
         ];
 

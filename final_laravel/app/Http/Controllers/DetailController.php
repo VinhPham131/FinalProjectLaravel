@@ -8,6 +8,6 @@ class DetailController extends Controller
 {
     public function show(Product $product)
     {
-        return view('detail', compact('product'));
+        return view('detail', compact(var_name: 'product'));
     }
 }

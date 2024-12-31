@@ -3,14 +3,14 @@
     notification: '', 
     showNotification: false,
     triggerNotification(event) {
-        console.log('Event Detail:', event.detail); // Kiểm tra dữ liệu sự kiện
+        console.log('Event Detail:', event.detail);
         if (event.detail && event.detail.message) {
             this.notification = event.detail.message;
         } else {
             this.notification = 'No message provided';
         }
         this.showNotification = true;
-        setTimeout(() => this.showNotification = false, 3000); // Ẩn sau 3 giây
+        setTimeout(() => this.showNotification = false, 3000); 
     }
 }" x-on:cart-updated.window="triggerNotification($event)" class="relative">
 
@@ -43,7 +43,7 @@
         id="dropdownCart"
         class="z-30 bg-white divide-y divide-gray-100 rounded-lg shadow w-[350px] absolute top-10 right-0 ml-2">
         <ul class="divide-y divide-gray-100">
-            @forelse ($cart as $id => $item)
+            @forelse ($cartItem as $id => $item)
                 <li class="flex items-center p-2">
                     <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-[100px] h-[100px] mr-3">
                     <div class="flex-1">
@@ -83,7 +83,7 @@
         <div class="p-4">
             <div class="flex justify-between items-center">
                 <div class="text-a28b68 font-bold text-md mb-2">Total: ${{ number_format($total, 2) }}</div>
-                <a class="text-gray-500 hover:underline cursor-pointer">
+                <a class = "text-gray-500 hover:underline cursor-pointer" href="{{ route('cart.index') }}">
                     <span class="text-gray-500 mb-4">View all</span>
                 </a>
             </div>

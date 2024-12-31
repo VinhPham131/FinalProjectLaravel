@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * Getting User Token.
+     * @unauthenticated
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -18,9 +22,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        // $user = Auth::user();
-        // $token = $user->createToken('API Token')->plainTextToken;
+        $user = Auth::user();
+        $token = $user->createToken('API Token')->plainTextToken;
 
-        return response()->json(['success' => 'Login successfully'], 200);
+        return response()->json(['token' => $token], 200);
     }
 }
