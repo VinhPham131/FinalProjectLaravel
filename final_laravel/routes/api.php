@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CollectionController;
 use App\Http\Controllers\API\ProductCategoryController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\SaleController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,13 @@ Route::middleware(['auth:sanctum', EnsureUserIsAdmin::class])->group(function ()
     Route::post('/collection', [CollectionController::class, 'store']);
     Route::put('/collection/{id}', [CollectionController::class, 'update']);
     Route::delete('/collection/{id}', [CollectionController::class, 'destroy']);
+    Route::post('/sale', [SaleController::class, 'store']);
+    Route::put('/sale/{id}', [SaleController::class, 'update']);
+    Route::delete('/sale/{id}', [SaleController::class, 'destroy']);
 });
 
 Route::apiResource('/category', ProductCategoryController::class)->only(['index', 'show']);
 Route::apiResource('/product', ProductController::class)->only(['index', 'show']);
 Route::apiResource('/collection', CollectionController::class)->only(['index', 'show']);
+Route::apiResource('/sale', SaleController::class)->only(['index', 'show']);
 Route::post('/login', [AuthController::class, 'login']);
