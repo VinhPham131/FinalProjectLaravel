@@ -90,28 +90,39 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string|max:255',
+            'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'sometimes|required|numeric|min:0',
-            'quantity' => 'sometimes|required|integer|min:0',
+            'price' => 'nullable|numeric|min:0',
+            'quantity' => 'nullable|integer|min:0',
             'material' => 'nullable|string',
             'size' => 'nullable|string',
             'stylecode' => 'nullable|string',
             'collection_id' => 'nullable|exists:collections,id',
-            'productcode' => 'nullable|string|unique:products,productcode,' . $product->id,
+            'productcode' => 'nullable|string|unique:products,productcode',
             'color' => 'nullable|string',
-            'category_id' => 'sometimes|required|exists:product_categories,id',
+            'category_id' => 'sometimes|exists:product_categories,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $product->update($request->all());
-        return response()->json(['data' => $product], 200);
+        try {
+            $product->fill($request->all());
+            $product->save();
+            return response()->json(['data' => $product->fresh()], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to update product', 'error' => $e->getMessage()], 500);
+        }
     }
 
     /**

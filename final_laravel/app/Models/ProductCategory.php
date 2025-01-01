@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductCategory extends Model
 {
-    use Sluggable;
+    use Sluggable, HasFactory;
 
     protected $fillable = ['name', 'slug'];
 
@@ -31,4 +32,3 @@ class ProductCategory extends Model
         return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'category');
     }
 }
-

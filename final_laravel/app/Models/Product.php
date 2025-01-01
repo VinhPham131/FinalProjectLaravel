@@ -3,18 +3,15 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends Model implements HasMedia
 {
-    use Sluggable, InteractsWithMedia;
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('products')
-            ->useDisk('public');
-    }
+    use HasFactory, Sluggable, InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'description',
@@ -127,5 +124,11 @@ class Product extends Model implements HasMedia
     public function getRouteKeyName(): string
     {
         return is_numeric(request()->route('product')) ? 'id' : 'slug';
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('products')
+            ->useDisk('public');
     }
 }
