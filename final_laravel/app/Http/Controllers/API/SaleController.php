@@ -66,22 +66,27 @@ class SaleController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'sale_target_type' => 'required|string|in:product,category,collection',
-            'sale_target_id' => 'required|integer',
-            'percentage' => 'required|numeric|min:0|max:100',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'name' => 'nullable|string|max:255',
+            'sale_target_type' => 'nullable|string|in:product,category,collection',
+            'sale_target_id' => 'nullable|integer|required_with:sale_target_type',
+            'percentage' => 'nullable|numeric|min:0|max:100',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $sale->update($request->all());
-
-        return response()->json($sale);
+        try {
+            $sale->fill($request->all());
+            $sale->save();
+            return response()->json(['data' => $sale->fresh()], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to update sale', 'error' => $e->getMessage()], 500);
+        }
     }
+
     /**
      * Deleting a sale.
      */
