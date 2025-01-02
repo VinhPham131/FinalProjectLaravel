@@ -12,8 +12,10 @@
         this.showNotification = true;
         setTimeout(() => this.showNotification = false, 3000); 
     }
-}" x-on:cart-updated.window="triggerNotification($event)" class="relative">
-
+}" 
+x-on:cart-updated-global.window="$wire.loadCart()" 
+x-on:cart-updated.window="triggerNotification($event)"
+ class="relative">
     <!-- Thông báo -->
     <div x-show="showNotification" x-transition
         class="fixed top-[100px] right-[200px] bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
@@ -52,7 +54,6 @@
                             <span class="text-a28b68 font-bold">
                                 ${{ number_format($item['price'], 2) }}
                             </span>
-
                             @if ($item['discount_percentage'] > 0)
                                 <span class="line-through text-gray-500 ">
                                     ${{ number_format($item['original_price'], 2) }}
@@ -87,7 +88,7 @@
                     <span class="text-gray-500 mb-4">View all</span>
                 </a>
             </div>
-            <a href="#" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
+            <a href="{{ route('checkout.step', ['step' => 1]) }}" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
                 Checkout
             </a>
         </div>

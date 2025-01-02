@@ -1,4 +1,5 @@
-<div class="container mx-auto p-6 tablet:max-w-[1150px] tablet:mx-auto">
+<div x-data x-on:cart-updated-global.window="$wire.loadCart()"
+    class="container mx-auto p-6 tablet:max-w-[1150px] tablet:mx-auto">
     <h1 class="text-3xl font-semibold mb-6">Shopping Cart</h1>
     <div class="overflow-x-auto">
         <table class="w-full table-auto border-collapse border border-gray-200">
@@ -21,7 +22,20 @@
                         <td class="p-4">{{ $item['name'] }}</td>
                         <td class="p-4">{{ $item['material'] }}</td>
                         <td class="p-4">{{ $item['size'] }}</td>
-                        <td class="p-4 ">${{ number_format($item['price'], 2) }}</td>
+                        <td class="p-4">
+                            @if ($item['discount_percentage'] > 0)
+                                <span class="text-a28b68 font-bold">
+                                    ${{ number_format($item['price'], 2) }}
+                                </span>
+                                <span class="line-through text-gray-500">
+                                    ${{ number_format($item['original_price'], 2) }}
+                                </span>
+                            @else
+                                <span class="text-a28b68 font-bold">
+                                    ${{ number_format($item['original_price'], 2) }}
+                                </span>
+                            @endif
+                        </td>
                         <td class="p-4">
                             <button wire:click="updateQuantity({{ $id }}, 'decrease')">-</button>
                             <span class="border-2 px-1 border-gray-300 rounded-md">{{ $item['quantity'] }}</span>
@@ -51,7 +65,11 @@
                 <span>TOTAL</span>
                 <span>${{ number_format($total, 2) }}</span>
             </div>
-            <button class="mt-4 w-full bg-black text-white py-3">PROCEED TO CHECKOUT</button>
+
+            <button class="mt-4 w-full bg-black text-white py-3"
+                onclick="window.location.href='{{ route('checkout.step', ['step' => 1]) }}'">PROCEED TO
+                CHECKOUT</button>
+
         </div>
     </div>
 </div>

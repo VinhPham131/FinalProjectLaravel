@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
     Route::get('/user/wishlist', action: [UserController::class, 'wishlist'])->name('user.wishlist');
     Route::get('/cart', action: [CartController::class, 'index'])->name('cart.index');
+    Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
+    Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
 
 });
 
@@ -33,8 +35,7 @@ Route::get('/product/{product}', [DetailController::class, 'show'])->name('detai
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
-Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
-Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
+
 
 
 // IN THE FUTURE, UPON DEPLOYMENT, CHANGE THIS FOR SCRAMBLE

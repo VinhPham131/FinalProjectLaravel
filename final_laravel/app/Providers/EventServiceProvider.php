@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         Login::class => [
             MergeCartOnLogin::class,
         ],
+        OrderCreated::class => [
+            SendOrderCreatedNotification::class,
+        ],
     ];
 
     public function boot()

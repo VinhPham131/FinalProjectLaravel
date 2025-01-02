@@ -8,11 +8,11 @@
     @include ('components.stepper', ['step' => $step])
     </div>
     @if ($step == 1)
-        @include('components.steps.personal-info')
+        @include('components.steps.personal-info', ['cart' => $cart])
     @elseif ($step == 2)
-        @include('components.steps.order-info')
+        @include('components.steps.confirmation', ['cart' => $cart])
     @elseif ($step == 3)
-        @include('components.steps.confirmation')
+        @include('components.steps.order-success', ['cart' => $cart])
     @endif
 </div>
 @endsection

@@ -78,4 +78,8 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     {
         return $this->role === 'admin';
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
