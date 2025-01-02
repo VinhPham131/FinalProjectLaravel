@@ -4,10 +4,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderItem;
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'user_id',
@@ -19,7 +21,8 @@ class Order extends Model
         'phone',
         'note',
         'payment',
-        'total_price'
+        'total_price',
+        'code'
     ];
 
     /**
@@ -28,6 +31,12 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class,'order_id');
+    }
+    protected static function booted()
+    {
+        static::creating(function ($order) {
+            $order->code = 'ID-' . strtoupper(Str::random(8));
+        });
     }
 
     /**

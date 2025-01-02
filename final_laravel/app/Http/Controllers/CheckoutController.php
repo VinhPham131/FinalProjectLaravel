@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Notifications\OrderCreatedNotification;
 
 class CheckoutController extends Controller
 {
@@ -83,7 +84,6 @@ class CheckoutController extends Controller
         $checkoutData = session('checkout');
         $cartData = $this->getCartData();
 
-
         if (!$checkoutData) {
             Log::error('Checkout data missing in session.');
             throw new Exception('Checkout data not found in session.');
@@ -91,6 +91,7 @@ class CheckoutController extends Controller
 
         Log::debug('Checkout data', ['checkout_data' => $checkoutData]);
 
+        // Tạo đơn hàng
         $order = Order::create([
             'user_id' => Auth::id(),
             'first_name' => $checkoutData['first_name'],
@@ -108,14 +109,13 @@ class CheckoutController extends Controller
             Log::error('Failed to create order', ['user_id' => Auth::id(), 'checkout_data' => $checkoutData]);
             throw new Exception('Failed to create order.');
         }
+
         Log::info('Order created successfully', ['order_id' => $order->id, 'user_id' => Auth::id()]);
 
         if (empty($cartData['cartItems'])) {
             Log::error('Cart is empty for user', ['user_id' => Auth::id()]);
             throw new Exception('Cart is empty. Cannot proceed with checkout.');
         }
-
-        Log::debug('Cart data for order items', ['cart_data' => $cartData]);
 
         foreach ($cartData['cartItems'] as $item) {
             OrderItem::create([
@@ -126,10 +126,20 @@ class CheckoutController extends Controller
             ]);
         }
 
+        // Gửi email xác nhận đơn hàng
+        try {
+            $order->user->notify(new OrderCreatedNotification($order));
+            Log::info('Order confirmation email sent', ['order_id' => $order->id]);
+        } catch (Exception $e) {
+            Log::error('Failed to send order confirmation email', ['order_id' => $order->id, 'error' => $e->getMessage()]);
+            throw new Exception('Failed to send order confirmation email.');
+        }
+
+        // Xóa giỏ hàng
         session()->forget('checkout');
-        //Delete cart items
         CartsItem::where('user_id', Auth::id())->delete();
-        return 3;
+
+        return 3; // Tiếp tục tới bước 3 (trang xác nhận)
     }
 
 

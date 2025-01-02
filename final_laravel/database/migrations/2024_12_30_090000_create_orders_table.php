@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('code')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->string('payment')->default('COD'); 
             $table->double('total_price');
+            
             $table->timestamps();
         
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
