@@ -5,7 +5,10 @@
     @if ($this->emailSent)
         <!-- Success Message -->
         <div class="p-4 bg-green-100 text-green-700 rounded-md text-center">
-            {{ __('We sent a verification email to your email address. Please check your inbox to verify.') }}
+            {{ __('Registration successful! You can now log in to your account.') }}
+            <a wire:click.prevent="switchMode('login')" class="text-amber-600 hover:text-amber-800 cursor-pointer">
+                {{ __('Go to Login') }}
+            </a>
         </div>
     @endif
     <!-- Form -->

@@ -43,4 +43,8 @@ Route::domain('docs.example.com')->group(function () {
     Scramble::registerUiRoute('api');
     Scramble::registerJsonSpecificationRoute('api.json');
 });
+
+Route::get('/test-sentry', function () {
+    throw new Exception('Testing Sentry...');
+});
 require __DIR__ . '/auth.php';

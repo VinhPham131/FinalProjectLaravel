@@ -43,7 +43,7 @@ x-on:cart-updated.window="triggerNotification($event)"
         x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95"
         id="dropdownCart"
-        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-[350px] absolute top-10 right-0 ml-2">
+        class="z-30 bg-white divide-y divide-gray-100 rounded-lg shadow w-[350px] absolute top-10 right-0 ml-2">
         <ul class="divide-y divide-gray-100">
             @forelse ($cartItem as $id => $item)
                 <li class="flex items-center p-2">

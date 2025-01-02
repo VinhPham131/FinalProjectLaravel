@@ -19,9 +19,10 @@
         "laravel/pulse": "^1.3",
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.2",
-        "outerweb/filament-image-library": "^2.6",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "outerweb/filament-image-library": "^2.6",
+        "sentry/sentry-laravel": "^4.10",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {
