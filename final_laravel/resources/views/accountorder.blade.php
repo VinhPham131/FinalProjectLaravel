@@ -31,7 +31,7 @@
         </div>
     </div>
     <!-- Order Content -->
-    <div class="mt-8 mx-auto max-w-[1100px] w-full p-4 border border-gray-200 rounded-lg shadow"">
+    <div class="mt-8 mx-auto max-w-[1100px] w-full p-4 border border-gray-200 rounded-lg shadow">
         <h1 class=" text-2xl font-bold mb-6">ORDERS</h1>
 
         <p class="text-gray-600">You haven't placed any orders yet.</p>

@@ -9,7 +9,7 @@
   </button>
 
   <!-- Dropdown menu -->
-  <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-52">
+  <div id="dropdownAvatar" class="z-30 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-52">
     <div class="px-4 py-3 text-[15px] text-gray-900 dark:text-white">
     <div>{{ Auth::user()->name }}</div>
     <div class="font-medium truncate">{{ Auth::user()->email }}</div>

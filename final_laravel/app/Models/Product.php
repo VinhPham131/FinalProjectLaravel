@@ -51,12 +51,19 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
+    public function cartItem()
+    {
+        return $this->hasMany(CartsItem::class, 'product_id');
+    }
 
     public function sales()
     {
         return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'product');
     }
-
+    public function order()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
     // Function to get the primary image or first image
     public function getPrimaryImagePath()
     {

@@ -31,20 +31,6 @@
         </div>
     </div>
     <!-- Profile Content -->
-    <div class="mt-8 mx-auto max-w-[1100px] w-full p-4 border border-gray-200 rounded-lg shadow">
-        <h1 class="text-2xl font-bold mb-6">PROFILE</h1>
-
-        <div class="mb-4">
-            <h2 class="text-lg font-semibold">Preferred Name</h2>
-            <p class="text-gray-600">{{ $user->name }}</p>
-            <a href="#" class="text-blue-500 hover:underline text-sm">EDIT PREFERRED NAME</a>
-        </div>
-
-        <div class="mb-4">
-            <h2 class="text-lg font-semibold">Email</h2>
-            <p class="text-gray-600">{{ $user->email }}</p>
-            <a href="#" class="text-blue-500 hover:underline text-sm">EDIT PASSWORD</a>
-        </div>
-    </div>
+    @livewire('profile-content')
 </section>
 @endsection

@@ -6,17 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCartsTable extends Migration
 {
+    protected $table = 'carts_items';
     /**
+     * 
      * Run the migrations.
      *
      * @return void
      */
     public function up()
+    
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('carts_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ class CreateCartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('carts_items');
     }
 }

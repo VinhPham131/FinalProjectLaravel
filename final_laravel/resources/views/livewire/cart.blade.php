@@ -3,17 +3,19 @@
     notification: '', 
     showNotification: false,
     triggerNotification(event) {
-        console.log('Event Detail:', event.detail); // Kiểm tra dữ liệu sự kiện
+        console.log('Event Detail:', event.detail);
         if (event.detail && event.detail.message) {
             this.notification = event.detail.message;
         } else {
             this.notification = 'No message provided';
         }
         this.showNotification = true;
-        setTimeout(() => this.showNotification = false, 3000); // Ẩn sau 3 giây
+        setTimeout(() => this.showNotification = false, 3000); 
     }
-}" x-on:cart-updated.window="triggerNotification($event)" class="relative">
-
+}" 
+x-on:cart-updated-global.window="$wire.loadCart()" 
+x-on:cart-updated.window="triggerNotification($event)"
+ class="relative">
     <!-- Thông báo -->
     <div x-show="showNotification" x-transition
         class="fixed top-[100px] right-[200px] bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
@@ -41,9 +43,9 @@
         x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95"
         id="dropdownCart"
-        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-[350px] absolute top-10 right-0 ml-2">
+        class="z-30 bg-white divide-y divide-gray-100 rounded-lg shadow w-[350px] absolute top-10 right-0 ml-2">
         <ul class="divide-y divide-gray-100">
-            @forelse ($cart as $id => $item)
+            @forelse ($cartItem as $id => $item)
                 <li class="flex items-center p-2">
                     <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-[100px] h-[100px] mr-3">
                     <div class="flex-1">
@@ -52,7 +54,6 @@
                             <span class="text-a28b68 font-bold">
                                 ${{ number_format($item['price'], 2) }}
                             </span>
-
                             @if ($item['discount_percentage'] > 0)
                                 <span class="line-through text-gray-500 ">
                                     ${{ number_format($item['original_price'], 2) }}
@@ -83,11 +84,11 @@
         <div class="p-4">
             <div class="flex justify-between items-center">
                 <div class="text-a28b68 font-bold text-md mb-2">Total: ${{ number_format($total, 2) }}</div>
-                <a class = "text-gray-500 hover:underline cursor-pointer">
+                <a class = "text-gray-500 hover:underline cursor-pointer" href="{{ route('cart.index') }}">
                     <span class="text-gray-500 mb-4">View all</span>
                 </a>
             </div>
-            <a href="#" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
+            <a href="{{ route('checkout.step', ['step' => 1]) }}" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
                 Checkout
             </a>
         </div>
