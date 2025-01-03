@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Collection;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -13,21 +13,18 @@ class ProductFactory extends Factory
 
     public function definition()
     {
-        
         return [
-            'name' => fake()->sentence(),
-            'description' => fake()->sentence(),
-            'price' => fake()->numberBetween(10, 1000),
-            'quantity' => fake()->numberBetween(1, 100),
-            'material' => 'Cotton',
-            'size' => 'M',
-            'stylecode' => 'SC123',
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'price' => $this->faker->randomFloat(2, 1, 1000),
+            'quantity' => $this->faker->numberBetween(1, 100),
+            'material' => $this->faker->word,
+            'size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
+            'stylecode' => $this->faker->bothify('SC###'),
             'collection_id' => Collection::factory(),
-            'productcode' => fake()->unique()->regexify('[A-Z0-9]{5}'),
-            'color' => fake()->colorName(),
+            'productcode' => $this->faker->unique()->bothify('PC###'),
+            'color' => $this->faker->safeColorName,
             'category_id' => ProductCategory::factory(),
-            'slug' => fake()->slug(),
-            'sale_count' => fake()->numberBetween(0, 100),
         ];
     }
 }

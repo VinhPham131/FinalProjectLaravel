@@ -12,8 +12,11 @@ return new class extends Migration {
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->json('urls');
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->string('image_path'); // URL for the product image
+            $table->text('alt_text')->nullable(); // Optional alt text for the image
+            $table->integer('sort_order')->default(0); // To define the order of images
+            $table->boolean('is_primary')->default(false); // To mark the primary image for the product
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade'); // Linking image to product
             $table->timestamps();
         });
     }

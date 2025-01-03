@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-
+use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     use Sluggable, HasFactory;
+
     protected $fillable = ['name', 'description', 'slug'];
 
     public function sluggable(): array
@@ -17,6 +15,7 @@ class Collection extends Model
         return [
             'slug' => [
                 'source' => 'name',
+                'onUpdate' => true,
             ],
         ];
     }
@@ -24,5 +23,10 @@ class Collection extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'collection');
     }
 }

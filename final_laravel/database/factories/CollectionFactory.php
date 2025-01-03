@@ -12,8 +12,8 @@ class CollectionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-            'slug' => $this->faker->slug,
+            'name' => $this->faker->unique()->word,
+            'description' => $this->faker->sentence,
         ];
     }
 }

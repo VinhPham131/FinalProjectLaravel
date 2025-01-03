@@ -2,11 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Product;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class FilteredProducts extends Component
 {
@@ -51,37 +50,85 @@ class FilteredProducts extends Component
      */
     public function render()
     {
+        // Get the current date for checking active sales
+        $currentDate = now();
+
         // Build the query for filtering products
-        $products = Product::with(['images', 'category', 'collection'])
+        $productsQuery = Product::with([
+            'images',
+            'category',
+            'collection',
+            'sales' => function ($query) use ($currentDate) {
+                $query->where('percentage', '>', 0)
+                    ->where('start_date', '<=', $currentDate)
+                    ->where('end_date', '>=', $currentDate);
+            },
+            'category.sales',
+            'collection.sales',
+        ])
+        // Search filter: Filter by product name
             ->when($this->search, fn($query) => $query->where('products.name', 'LIKE', '%' . $this->search . '%'))
+
+        // Category filter: Filter by selected categories
             ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
-            ->when($this->onSale, function ($query) {
-                $query->whereHas('category.sales', function ($saleQuery) {
-                    $saleQuery->where('percentage', '>', 0);
-                });
+
+        // On sale filter: Products that have an active sale
+            ->when($this->onSale, function ($query) use ($currentDate) {
+                $query->whereHas('sales', function ($saleQuery) use ($currentDate) {
+                    $saleQuery->where('percentage', '>', 0)
+                        ->where('start_date', '<=', $currentDate)
+                        ->where('end_date', '>=', $currentDate);
+                })
+                    ->orWhereHas('category.sales', function ($saleQuery) use ($currentDate) {
+                        $saleQuery->where('percentage', '>', 0)
+                            ->where('start_date', '<=', $currentDate)
+                            ->where('end_date', '>=', $currentDate);
+                    })
+                    ->orWhereHas('collection.sales', function ($saleQuery) use ($currentDate) {
+                        $saleQuery->where('percentage', '>', 0)
+                            ->where('start_date', '<=', $currentDate)
+                            ->where('end_date', '>=', $currentDate);
+                    });
             })
+
+        // In stock filter: Products that have a quantity greater than 0
             ->when($this->inStock, fn($query) => $query->where('quantity', '>', 0))
-            ->when($this->sortBy, function ($query) {
-                match ($this->sortBy) {
-                    'lowest_to_highest' => $query->orderBy('price', 'asc'),
-                    'highest_to_lowest' => $query->orderBy('price', 'desc'),
-                    'best_seller' => $query->orderBy('sale_count', 'desc'),
-                    default => null,
-                };
-            })
+
+        // Select the necessary columns and calculate the discounted price
             ->select(
                 'products.*',
-                DB::raw('MAX(sales.percentage) as highest_sale'),
-                DB::raw('products.price - (products.price * MAX(sales.percentage) / 100) as discounted_price')
+                DB::raw('products.price - (products.price * COALESCE(MAX(category_sales.percentage), MAX(collection_sales.percentage), MAX(product_sales.percentage), 0) / 100) as discounted_price')
             )
             ->leftJoin('product_categories', 'product_categories.id', '=', 'products.category_id')
-            ->leftJoin('sales', function ($join) {
-                $join->on('sales.name', '=', 'product_categories.name')
-                     ->where('sales.sale_target', '=', 'category');
+            ->leftJoin('sales as category_sales', function ($join) {
+                $join->on('category_sales.sale_target_id', '=', 'product_categories.id')
+                    ->where('category_sales.sale_target_type', '=', 'category');
+            })
+            ->leftJoin('collections', 'collections.id', '=', 'products.collection_id')
+            ->leftJoin('sales as collection_sales', function ($join) {
+                $join->on('collection_sales.sale_target_id', '=', 'collections.id')
+                    ->where('collection_sales.sale_target_type', '=', 'collection');
+            })
+            ->leftJoin('sales as product_sales', function ($join) {
+                $join->on('product_sales.sale_target_id', '=', 'products.id')
+                    ->where('product_sales.sale_target_type', '=', 'product');
             })
             ->groupBy('products.id')
-            ->paginate(9);
 
+        // Sorting: Apply sorting based on selected option
+            ->when($this->sortBy, function ($query) {
+                match ($this->sortBy) {
+                    'lowest_to_highest' => $query->orderBy('discounted_price', 'asc'),
+                    'highest_to_lowest' => $query->orderBy('discounted_price', 'desc'),
+                    'best_seller' => $query->orderByDesc('sale_count'),
+                    default => $query, // Do nothing if no sorting is selected
+                };
+            });
+
+        // Paginate results, 9 products per page
+        $products = $productsQuery->paginate(9);
+
+        // Return the view with the filtered products
         return view('livewire.filtered-products', [
             'products' => $products,
         ]);

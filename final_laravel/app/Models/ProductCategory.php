@@ -17,7 +17,6 @@ class ProductCategory extends Model
             'slug' => [
                 'source' => 'name',
                 'onUpdate' => true,
-
             ],
         ];
     }
@@ -26,8 +25,9 @@ class ProductCategory extends Model
     {
         return $this->hasMany(Product::class, 'category_id');
     }
+
     public function sales()
     {
-        return $this->hasMany(Sale::class, 'name', 'name');
+        return $this->hasMany(Sale::class, 'sale_target_id')->where('sale_target_type', 'category');
     }
 }

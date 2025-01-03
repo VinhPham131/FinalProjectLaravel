@@ -1,7 +1,7 @@
 <!-- Navigation Bar -->
 <section class="grid tablet:justify-center">
     <header
-        class="flex flex-row justify-between border-b-2 bg-white my-5 mb-10 phone:max-tablet:mb-10 phone:max-tablet:border-b-0 tablet:mx-[200px] tablet:max-w-[1200px] phone:mx-[10px] tablet:w-[calc(1200px-350px)] laptop:w-[calc(1200px-100px)] shadow-sm">
+        class="flex flex-row justify-between items-center border-b-2 bg-white my-5 mb-5 phone:max-tablet:mb-10 phone:max-tablet:border-b-0 tablet:mx-auto tablet:max-w-[1200px] phone:mx-[10px] tablet:w-full laptop:w-[calc(1200px-50px)] shadow-sm">
         <div class="flex flex-row mt-1 ml-2 tablet:hidden">
             <a href="#">
                 <img loading="lazy"
@@ -60,7 +60,7 @@
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/b53ad79a5e4ea34706fc375724ee506199b29340c27f09c40ae777a95cc73c28?apiKey=e8ca62b583f64a60ba17a0d16e44846a&"
                     alt="Image description"
                     class="shrink-0 self-start border border-white border-solid aspect-square fill-black stroke-[0.75px] stroke-white w-[19px]" />
-                @livewire('cart')
+                @livewire('cart', ['viewType' => 'mini'])
 
                 <!-- User -->
                 <x-user />
