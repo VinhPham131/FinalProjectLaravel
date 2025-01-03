@@ -3,18 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProductDetail extends Component
 {
     public Product $product;
     public $relatedProducts;
+    public $images = [];
 
     public function mount(Product $product)
     {
-        $this->product = $product->load('images');
+        $this->product = $product;
+        
+        // Manually load the images
+        $this->images = $product->getMedia('products'); // Assuming 'products' is the media collection name
     }
+
     public function addToCart()
     {
         $this->dispatch('addToCart', $this->product->id); // Emit event to Cart component
@@ -31,3 +35,4 @@ class ProductDetail extends Component
         ]);
     }
 }
+

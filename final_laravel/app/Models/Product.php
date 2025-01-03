@@ -49,8 +49,9 @@ class Product extends Model implements HasMedia
 
     public function images()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->getMedia('products')->sortBy('order_column');
     }
+
     public function cartItem()
     {
         return $this->hasMany(CartsItem::class, 'product_id');
@@ -67,12 +68,12 @@ class Product extends Model implements HasMedia
     // Function to get the primary image or first image
     public function getPrimaryImagePath()
     {
-        $primaryImage = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
+        $primaryImage = $this->images()->first();
         if ($primaryImage) {
-            $imagePath = $primaryImage->image_path;
-            return filter_var($imagePath, FILTER_VALIDATE_URL) ? $imagePath : asset($imagePath);
+            return $primaryImage->getUrl(); // Returns the URL of the image
         }
-        return asset('images/placeholder.png'); // Fallback image
+
+        return asset('images/placeholder.jpg'); // Fallback image
     }
 
     // Accessor for the highest sale percentage
