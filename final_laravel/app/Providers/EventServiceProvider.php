@@ -1,11 +1,14 @@
 <?php
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Events\OrderCreated;
 use App\Events\SlowQueryDetected;
+use App\Listeners\MergeCartOnLogin;
+use App\Listeners\SendDiscordNotification;
+use App\Listeners\SendOrderCreatedNotification;
 use App\Listeners\SendSlowQueryAlert;
 use Illuminate\Auth\Events\Login;
-use App\Listeners\MergeCartOnLogin;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderCreated::class => [
             SendOrderCreatedNotification::class,
+            SendDiscordNotification::class,
         ],
     ];
 

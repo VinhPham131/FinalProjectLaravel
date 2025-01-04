@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Events\OrderCreated;
 use App\Models\CartsItem;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Notifications\OrderCreatedNotification;
 
 class CheckoutController extends Controller
 {
@@ -46,12 +46,12 @@ class CheckoutController extends Controller
 
         try {
             $nextStep = isset($stepProcessors[$step])
-                ? $this->{$stepProcessors[$step]}($request)
-                : $step + 1;
+            ? $this->{$stepProcessors[$step]}($request)
+            : $step + 1;
 
             return $nextStep > 3
-                ? redirect()->route('checkout.process', ['step' => 3])
-                : redirect()->route('checkout.process', ['step' => $nextStep]);
+            ? redirect()->route('checkout.process', ['step' => 3])
+            : redirect()->route('checkout.process', ['step' => $nextStep]);
         } catch (Exception $e) {
             Log::error("Error processing step {$step}: " . $e->getMessage());
             return redirect()->route('checkout.step', ['step' => $step])
@@ -128,7 +128,7 @@ class CheckoutController extends Controller
 
         // Gửi email xác nhận đơn hàng
         try {
-            $order->user->notify(new OrderCreatedNotification($order));
+            event(new OrderCreated($order));
             Log::info('Order confirmation email sent', ['order_id' => $order->id]);
         } catch (Exception $e) {
             Log::error('Failed to send order confirmation email', ['order_id' => $order->id, 'error' => $e->getMessage()]);
@@ -141,7 +141,6 @@ class CheckoutController extends Controller
 
         return 3; // Tiếp tục tới bước 3 (trang xác nhận)
     }
-
 
     private function isValidStep($step)
     {
