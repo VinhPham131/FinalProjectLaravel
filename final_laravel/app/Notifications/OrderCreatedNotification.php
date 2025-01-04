@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class OrderCreatedNotification extends Notification
 {
@@ -55,10 +56,12 @@ class OrderCreatedNotification extends Notification
 
         // Add product details
         foreach ($this->order->items as $item) {
+            $productImageUrl = $item->product->getPrimaryImagePath(); // Get the product image URL
             $mailMessage->line('**Product:** ' . $item->product->name)
                 ->line('   Quantity: ' . $item->quantity)
                 ->line('   Price per unit: $' . number_format($item->price, 2))
                 ->line('   Total: $' . number_format($item->quantity * $item->price, 2))
+                ->line(new HtmlString('<div class="phone:h-[180px] phone:w-[180px] tablet:w-[240px] tablet:h-[240px]"><img src="' . $productImageUrl . '" alt="' . $item->product->name . '" style="width: 100px; height: auto;"></div>')) // Add the product image with custom size
                 ->line('---');
         }
 

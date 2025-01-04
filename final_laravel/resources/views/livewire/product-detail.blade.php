@@ -4,10 +4,10 @@
         <!-- Left Column: Product Images -->
         <section class="slideshow-container relative">
             <section class="relative border-2 border-gray-700 tablet:w-[605px] tablet:h-[555px] mt-5">
-                @if($product->images->isNotEmpty())
-                    @foreach ($product->images as $image)
+                @if($images->isNotEmpty())
+                    @foreach ($images as $image)
                         <section class="mySlides fade hidden" data-slide="{{ $loop->index }}">
-                            <img src="{{ $image->getImagePath() }}"
+                            <img src="{{ $image->getUrl() }}"
                                 class="w-[600px] h-[550px] phone:max-tablet:w-full phone:max-tablet:h-full"
                                 alt="{{ $image->alt_text ?? 'Product Image ' . ($loop->index + 1) }}">
                         </section>
@@ -19,19 +19,23 @@
                     <a class="next cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-0 p-4 text-black font-bold text-xl transition duration-600 ease-in-out hover:bg-black hover:text-white rounded-l-md select-none"
                         onclick="changeSlide(1)">&#10095;</a>
                 @else
-                    <p class="text-gray-500 text-center mt-5">No images available for this product.</p>
+                    <img src="{{ asset('images/placeholder.jpg') }}"
+                        class="w-[600px] h-[550px] phone:max-tablet:w-full phone:max-tablet:h-full"
+                        alt="No Image Available" />
                 @endif
             </section>
 
             <section class="justify-center flex gap-6 phone:mb-10 mt-5 ml-5">
-                @if($product->images->isNotEmpty())
-                    @foreach ($product->images as $image)
-                        <img src="{{ $image->getImagePath() }}" alt="Thumbnail {{ $loop->index + 1 }}"
+                @if($images->isNotEmpty())
+                    @foreach ($images as $image)
+                        <img src="{{ $image->getUrl() }}" alt="Thumbnail {{ $loop->index + 1 }}"
                             class="thumbnail w-[100px] h-[100px] object-cover opacity-40 hover:opacity-100 hover:border hover:border-gray-700"
                             data-slide="{{ $loop->index }}" onclick="showSlide({{ $loop->index }})">
                     @endforeach
                 @else
-                    <p class="text-gray-500">No thumbnails available.</p>
+                    <img src="{{ asset('images/placeholder.jpg') }}"
+                        class="thumbnail w-[100px] h-[100px] object-cover opacity-40 hover:opacity-100 hover:border hover:border-gray-700"
+                        alt="No Image Available" />
                 @endif
             </section>
         </section>
@@ -94,7 +98,6 @@
         </section>
     </section>
 
-
     <!-- Related Products Section -->
     <section class="related-products mt-10">
         <h3 class="font-garamond font-bold text-2xl pb-3.75">
@@ -102,5 +105,4 @@
         </h3>
         @livewire('products')
     </section>
-
 </section>

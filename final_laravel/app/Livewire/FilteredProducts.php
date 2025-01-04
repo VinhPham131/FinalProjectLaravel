@@ -55,7 +55,6 @@ class FilteredProducts extends Component
 
         // Build the query for filtering products
         $productsQuery = Product::with([
-            'images',
             'category',
             'collection',
             'sales' => function ($query) use ($currentDate) {
@@ -66,13 +65,13 @@ class FilteredProducts extends Component
             'category.sales',
             'collection.sales',
         ])
-        // Search filter: Filter by product name
+            // Search filter: Filter by product name
             ->when($this->search, fn($query) => $query->where('products.name', 'LIKE', '%' . $this->search . '%'))
 
-        // Category filter: Filter by selected categories
+            // Category filter: Filter by selected categories
             ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
 
-        // On sale filter: Products that have an active sale
+            // On sale filter: Products that have an active sale
             ->when($this->onSale, function ($query) use ($currentDate) {
                 $query->whereHas('sales', function ($saleQuery) use ($currentDate) {
                     $saleQuery->where('percentage', '>', 0)
@@ -91,10 +90,10 @@ class FilteredProducts extends Component
                     });
             })
 
-        // In stock filter: Products that have a quantity greater than 0
+            // In stock filter: Products that have a quantity greater than 0
             ->when($this->inStock, fn($query) => $query->where('quantity', '>', 0))
 
-        // Select the necessary columns and calculate the discounted price
+            // Select the necessary columns and calculate the discounted price
             ->select(
                 'products.*',
                 DB::raw('products.price - (products.price * COALESCE(MAX(category_sales.percentage), MAX(collection_sales.percentage), MAX(product_sales.percentage), 0) / 100) as discounted_price')
@@ -115,7 +114,7 @@ class FilteredProducts extends Component
             })
             ->groupBy('products.id')
 
-        // Sorting: Apply sorting based on selected option
+            // Sorting: Apply sorting based on selected option
             ->when($this->sortBy, function ($query) {
                 match ($this->sortBy) {
                     'lowest_to_highest' => $query->orderBy('discounted_price', 'asc'),
@@ -127,6 +126,12 @@ class FilteredProducts extends Component
 
         // Paginate results, 9 products per page
         $products = $productsQuery->paginate(9);
+
+        // Add primary image paths from the media library
+        $products->getCollection()->transform(function ($product) {
+            $product->primary_image = $product->getPrimaryImagePath();
+            return $product;
+        });
 
         // Return the view with the filtered products
         return view('livewire.filtered-products', [
