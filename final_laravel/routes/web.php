@@ -22,10 +22,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/profile', action: [UserController::class, 'profile'])->name('user.profile');
     Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
     Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
-    Route::get('/user/wishlist', action: [UserController::class, 'wishlist'])->name('user.wishlist');
     Route::get('/cart', action: [CartController::class, 'index'])->name('cart.index');
     Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
     Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
+    Route::post('/user/update-avatar', [UserController::class, 'updateAvatar'])->name('user.updateAvatar');
+
+
 
 });
 

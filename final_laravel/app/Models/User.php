@@ -12,10 +12,13 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
+
+
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
+
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         'email',
         'password',
         'role', // Add the role attribute
+        'avatar_url',
     ];
 
     /**
