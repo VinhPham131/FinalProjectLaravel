@@ -50,7 +50,7 @@ class Cart extends Component
             $cart = session()->get('cart', []);
             $productIds = array_keys($cart);
 
-            $products = Product::whereIn('id', $productIds)->with('images')->get();
+            $products = Product::whereIn('id', $productIds)->with('media')->get();
 
             $this->cart = $products->mapWithKeys(function ($product) use ($cart) {
                 return [
