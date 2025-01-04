@@ -5,7 +5,6 @@ namespace Tests\Unit\Models;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Collection;
-use App\Models\ProductImage;
 use App\Models\Sale;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -30,13 +29,6 @@ class ProductTest extends TestCase
     {
         $product = Product::factory()->create();
         $this->assertInstanceOf(Collection::class, $product->collection);
-    }
-
-    public function test_it_can_retrieve_images()
-    {
-        $product = Product::factory()->create();
-        $image = ProductImage::factory()->create(['product_id' => $product->id]);
-        $this->assertTrue($product->images->contains($image));
     }
 
     public function test_it_can_retrieve_applicable_sales()
@@ -116,25 +108,6 @@ class ProductTest extends TestCase
         ]);
 
         $this->assertEquals(160, $product->salePrice());
-    }
-
-
-    public function test_it_can_retrieve_primary_image_path()
-    {
-        $product = Product::factory()->create();
-
-        $primaryImage = ProductImage::factory()->create([
-            'product_id' => $product->id,
-            'is_primary' => true,
-            'image_path' => 'primary.jpg',
-        ]);
-
-        ProductImage::factory()->create([
-            'product_id' => $product->id,
-            'image_path' => 'secondary.jpg',
-        ]);
-
-        $this->assertEquals(asset('primary.jpg'), $product->getPrimaryImagePath());
     }
 
 

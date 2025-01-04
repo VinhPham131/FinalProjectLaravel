@@ -5,11 +5,9 @@ namespace Tests\Feature\Controllers;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\CartsItem;
-use App\Models\Order;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\OrderCreatedNotification;
+
 
 class CheckoutControllerTest extends TestCase
 {
@@ -97,14 +95,20 @@ class CheckoutControllerTest extends TestCase
         // Add items to the cart
         CartsItem::factory()->count(2)->create(['user_id' => $this->user->id]);
 
+        // Ensure cart items exist
+        $this->assertDatabaseCount('carts_items', 2);
+
+        // Process step 2
         $response = $this->withoutMiddleware()
             ->actingAs($this->user)
             ->post(route('checkout.process', ['step' => 2]));
+
         $response->assertRedirect(route('checkout.process', ['step' => 3]));
+
+        // Verify order creation
         $this->assertDatabaseHas('orders', ['user_id' => $this->user->id]);
         $this->assertDatabaseCount('order_items', 2);
     }
-
     public function test_it_throws_error_if_cart_is_empty_in_step_two()
     {
         session([

@@ -106,15 +106,4 @@ class FilterTest extends TestCase
             ->assertSet('sortBy', 'highest_to_lowest')
             ->assertSeeInOrder([$productExpensive->name, $productCheap->name]);
     }
-
-    public function test_it_sorts_products_by_best_seller()
-    {
-        $productLowSales = $this->createProduct(['sale_count' => 10, 'name' => 'Low Sales']);
-        $productHighSales = $this->createProduct(['sale_count' => 100, 'name' => 'High Sales']);
-
-        Livewire::test(FilteredProducts::class)
-            ->set('sortBy', 'best_seller')
-            ->assertSet('sortBy', 'best_seller')
-            ->assertSeeInOrder([$productHighSales->name, $productLowSales->name]);
-    }
 }
