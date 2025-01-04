@@ -38,8 +38,7 @@ class ProductController extends Controller
             'color' => 'nullable|string',
             'category_id' => 'required|exists:product_categories,id',
             'images' => 'nullable|array',
-            'images.*.urls' => 'required|array',
-            'images.*.urls.*' => 'required|url',
+            'images.*' => 'nullable|file|mimes:jpg,jpeg,png',
         ]);
 
         if ($validator->fails()) {
@@ -49,16 +48,15 @@ class ProductController extends Controller
         try {
             $product = Product::create($request->except('images'));
 
-            if ($request->has('images')) {
-                foreach ($request->images as $imageData) {
-                    $product->images()->create([
-                        'urls' => $imageData['urls'],
-                        'product_id' => $product->id,
-                    ]);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $index => $image) {
+                    $product->addMedia($image)
+                        ->withCustomProperties(['order_column' => $index + 1])
+                        ->toMediaCollection('products');
                 }
             }
 
-            return response()->json(['data' => $product->load('images')], 201);
+            return response()->json(['data' => $product->load('media')], 201);
         } catch (\Exception $e) {
             Log::error('Error creating product: ' . $e->getMessage(), ['exception' => $e]);
             return response()->json(['error' => 'An error occurred while creating the product.'], 500);
@@ -75,7 +73,7 @@ class ProductController extends Controller
             $product = Product::findOrFail($id);
 
             // Load related models
-            $product->load(['category', 'collection', 'images']);
+            $product->load(['category', 'collection']);
 
             return response()->json(['data' => $product], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -107,9 +105,11 @@ class ProductController extends Controller
             'size' => 'nullable|string',
             'stylecode' => 'nullable|string',
             'collection_id' => 'nullable|exists:collections,id',
-            'productcode' => 'nullable|string|unique:products,productcode',
+            'productcode' => 'nullable|string|unique:products,productcode,' . $product->id,
             'color' => 'nullable|string',
             'category_id' => 'sometimes|exists:product_categories,id',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|file|mimes:jpg,jpeg,png',
         ]);
 
         if ($validator->fails()) {
@@ -117,9 +117,19 @@ class ProductController extends Controller
         }
 
         try {
-            $product->fill($request->all());
+            $product->fill($request->except('images'));
             $product->save();
-            return response()->json(['data' => $product->fresh()], 200);
+
+            if ($request->hasFile('images')) {
+                $product->clearMediaCollection('products');
+                foreach ($request->file('images') as $index => $image) {
+                    $product->addMedia($image)
+                        ->withCustomProperties(['order_column' => $index + 1])
+                        ->toMediaCollection('products');
+                }
+            }
+
+            return response()->json(['data' => $product->load('media')], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to update product', 'error' => $e->getMessage()], 500);
         }
@@ -130,13 +140,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
         try {
-            $product = Product::findOrFail($id);
             $product->delete();
-            return response()->json(['message' => 'Product deleted successfully.'], 200);
+            return response()->json(['message' => 'Product deleted successfully.']);
         } catch (\Exception $e) {
-            Log::error('Error deleting product: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the product.'], 500);
+            return response()->json(['message' => 'Failed to delete product', 'error' => $e->getMessage()], 500);
         }
     }
 }
