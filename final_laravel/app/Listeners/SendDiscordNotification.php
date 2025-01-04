@@ -17,7 +17,7 @@ class SendDiscordNotification
         $webhookUrl = env('DISCORD_WEBHOOK_URL');
 
         $message = [
-            'content' => "New Order Created!\n**Order Code:** {$event->order->code}\n**Name:** {$event->order->first_name} {$event->order->last_name}\n**Email:** {$event->order->email}\n**Total Price:** {$event->order->total_price}\n**Payment Method:** {$event->order->payment}\n**Shipping Address:** {$event->order->address}, {$event->order->country}",
+            'content' => "New Order Created!\n**Order Code:** {$event->order->code}\n**Name:** {$event->order->first_name} {$event->order->last_name}\n**Email:** {$event->order->email}\n**Total Price:** {$event->order->total_price}\n**Payment Method:** {$event->order->payment}\n**Shipping Address:** {$event->order->address}, {$event->order->country} \n**Status:** {$event->order->status}",
         ];
 
         $response = Http::post($webhookUrl, $message);
