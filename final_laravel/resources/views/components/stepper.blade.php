@@ -1,5 +1,5 @@
 <ol class="flex items-center w-[700px] text-md font-medium text-center text-gray-500 dark:text-gray-400">
-    @foreach (['Personal Info', 'Confirmation', 'Order Sucessfull'] as $index => $label)
+    @foreach (['Personal Info', 'Confirmation', 'Order Successful'] as $index => $label)
         <li class="flex flex-1 items-center {{ $step == $index + 1 ? 'text-[#A18A68] dark:text-[#d39b48] font-bold' : '' }}">
             <div class="flex items-center">
                 @if ($index + 1 < $step)

@@ -27,9 +27,11 @@
                     <div>
                         <label for="email" class="block text-sm font-bold text-gray-700">Email *</label>
                         <input type="email" id="email" name="email"
-                            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A18A68]" required>
+                            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A18A68]"
+                            value="{{ old('email', $user->email ?? '') }}" required>
                         <span class="text-red-500 text-sm hidden" id="emailError">Please enter a valid email address.</span>
                     </div>
+
 
                     <!-- Country -->
                     <div>

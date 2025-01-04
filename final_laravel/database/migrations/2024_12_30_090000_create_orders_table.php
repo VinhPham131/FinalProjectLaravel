@@ -22,14 +22,12 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->text('note')->nullable();
-            $table->string('payment')->default('COD'); 
+            $table->string('payment')->default('COD');
             $table->double('total_price');
-            
+            $table->string('status')->default('packaging'); // Set default status to packaging
             $table->timestamps();
-        
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
     }
 
     /**
