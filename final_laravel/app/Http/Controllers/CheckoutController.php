@@ -25,11 +25,13 @@ class CheckoutController extends Controller
         }
 
         $cartData = $this->getCartData();
+        $user = Auth::user();
 
         return view('checkout', [
             'step' => $step,
             'cart' => $cartData['cartItems'],
             'totalPrice' => $cartData['totalPrice'],
+            'user' => $user,
         ]);
     }
 
