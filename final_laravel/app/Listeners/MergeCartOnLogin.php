@@ -35,4 +35,5 @@ class MergeCartOnLogin
             Session::forget('cart');
         }
     }
+    
 }

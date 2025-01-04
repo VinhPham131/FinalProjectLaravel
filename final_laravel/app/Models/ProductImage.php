@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
+    use HasFactory;
     protected $fillable = ['image_path', 'alt_text', 'sort_order', 'is_primary', 'product_id'];
 
     // Each image belongs to a product

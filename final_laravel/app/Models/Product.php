@@ -25,6 +25,7 @@ class Product extends Model implements HasMedia
         'color',
         'category_id',
         'slug',
+        'sell_count'
     ];
 
     public function sluggable(): array
@@ -121,7 +122,7 @@ class Product extends Model implements HasMedia
                 $query->orWhere('category_id', $this->category_id);
                 $query->orWhere('collection_id', $this->collection_id);
                 $query->orWhereHas('sales', function ($saleQuery) {
-                    $saleQuery->where('percentage', $this->highestSale());
+                    $saleQuery->where('percentage', $this->getHighestSalePercentageAttribute());
                 });
             })
             ->take(5)

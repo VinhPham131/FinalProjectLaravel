@@ -30,6 +30,11 @@ class OrderCreatedNotification extends Notification
     {
         return ['mail'];
     }
+    // Add this getter method
+    public function getOrder()
+    {
+        return $this->order;
+    }
 
     /**
      * Get the mail representation of the notification.
