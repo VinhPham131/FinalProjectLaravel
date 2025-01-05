@@ -65,8 +65,6 @@ class ProductTest extends TestCase
         $this->assertTrue($sales->contains($collectionSale));
         $this->assertTrue($sales->contains($productSale));
     }
-
-
     public function test_it_can_calculate_highest_sales_percentage()
     {
         $category = ProductCategory::factory()->create();
@@ -126,5 +124,4 @@ class ProductTest extends TestCase
         $this->assertTrue($relatedProducts->contains($relatedProduct));
         $this->assertFalse($relatedProducts->contains($unrelatedProduct));
     }
-
 }

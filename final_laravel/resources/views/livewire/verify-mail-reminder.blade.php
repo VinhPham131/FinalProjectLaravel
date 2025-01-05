@@ -7,7 +7,7 @@
                     <p class="font-bold">🚨 Email Verification Needed! 🚨</p>
                     <p>Please verify your email to place orders and enjoy our services.</p>
                 </div>
-                <a href="{{ route('user.profile') }}"
+                <a href="{{ route('user.account.tab', ['tab' => 'account']) }}"
                     class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                     Verify Email
                 </a>

@@ -10,11 +10,17 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Routing\Controller;
 
 class CheckoutController extends Controller
 {
+
     public function showCheckoutStep($step)
     {
+        if (!Auth::check()) {
+            session()->flash('alert', 'You need to login before proceeding to checkout.');
+            return redirect()->route('shop');
+        }
         if (!$this->isValidStep($step)) {
             abort(404);
         }
@@ -37,6 +43,11 @@ class CheckoutController extends Controller
 
     public function processStep(Request $request, $step)
     {
+        if (!Auth::check()) {
+            session()->flash('alert', 'You need to login before proceeding to checkout.');
+            return redirect()->route('login');
+        }
+
         if (!$this->isValidStep($step)) {
             abort(404);
         }
@@ -48,12 +59,12 @@ class CheckoutController extends Controller
 
         try {
             $nextStep = isset($stepProcessors[$step])
-            ? $this->{$stepProcessors[$step]}($request)
-            : $step + 1;
+                ? $this->{$stepProcessors[$step]}($request)
+                : $step + 1;
 
             return $nextStep > 3
-            ? redirect()->route('checkout.process', ['step' => 3])
-            : redirect()->route('checkout.process', ['step' => $nextStep]);
+                ? redirect()->route('checkout.process', ['step' => 3])
+                : redirect()->route('checkout.process', ['step' => $nextStep]);
         } catch (Exception $e) {
             Log::error("Error processing step {$step}: " . $e->getMessage());
             return redirect()->route('checkout.step', ['step' => $step])
