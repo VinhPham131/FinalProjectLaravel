@@ -83,14 +83,17 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-        $collection = Collection::find($id);
-
+        $collection = Collection::findOrFail($id);
         if (!$collection) {
             return response()->json(['message' => 'Collection not found'], 404);
+        }
+        // Delete related products
+        foreach ($collection->products as $product) {
+            $product->delete();
         }
 
         $collection->delete();
 
-        return response()->json(['message' => 'Collection deleted successfully']);
+        return response()->json(['message' => 'Collection deleted successfully'], 200);
     }
 }
