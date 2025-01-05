@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\API;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -75,13 +75,6 @@ class ProductControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($admin, 'sanctum')->putJson('/api/product/' . $product->id, $data);
-
-        // Dump the response content for debugging
-        $response->dump();
-
-        // Fetch the updated product from the database
-        $updatedProduct = Product::find($product->id);
-        dump($updatedProduct->toArray());
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Product']);
