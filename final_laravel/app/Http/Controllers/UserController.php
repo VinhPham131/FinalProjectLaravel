@@ -8,24 +8,23 @@ class UserController extends Controller
 {
     public function profile(Request $request)
     {
-        return view('user', [
+        return view('user-tabs', [
             'user' => $request->user(),
         ]);
     }
 
-    public function order()
+    // UserController.php
+    public function showAccountTab(Request $request, $tab)
     {
-        return view('accountorder');
-    }
-    public function account(Request $request)
-    {
-        return view('accountedit', [
+        $validTabs = ['cart', 'order', 'account'];
+        $activeTab = in_array($tab, $validTabs) ? $tab : 'cart';
+
+        $orders = $tab === 'order' ? $request->user()->orders()->latest()->get() : collect();
+
+        return view('account', [
+            'activeTab' => $activeTab,
             'user' => $request->user(),
+            'orders' => $orders,
         ]);
     }
-    public function wishlist()
-    {
-        return view('accountwishlist');
-    }
-    
 }
