@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', action: [CartController::class, 'index'])->name('cart.index');
     Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
     Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
+    Route::get('/order-details/{orderId}', [CheckoutController::class, 'show'])->name('order.details');
+    
 
 });
 
