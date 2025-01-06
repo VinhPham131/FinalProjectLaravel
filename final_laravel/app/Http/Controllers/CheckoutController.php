@@ -18,7 +18,6 @@ class CheckoutController extends Controller
         if (!$this->isValidStep($step)) {
             abort(404);
         }
-
         if ($step == 3 && !$this->userHasOrder()) {
             return redirect()->route('checkout.step', ['step' => 2])
                 ->with('error', 'You must create an order before proceeding to step 3.');
@@ -26,12 +25,14 @@ class CheckoutController extends Controller
 
         $cartData = $this->getCartData();
         $user = Auth::user();
+        $order = $this->userHasOrder() ? Order::where('user_id', Auth::id())->latest()->first() : null;
 
         return view('checkout', [
             'step' => $step,
             'cart' => $cartData['cartItems'],
             'totalPrice' => $cartData['totalPrice'],
             'user' => $user,
+            'order' => $order,
         ]);
     }
 
@@ -48,12 +49,12 @@ class CheckoutController extends Controller
 
         try {
             $nextStep = isset($stepProcessors[$step])
-            ? $this->{$stepProcessors[$step]}($request)
-            : $step + 1;
+                ? $this->{$stepProcessors[$step]}($request)
+                : $step + 1;
 
             return $nextStep > 3
-            ? redirect()->route('checkout.process', ['step' => 3])
-            : redirect()->route('checkout.process', ['step' => $nextStep]);
+                ? redirect()->route('checkout.process', ['step' => 3])
+                : redirect()->route('checkout.process', ['step' => $nextStep]);
         } catch (Exception $e) {
             Log::error("Error processing step {$step}: " . $e->getMessage());
             return redirect()->route('checkout.step', ['step' => $step])
@@ -141,7 +142,7 @@ class CheckoutController extends Controller
         session()->forget('checkout');
         CartsItem::where('user_id', Auth::id())->delete();
 
-        return 3; // Tiếp tục tới bước 3 (trang xác nhận)
+        return 3;
     }
 
     private function isValidStep($step)
@@ -177,4 +178,23 @@ class CheckoutController extends Controller
 
         return ['cartItems' => $cartItems, 'totalPrice' => $totalPrice];
     }
+    public function show($orderId)
+    {
+        $order = Order::with('items')->findOrFail($orderId);
+
+        return view('order-details',[
+            'order' => $order,
+            'cart' => $order->items, 
+            'totalPrice' => $order->total_price, 
+        ]);
+    }
+    public function showOrderSuccess($orderId)
+{
+    $order = Order::with('items')->findOrFail($orderId);
+
+    return view('order-succes', [
+        'order' => $order,
+    ]);
+}
+
 }

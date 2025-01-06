@@ -21,8 +21,7 @@ x-on:cart-updated.window="triggerNotification($event)"
         class="fixed top-[100px] right-[200px] bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
         <span x-text="notification"></span>
     </div>
-
-
+    
     <!-- Cart Icon with Dropdown -->
     <button @click="openDropdown = !openDropdown" @mouseover="openDropdown = true" @mouseleave="openDropdown = false"
         id="dropdownCartButton"
@@ -84,13 +83,19 @@ x-on:cart-updated.window="triggerNotification($event)"
         <div class="p-4">
             <div class="flex justify-between items-center">
                 <div class="text-a28b68 font-bold text-md mb-2">Total: ${{ number_format($total, 2) }}</div>
-                <a class = "text-gray-500 hover:underline cursor-pointer" href="{{ route('cart.index') }}">
+                <a class="text-gray-500 hover:underline cursor-pointer" href="{{ route('cart.index') }}">
                     <span class="text-gray-500 mb-4">View all</span>
                 </a>
             </div>
-            <a href="{{ route('checkout.step', ['step' => 1]) }}" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
-                Checkout
-            </a>
+            @if ($totalQuantity > 0)
+                <a href="{{ route('checkout.step', ['step' => 1]) }}" class="block w-full text-center text-white bg-gray-800 hover:bg-gray-900 px-4 py-2 rounded-md">
+                    Checkout
+                </a>
+            @else
+                <div class="block w-full text-center text-white bg-gray-400 px-4 py-2 rounded-md cursor-not-allowed">
+                    Checkout
+                </div>
+            @endif
         </div>
     </div>
 </div>

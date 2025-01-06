@@ -65,11 +65,16 @@
                 <span>TOTAL</span>
                 <span>${{ number_format($total, 2) }}</span>
             </div>
-
-            <button class="mt-4 w-full bg-black text-white py-3"
-                onclick="window.location.href='{{ route('checkout.step', ['step' => 1]) }}'">PROCEED TO
-                CHECKOUT</button>
-
+            @if($total > 0)
+                <button class="mt-4 w-full bg-black text-white py-3"
+                    onclick="window.location.href='{{ route('checkout.step', ['step' => 1]) }}'">PROCEED TO
+                    CHECKOUT
+                </button>
+            @else
+                <button class="mt-4 w-full bg-gray-400 text-white py-3 cursor-not-allowed">PROCEED TO
+                    CHECKOUT
+                </button>
+            @endif
         </div>
     </div>
 </div>

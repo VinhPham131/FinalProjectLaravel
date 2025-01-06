@@ -91,7 +91,7 @@ class Product extends Model implements HasMedia
     // Function to calculate the sale price based on the highest sale percentage
     public function salePrice()
     {
-        return $this->highest_sale_percentage ? $this->price * (1 - $this->highest_sale_percentage / 100) : null;
+        return $this->highest_sale_percentage ? $this->price * (1 - $this->highest_sale_percentage / 100) : $this->price;
     }
 
     // Function to get all active sales for the product
