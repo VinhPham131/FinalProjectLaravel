@@ -17,38 +17,46 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('accountedit', [
+        return view('account', [
             'user' => $request->user(),
+            'activeTab' => 'account', // Ensure 'account' tab is active
         ]);
     }
+
     /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null; // Reset email verification if email changes
         }
 
-        $request->user()->save();
+        $user->save();
 
-        return Redirect::route('user.account')->with('status', 'profile-updated');
+        return Redirect::route('user.account.tab', ['tab' => 'account'])
+            ->with('status', 'profile-updated'); // Flash session status
     }
 
+    /**
+     * Update the user's password.
+     */
     public function updatePassword(Request $request): RedirectResponse
     {
         $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'current_password' => ['required', 'current_password'], // Check current password
+            'password' => ['required', 'string', 'min:8', 'confirmed'], // Validate new password
         ]);
 
         $user = $request->user();
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->password); // Update password securely
         $user->save();
 
-        return Redirect::route('user.account')->with('status', 'password-updated');
+        return Redirect::route('user.account.tab', ['tab' => 'account'])
+            ->with('status', 'password-updated'); // Flash session status
     }
 
     /**
