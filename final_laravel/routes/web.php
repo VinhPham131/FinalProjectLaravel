@@ -19,13 +19,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/user/profile', action: [UserController::class, 'profile'])->name('user.profile');
-    Route::get('/user/order', [UserController::class, 'order'])->name('user.order');
-    Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
-    Route::get('/user/wishlist', action: [UserController::class, 'wishlist'])->name('user.wishlist');
+    Route::get('/account/{tab}', [UserController::class, 'showAccountTab'])->name('user.account.tab');
     Route::get('/cart', action: [CartController::class, 'index'])->name('cart.index');
     Route::get('/checkout/{step}', [CheckoutController::class, 'showCheckoutStep'])->name('checkout.step');
     Route::post('/checkout/{step}', [CheckoutController::class, 'processStep'])->name('checkout.process');
+    Route::get('/order-details/{orderId}', [CheckoutController::class, 'show'])->name('order.details');
+    
 
 });
 

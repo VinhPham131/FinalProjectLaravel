@@ -1,11 +1,11 @@
 <?php
 namespace App\Models;
 
+use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OrderItem;
-use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -22,7 +22,12 @@ class Order extends Model
         'note',
         'payment',
         'total_price',
-        'code'
+        'code',
+        'status', // Add status to fillable
+    ];
+
+    protected $attributes = [
+        'status' => 'packaging', // Set default status to packaging
     ];
 
     /**
@@ -30,8 +35,9 @@ class Order extends Model
      */
     public function items()
     {
-        return $this->hasMany(OrderItem::class,'order_id');
+        return $this->hasMany(OrderItem::class, 'order_id');
     }
+
     protected static function booted()
     {
         static::creating(function ($order) {
@@ -45,5 +51,19 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Set the status attribute.
+     */
+    public function setStatusAttribute($value)
+    {
+        $allowedStatuses = ['packaging', 'shipping', 'shipped'];
+
+        if (!in_array($value, $allowedStatuses)) {
+            throw new \InvalidArgumentException("Invalid status: $value");
+        }
+
+        $this->attributes['status'] = $value;
     }
 }

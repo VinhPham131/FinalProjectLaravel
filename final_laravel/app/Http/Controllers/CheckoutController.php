@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Events\OrderCreated;
 use App\Models\CartsItem;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Notifications\OrderCreatedNotification;
 
 class CheckoutController extends Controller
 {
@@ -18,18 +18,21 @@ class CheckoutController extends Controller
         if (!$this->isValidStep($step)) {
             abort(404);
         }
-
         if ($step == 3 && !$this->userHasOrder()) {
             return redirect()->route('checkout.step', ['step' => 2])
                 ->with('error', 'You must create an order before proceeding to step 3.');
         }
 
         $cartData = $this->getCartData();
+        $user = Auth::user();
+        $order = $this->userHasOrder() ? Order::where('user_id', Auth::id())->latest()->first() : null;
 
         return view('checkout', [
             'step' => $step,
             'cart' => $cartData['cartItems'],
             'totalPrice' => $cartData['totalPrice'],
+            'user' => $user,
+            'order' => $order,
         ]);
     }
 
@@ -128,7 +131,7 @@ class CheckoutController extends Controller
 
         // Gửi email xác nhận đơn hàng
         try {
-            $order->user->notify(new OrderCreatedNotification($order));
+            event(new OrderCreated($order));
             Log::info('Order confirmation email sent', ['order_id' => $order->id]);
         } catch (Exception $e) {
             Log::error('Failed to send order confirmation email', ['order_id' => $order->id, 'error' => $e->getMessage()]);
@@ -139,9 +142,8 @@ class CheckoutController extends Controller
         session()->forget('checkout');
         CartsItem::where('user_id', Auth::id())->delete();
 
-        return 3; // Tiếp tục tới bước 3 (trang xác nhận)
+        return 3;
     }
-
 
     private function isValidStep($step)
     {
@@ -176,4 +178,23 @@ class CheckoutController extends Controller
 
         return ['cartItems' => $cartItems, 'totalPrice' => $totalPrice];
     }
+    public function show($orderId)
+    {
+        $order = Order::with('items')->findOrFail($orderId);
+
+        return view('order-details',[
+            'order' => $order,
+            'cart' => $order->items, 
+            'totalPrice' => $order->total_price, 
+        ]);
+    }
+    public function showOrderSuccess($orderId)
+{
+    $order = Order::with('items')->findOrFail($orderId);
+
+    return view('order-succes', [
+        'order' => $order,
+    ]);
+}
+
 }

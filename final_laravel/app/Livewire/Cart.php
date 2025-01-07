@@ -35,7 +35,7 @@ class Cart extends Component
                 return [
                     $item->product_id => [
                         'name' => $item->product->name,
-                        'price' => $item->product->salePrice() ?? $item->product->price,
+                        'price' => $item->product->salePrice(),
                         'image' => $item->product->getPrimaryImagePath(),
                         'quantity' => $item->quantity,
                         'discount_percentage' => $item->product->getHighestSalePercentageAttribute() ?? 0,

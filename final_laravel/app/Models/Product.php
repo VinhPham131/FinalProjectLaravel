@@ -25,6 +25,7 @@ class Product extends Model implements HasMedia
         'color',
         'category_id',
         'slug',
+        'sell_count'
     ];
 
     public function sluggable(): array
@@ -90,7 +91,7 @@ class Product extends Model implements HasMedia
     // Function to calculate the sale price based on the highest sale percentage
     public function salePrice()
     {
-        return $this->highest_sale_percentage ? $this->price * (1 - $this->highest_sale_percentage / 100) : null;
+        return $this->highest_sale_percentage ? $this->price * (1 - $this->highest_sale_percentage / 100) : $this->price;
     }
 
     // Function to get all active sales for the product
@@ -122,7 +123,7 @@ class Product extends Model implements HasMedia
                 $query->orWhere('category_id', $this->category_id);
                 $query->orWhere('collection_id', $this->collection_id);
                 $query->orWhereHas('sales', function ($saleQuery) {
-                    $saleQuery->where('percentage', $this->highestSale());
+                    $saleQuery->where('percentage', $this->getHighestSalePercentageAttribute());
                 });
             })
             ->take(5)

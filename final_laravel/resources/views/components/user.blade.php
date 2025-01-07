@@ -16,15 +16,15 @@
     </div>
     <ul class="py-2 text-[15px] text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
     <li>
-      <a href="{{ route('user.profile') }}"
-      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+      <a href="{{ route('user.account.tab', ['tab' => 'cart']) }}"
+      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Cart</a>
     </li>
     <li>
-      <a href="{{ route('user.order') }}"
-      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Order</a>
+      <a href="{{ route('user.account.tab', ['tab' => 'order']) }}"
+      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Order</a>
     </li>
     <li>
-      <a href="{{ route('user.account') }}"
+      <a href="{{ route('user.account.tab', ['tab' => 'account']) }}"
       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Account</a>
     </li>
     </ul>
@@ -51,14 +51,14 @@
   </button>
   <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-32">
     <ul class="py-2 text-[15px] text-gray-700 dark:text-gray-200 text-left" aria-labelledby="dropdownUserAvatarButton">
-      <li>
+    <li>
       <button onclick="Livewire.dispatch('openModal', { component: 'auth-modal', arguments: { mode:'login'}})"
       class="block text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Login</button>
     </li>
     <li>
-     <button onclick="Livewire.dispatch('openModal', { component: 'auth-modal', arguments: { mode:'register'}})"
-     class="block text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</button>
+      <button onclick="Livewire.dispatch('openModal', { component: 'auth-modal', arguments: { mode:'register'}})"
+      class="block text-left w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</button>
     </li>
-  </ul>
-</div>
+    </ul>
+  </div>
 @endguest
