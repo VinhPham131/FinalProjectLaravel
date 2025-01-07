@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             NormalUserSeeder::class,
             ProductMediaSeeder::class,
-            OneMProductSeeder::class,
         ]);
     }
 }
