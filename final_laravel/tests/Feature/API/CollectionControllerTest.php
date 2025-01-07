@@ -3,13 +3,13 @@
 namespace Tests\Feature\API;
 
 use App\Models\Collection;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\TestHelpers;
 
 class CollectionControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, TestHelpers;
 
     public function test_can_view_collections()
     {
@@ -23,7 +23,7 @@ class CollectionControllerTest extends TestCase
 
     public function test_can_view_single_collection()
     {
-        $collection = Collection::factory()->create();
+        $collection = $this->createCollection();
 
         $response = $this->getJson('/api/collection/' . $collection->id);
 
@@ -33,13 +33,12 @@ class CollectionControllerTest extends TestCase
 
     public function test_admin_can_create_collection()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
         $data = [
             'name' => 'New Collection',
             'description' => 'Description of the new collection',
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->postJson('/api/collection', $data);
+        $response = $this->actingAsAdmin()->postJson('/api/collection', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment(['name' => 'New Collection']);
@@ -47,14 +46,13 @@ class CollectionControllerTest extends TestCase
 
     public function test_admin_can_update_collection()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $collection = Collection::factory()->create();
+        $collection = $this->createCollection();
         $data = [
             'name' => 'Updated Collection',
             'description' => 'Updated description',
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->putJson('/api/collection/' . $collection->id, $data);
+        $response = $this->actingAsAdmin()->putJson('/api/collection/' . $collection->id, $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Collection']);
@@ -62,10 +60,9 @@ class CollectionControllerTest extends TestCase
 
     public function test_admin_can_delete_collection()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $collection = Collection::factory()->create();
+        $collection = $this->createCollection();
 
-        $response = $this->actingAs($admin, 'sanctum')->deleteJson('/api/collection/' . $collection->id);
+        $response = $this->actingAsAdmin()->deleteJson('/api/collection/' . $collection->id);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Collection deleted successfully']);
@@ -73,13 +70,12 @@ class CollectionControllerTest extends TestCase
 
     public function test_non_admin_cannot_create_collection()
     {
-        $user = User::factory()->create(['role' => 'user']);
         $data = [
             'name' => 'New Collection',
             'description' => 'Description of the new collection',
         ];
 
-        $response = $this->actingAs($user, 'sanctum')->postJson('/api/collection', $data);
+        $response = $this->actingAsUser()->postJson('/api/collection', $data);
 
         $response->assertStatus(403);
     }
