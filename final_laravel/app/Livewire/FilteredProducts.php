@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -70,8 +70,8 @@ class FilteredProducts extends Component
                 ->when(!empty($this->selectedCategories), fn($query) => $query->whereIn('category_id', $this->selectedCategories))
                 ->when($this->onSale, function ($query) use ($currentDate) {
                     $query->whereHas('sales', fn($saleQuery) => $saleQuery->where('percentage', '>', 0)
-                        ->where('start_date', '<=', $currentDate)
-                        ->where('end_date', '>=', $currentDate));
+                            ->where('start_date', '<=', $currentDate)
+                            ->where('end_date', '>=', $currentDate));
                 })
                 ->when($this->inStock, fn($query) => $query->where('quantity', '>', 0))
                 ->select(
@@ -122,7 +122,7 @@ class FilteredProducts extends Component
             'categories' => implode(',', $this->selectedCategories),
             'onSale' => $this->onSale,
             'inStock' => $this->inStock,
-            'page' => $this->page ?? 1,
+            'page' => $this->page ?? $this->pageName(),
         ];
 
         return 'filtered_products_' . md5(json_encode($filters));
