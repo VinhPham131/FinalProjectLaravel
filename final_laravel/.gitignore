@@ -48,4 +48,5 @@ Homestead.yaml
 .nitro/
 
 #remove  .DS_Store (specifically for mac)
-.DS_Store
+.DS_Storerr
+.rr.yaml
