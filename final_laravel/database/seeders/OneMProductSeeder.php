@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+ini_set('memory_limit', '-1');
+
 
 class OneMProductSeeder extends Seeder
 {

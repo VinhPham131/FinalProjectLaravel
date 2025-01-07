@@ -15,7 +15,7 @@ class Products extends Component
     public function mount()
     {
         $this->updateCache();
-        $this->totalProducts = Cache::forever('total_products', function () {
+        $this->totalProducts = Cache::rememberForever('total_products', function () {
             return Product::count();
         });
         $this->loadProducts();
@@ -23,10 +23,9 @@ class Products extends Component
 
     public function loadProducts()
     {
-        $cacheKey = "products_{$this->limit}";
-        $this->products = Cache::forever($cacheKey, function () {
-            // return Product::limit($this->limit)->get();
-            return Product::cursor();
+        $cacheKey = "products_limit_{$this->limit}";
+        $this->products = Cache::remember($cacheKey, now()->addMinutes(30), function () {
+            return Product::limit($this->limit)->get();
         });
     }
 
@@ -44,9 +43,8 @@ class Products extends Component
 
     private function updateCache()
     {
-        // Check if products have been updated
         $lastUpdated = Cache::get('products_last_updated', 0);
-        $latestUpdate = Product::max('updated_at')->timestamp ?? 0;
+        $latestUpdate = Product::max('updated_at')?->timestamp ?? 0;
 
         if ($latestUpdate > $lastUpdated) {
             Cache::flush();
