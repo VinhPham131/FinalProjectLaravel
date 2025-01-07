@@ -2,18 +2,19 @@
 
 namespace Tests\Feature\API;
 
-use App\Models\Sale;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\TestHelpers;
 
 class SaleControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, TestHelpers;
 
     public function test_can_view_sales()
     {
-        Sale::factory()->count(3)->create();
+        $this->createSale();
+        $this->createSale();
+        $this->createSale();
 
         $response = $this->getJson('/api/sale');
 
@@ -23,7 +24,7 @@ class SaleControllerTest extends TestCase
 
     public function test_can_view_single_sale()
     {
-        $sale = Sale::factory()->create();
+        $sale = $this->createSale();
 
         $response = $this->getJson('/api/sale/' . $sale->id);
 
@@ -33,14 +34,16 @@ class SaleControllerTest extends TestCase
 
     public function test_admin_can_create_sale()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+        $admin = $this->createAdmin();
+        $product = $this->createProduct();
+
         $data = [
             'name' => 'New Sale',
             'sale_target_type' => 'product',
-            'sale_target_id' => 1,
+            'sale_target_id' => $product->id,
             'percentage' => 20,
-            'start_date' => '2024-12-31',
-            'end_date' => '2024-12-31',
+            'start_date' => now()->subDay()->toDateTimeString(),
+            'end_date' => now()->addDay()->toDateTimeString(),
         ];
 
         $response = $this->actingAs($admin, 'sanctum')->postJson('/api/sale', $data);
@@ -51,28 +54,25 @@ class SaleControllerTest extends TestCase
 
     public function test_admin_can_update_sale()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $sale = Sale::factory()->create();
+        $sale = $this->createSale();
         $data = [
             'name' => 'Updated Sale',
-            'sale_target_type' => 'product',
-            'sale_target_id' => 1,
             'percentage' => 30,
-            'start_date' => '2024-12-31',
-            'end_date' => '2024-12-31',
+            'start_date' => now()->subDay()->toDateTimeString(),
+            'end_date' => now()->addDay()->toDateTimeString(),
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->putJson('/api/sale/' . $sale->id, $data);
+        $response = $this->actingAsAdmin()->putJson('/api/sale/' . $sale->id, $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Sale']);
     }
+
     public function test_admin_can_delete_sale()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $sale = Sale::factory()->create();
+        $sale = $this->createSale();
 
-        $response = $this->actingAs($admin, 'sanctum')->deleteJson('/api/sale/' . $sale->id);
+        $response = $this->actingAsAdmin()->deleteJson('/api/sale/' . $sale->id);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Sale deleted successfully']);
@@ -80,17 +80,14 @@ class SaleControllerTest extends TestCase
 
     public function test_non_admin_cannot_create_sale()
     {
-        $user = User::factory()->create(['role' => 'user']);
         $data = [
             'name' => 'New Sale',
-            'sale_target_type' => 'product',
-            'sale_target_id' => 1,
             'percentage' => 20,
-            'start_date' => '2024-12-31',
-            'end_date' => '2024-12-31',
+            'start_date' => now()->subDay()->toDateTimeString(),
+            'end_date' => now()->addDay()->toDateTimeString(),
         ];
 
-        $response = $this->actingAs($user, 'sanctum')->postJson('/api/sale', $data);
+        $response = $this->actingAsUser()->postJson('/api/sale', $data);
 
         $response->assertStatus(403);
     }

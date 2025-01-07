@@ -2,19 +2,19 @@
 
 namespace Tests\Feature\API;
 
-use App\Models\Product;
-use App\Models\ProductCategory;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\TestHelpers;
 
 class ProductControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, TestHelpers;
 
     public function test_can_view_products()
     {
-        Product::factory()->count(3)->create();
+        $this->createProduct();
+        $this->createProduct();
+        $this->createProduct();
 
         $response = $this->getJson('/api/product');
 
@@ -24,7 +24,7 @@ class ProductControllerTest extends TestCase
 
     public function test_can_view_single_product()
     {
-        $product = Product::factory()->create();
+        $product = $this->createProduct();
 
         $response = $this->getJson('/api/product/' . $product->id);
 
@@ -34,23 +34,24 @@ class ProductControllerTest extends TestCase
 
     public function test_admin_can_create_product()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $category = ProductCategory::factory()->create();
+        $collection = $this->createCollection();
+        $category = $this->createProductCategory();
+
         $data = [
             'name' => 'New Product',
             'description' => 'Description of the new product',
-            'price' => 100.00,
+            'price' => 100,
             'quantity' => 10,
             'material' => 'Cotton',
             'size' => 'L',
             'stylecode' => 'SC123',
-            'collection_id' => null,
+            'collection_id' => $collection->id,
             'productcode' => 'PC123',
             'color' => 'Red',
             'category_id' => $category->id,
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->postJson('/api/product', $data);
+        $response = $this->actingAsAdmin()->postJson('/api/product', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment(['name' => 'New Product']);
@@ -58,13 +59,12 @@ class ProductControllerTest extends TestCase
 
     public function test_admin_can_update_product()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $product = Product::factory()->create();
+        $product = $this->createProduct();
         $data = [
             'name' => 'Updated Product',
             'description' => 'Updated description',
-            'price' => 150.00,
-            'quantity' => 5,
+            'price' => 150,
+            'quantity' => 20,
             'material' => 'Wool',
             'size' => 'M',
             'stylecode' => 'SC456',
@@ -74,7 +74,7 @@ class ProductControllerTest extends TestCase
             'category_id' => $product->category_id,
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->putJson('/api/product/' . $product->id, $data);
+        $response = $this->actingAsAdmin()->putJson('/api/product/' . $product->id, $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Product']);
@@ -82,10 +82,9 @@ class ProductControllerTest extends TestCase
 
     public function test_admin_can_delete_product()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $product = Product::factory()->create();
+        $product = $this->createProduct();
 
-        $response = $this->actingAs($admin, 'sanctum')->deleteJson('/api/product/' . $product->id);
+        $response = $this->actingAsAdmin()->deleteJson('/api/product/' . $product->id);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Product deleted successfully.']);
@@ -93,23 +92,21 @@ class ProductControllerTest extends TestCase
 
     public function test_non_admin_cannot_create_product()
     {
-        $user = User::factory()->create(['role' => 'user']);
-        $category = ProductCategory::factory()->create();
         $data = [
             'name' => 'New Product',
             'description' => 'Description of the new product',
-            'price' => 100.00,
+            'price' => 100,
             'quantity' => 10,
             'material' => 'Cotton',
             'size' => 'L',
             'stylecode' => 'SC123',
-            'collection_id' => null,
+            'collection_id' => 1,
             'productcode' => 'PC123',
             'color' => 'Red',
-            'category_id' => $category->id,
+            'category_id' => 1,
         ];
 
-        $response = $this->actingAs($user, 'sanctum')->postJson('/api/product', $data);
+        $response = $this->actingAsUser()->postJson('/api/product', $data);
 
         $response->assertStatus(403);
     }
