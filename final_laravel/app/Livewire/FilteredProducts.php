@@ -62,12 +62,12 @@ class FilteredProducts extends Component
     private function generateCacheKey()
     {
         $filters = [
-            $this->search,
-            $this->sortBy,
-            implode(',', $this->selectedCategories),
-            $this->onSale,
-            $this->inStock,
-            $this->page ?? $this->getPage(),
+            'search' => $this->search,
+            'sortBy' => $this->sortBy,
+            'categories' => implode(',', $this->selectedCategories),
+            'onSale' => $this->onSale,
+            'inStock' => $this->inStock,
+            'page' => $this->page ?? $this->getPage(),
         ];
         return 'filtered_products_' . md5(implode('_', $filters));
     }

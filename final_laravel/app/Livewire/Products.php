@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class Products extends Component
 {
