@@ -14,7 +14,7 @@
     </section>
 
     <!-- Pagination with Livewire pagination links -->
-    <div class="ml-[350px] mt-4">
+    <div class="ml-[150px] mt-12">
         {{ $products->links('vendor.livewire.simple-tailwind') }}
     </div>
 </section>

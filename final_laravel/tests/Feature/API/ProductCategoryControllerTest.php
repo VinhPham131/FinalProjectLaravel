@@ -2,18 +2,19 @@
 
 namespace Tests\Feature\API;
 
-use App\Models\ProductCategory;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Tests\Traits\TestHelpers;
 
 class ProductCategoryControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, TestHelpers;
 
     public function test_can_view_product_categories()
     {
-        ProductCategory::factory()->count(3)->create();
+        $this->createProductCategory();
+        $this->createProductCategory();
+        $this->createProductCategory();
 
         $response = $this->getJson('/api/category');
 
@@ -23,7 +24,7 @@ class ProductCategoryControllerTest extends TestCase
 
     public function test_can_view_single_product_category()
     {
-        $category = ProductCategory::factory()->create();
+        $category = $this->createProductCategory();
 
         $response = $this->getJson('/api/category/' . $category->id);
 
@@ -33,12 +34,12 @@ class ProductCategoryControllerTest extends TestCase
 
     public function test_admin_can_create_product_category()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
         $data = [
             'name' => 'New Category',
+            'description' => 'Description of the new category',
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->postJson('/api/category', $data);
+        $response = $this->actingAsAdmin()->postJson('/api/category', $data);
 
         $response->assertStatus(201)
             ->assertJsonFragment(['name' => 'New Category']);
@@ -46,13 +47,13 @@ class ProductCategoryControllerTest extends TestCase
 
     public function test_admin_can_update_product_category()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $category = ProductCategory::factory()->create();
+        $category = $this->createProductCategory();
         $data = [
             'name' => 'Updated Category',
+            'description' => 'Updated description',
         ];
 
-        $response = $this->actingAs($admin, 'sanctum')->putJson('/api/category/' . $category->id, $data);
+        $response = $this->actingAsAdmin()->putJson('/api/category/' . $category->id, $data);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Updated Category']);
@@ -60,10 +61,9 @@ class ProductCategoryControllerTest extends TestCase
 
     public function test_admin_can_delete_product_category()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
-        $category = ProductCategory::factory()->create();
+        $category = $this->createProductCategory();
 
-        $response = $this->actingAs($admin, 'sanctum')->deleteJson('/api/category/' . $category->id);
+        $response = $this->actingAsAdmin()->deleteJson('/api/category/' . $category->id);
 
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Category deleted successfully.']);
@@ -71,12 +71,12 @@ class ProductCategoryControllerTest extends TestCase
 
     public function test_non_admin_cannot_create_product_category()
     {
-        $user = User::factory()->create(['role' => 'user']);
         $data = [
             'name' => 'New Category',
+            'description' => 'Description of the new category',
         ];
 
-        $response = $this->actingAs($user, 'sanctum')->postJson('/api/category', $data);
+        $response = $this->actingAsUser()->postJson('/api/category', $data);
 
         $response->assertStatus(403);
     }

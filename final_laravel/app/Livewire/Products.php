@@ -2,42 +2,54 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class Products extends Component
 {
-    public $products = [];  // List of products to display
-    public $limit = 8;      // Number of products to display initially
-    public $totalProducts;  // Total number of products
+    public $products = [];
+    public $limit = 8;
+    public $totalProducts;
 
     public function mount()
     {
-        $this->totalProducts = Product::count(); // Get the total number of products in the database
+        $this->updateCache();
+        $this->totalProducts = Cache::rememberForever('total_products', function () {
+            return Product::count();
+        });
         $this->loadProducts();
     }
 
     public function loadProducts()
     {
-        // Eager load the sales relationship and calculate the highest sale percentage for each product
-        $this->products = Product::limit($this->limit)->get();
-        // ->each(function ($product) {
-            // Calculate the highest sale for each product and add it as an attribute
-            // $product->getHighestSalePercentageAttribute();
-        // });
+        $cacheKey = "products_limit_{$this->limit}";
+        $this->products = Cache::remember($cacheKey, now()->addMinutes(30), function () {
+            return Product::limit($this->limit)->get();
+        });
     }
 
     public function showMore()
     {
-        $this->limit += 8; // Increase the limit of displayed products
+        $this->limit += 8;
         $this->loadProducts();
     }
 
     public function showLess()
     {
-        $this->limit = max(8, $this->limit - 8); // Decrease the limit, but not below 8
+        $this->limit = max(8, $this->limit - 8);
         $this->loadProducts();
+    }
+
+    private function updateCache()
+    {
+        $lastUpdated = Cache::get('products_last_updated', 0);
+        $latestUpdate = Product::max('updated_at')?->timestamp ?? 0;
+
+        if ($latestUpdate > $lastUpdated) {
+            Cache::flush();
+            Cache::forever('products_last_updated', $latestUpdate);
+        }
     }
 
     public function render()

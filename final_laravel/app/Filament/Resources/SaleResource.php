@@ -10,6 +10,7 @@ use App\Models\Sale;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Cache;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -21,6 +22,9 @@ class SaleResource extends Resource
     protected static ?string $model = Sale::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    // Cache key prefix for sale target data
+    protected static $saleTargetCacheKey = 'sale_target_';
 
     public static function form(Form $form): Form
     {
@@ -71,14 +75,18 @@ class SaleResource extends Resource
                 TextColumn::make('sale_target_id')
                     ->label('Sale Target')
                     ->getStateUsing(function ($record) {
-                        if ($record->sale_target_type === 'category') {
-                            return ProductCategory::find($record->sale_target_id)->name ?? 'N/A';
-                        } elseif ($record->sale_target_type === 'product') {
-                            return Product::find($record->sale_target_id)->name ?? 'N/A';
-                        } elseif ($record->sale_target_type === 'collection') {
-                            return Collection::find($record->sale_target_id)->name ?? 'N/A';
-                        }
-                        return 'N/A';
+                        $cacheKey = self::$saleTargetCacheKey . $record->sale_target_id;
+
+                        return Cache::remember($cacheKey, 60, function () use ($record) {
+                            if ($record->sale_target_type === 'category') {
+                                return ProductCategory::find($record->sale_target_id)->name ?? 'N/A';
+                            } elseif ($record->sale_target_type === 'product') {
+                                return Product::find($record->sale_target_id)->name ?? 'N/A';
+                            } elseif ($record->sale_target_type === 'collection') {
+                                return Collection::find($record->sale_target_id)->name ?? 'N/A';
+                            }
+                            return 'N/A';
+                        });
                     })
                     ->sortable()
                     ->searchable(),
@@ -114,4 +122,30 @@ class SaleResource extends Resource
             'edit' => Pages\EditSale::route('/{record}/edit'),
         ];
     }
+
+    // Invalidate cache after creating a sale
+    public static function afterCreate(Sale $sale)
+    {
+        self::invalidateSaleTargetCache($sale); // Invalidate cache for the relevant sale target
+    }
+
+    // Invalidate cache after updating a sale
+    public static function afterUpdate(Sale $sale)
+    {
+        self::invalidateSaleTargetCache($sale); // Invalidate cache for the relevant sale target
+    }
+
+    // Invalidate cache after deleting a sale
+    public static function afterDelete(Sale $sale)
+    {
+        self::invalidateSaleTargetCache($sale); // Invalidate cache for the relevant sale target
+    }
+
+    // Helper method to invalidate sale target cache
+    protected static function invalidateSaleTargetCache(Sale $sale)
+    {
+        $cacheKey = self::$saleTargetCacheKey . $sale->sale_target_id;
+        Cache::forget($cacheKey); // Remove the cache entry for the sale target
+    }
 }
+

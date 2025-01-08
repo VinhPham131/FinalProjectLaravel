@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -28,12 +29,13 @@ class UserResource extends Resource
                 TextInput::make('email')
                     ->required()
                     ->email()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->unique(User::class),
                 TextInput::make('password')
                     ->password()
                     ->required()
                     ->maxLength(255)
-                    ->dehydrateStateUsing(fn($state) => bcrypt($state)),
+                    ->dehydrateStateUsing(fn($state) => $state ? Hash::make($state) : null), // Only hash if password is set
                 Select::make('role')
                     ->options([
                         'admin' => 'Admin',
@@ -82,3 +84,4 @@ class UserResource extends Resource
         ];
     }
 }
+

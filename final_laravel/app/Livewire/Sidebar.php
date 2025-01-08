@@ -60,19 +60,22 @@ class Sidebar extends Component
 
     public function render()
     {
-        logger()->info('Emitting filters:', [
-            'search' => $this->search,
-            'sortBy' => $this->sortBy,
-            'selectedCategories' => $this->selectedCategories,
-            'onSale' => $this->onSale,
-            'inStock' => $this->inStock,
-        ]);
+        // logger()->info('Emitting filters:', [
+        //     'search' => $this->search,
+        //     'sortBy' => $this->sortBy,
+        //     'selectedCategories' => $this->selectedCategories,
+        //     'onSale' => $this->onSale,
+        //     'inStock' => $this->inStock,
+        // ]);
 
-        //reduce cache to 5 instead of 60 to reflect changes from filament!
-        $categories = Cache::remember('categories', 5, callback: function () {
+        $categories = Cache::remember('categories', 600, function () {
             return ProductCategory::all();
         });
-
-        return view('livewire.sidebar', ['categories' => $categories, 'sortBy' => $this->sortBy, 'selectedCategories' => $this->selectedCategories]);
+    
+        return view('livewire.sidebar', [
+            'categories' => $categories,
+            'sortBy' => $this->sortBy,
+            'selectedCategories' => $this->selectedCategories,
+        ]);
     }
 }
