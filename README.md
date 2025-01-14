@@ -7,28 +7,20 @@ Welcome to the **LBJ (Luxury Boys Jewelry) Online Shop**. This is a high-end e-c
 
 ## Technologies
 This project is built with robust and modern technologies to ensure high performance and scalability:
-- EJS templates for rendering HTML pages.
-- Prisma ORM for database access.
-- MySQL database.
-- Environment variables using dotenv.
-- Tailwind CSS for styling.
-- ESLint and Prettier for code linting and formatting.
-- Nodemon for auto-reloading the server during development.
-- Winston for logging.
-- Express-validator for request validation.
-- Helmet for securing the app by setting various HTTP headers.
-- Compression for compressing the response data.
-- Morgan for logging HTTP requests.
-- Vite for building the frontend assets. Support - HMR (Hot Module Replacement) in development mode.
-- Build the frontend assets with npm run build.
-
-## Our mockup: 
-[quocanle-study.github.io/WebDesignProject](http://quocanle-study.github.io/WebDesignProject)
+- Laravel Framework 11.9
+- Laravel Fortify for authentication
+- Livewire for dynamic UI components
+- Sanctum for API authentication
+- Filament for admin management
+- Blade Templating Engine
+- Tailwind CSS for styling
+- Alpine.js for lightweight interactivity
+- Laravel Octane for high performance
+- RoadRunner for server handling
+- Telescope for debugging
+- Laravel Pint for code formatting
 
 ## Detail of the project
-- [Wireframe](content/wireFrame/README.md)
-- [Planning](content/Planning/README.md)
-- [Task](content/Task/README.md)
 - [ERD diagram](content/databaseimg/README.md)
 - [ScreenShot](content/screenshot/README.md)
 
@@ -36,30 +28,33 @@ This project is built with robust and modern technologies to ensure high perform
 
 Before running this project, ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/en/download/)
+- [PHP 8.2+](https://www.php.net/downloads)
 - [MySQL](https://dev.mysql.com/downloads/mysql/)
 - [Git](https://git-scm.com/downloads)
+- [Composer](https://getcomposer.org/download/)
 
 ## Project Structure
 
 Here is an overview of the main directories and files in the project:
 
-- **/controllers**: Contains the logic for handling requests and returning responses.
-- **/views**: Contains the EJS templates for rendering HTML pages.
+- **/app/Http/Controllers**: Contains the logic for handling requests and returning responses.
+- **/resources/views**: Contains the Blade templates for rendering HTML pages.
 - **/config**: Holds configuration files for the database connection and environment variables.
 - **/public**: Static files like CSS, JavaScript, and images.
-- **server.js**: The main entry point of the application.
-- **package.json**: Lists the project dependencies and scripts.
-
+- **/routes**: Contains all the route definitions for the application.
+- **/database/migrations**: Contains the database migration files.
+- **/database/seeders**: Contains the database seeder files.
+- **/tests**: Contains the test files.
+- **artisan**: The command-line interface for Laravel.
+- **composer.json**: Lists the PHP dependencies and scripts.
+- **package.json**: Lists the JavaScript dependencies and scripts.
 ## Setup Instructions
 
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/quocanle-study/WebDesignProject.git
-
-cd WebDesignProject
-cd webapp
+git clone https://github.com/VinhPham131/FinalProjectLaravel.git
+cd final_laravel
 ```
 
 2. **Install Dependencies**
@@ -68,6 +63,7 @@ Install all required dependencies using npm:
 
 ```bash
 npm install
+composer install
 ```
 
 3. **Database Setup**
@@ -78,10 +74,12 @@ npm install
 
 Create `.env` like `.env.example` and set the values. For example:
 ```
-PORT=3000
-SITE_NAME="LBJ"
-NODE_ENV=development
-DATABASE_URL="mysql://root:password@localhost:3306/apps"
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=jew_db
+DB_USERNAME=root
+DB_PASSWORD=vinh1301
 ```
 
 4. **Run Database Migrations**
@@ -89,7 +87,7 @@ DATABASE_URL="mysql://root:password@localhost:3306/apps"
 Run the migrations to set up the database schema:
 
 ```bash
-npx prisma migrate dev
+php artisan migrate
 ```
 
 5. **Seed the Database**
@@ -97,38 +95,34 @@ npx prisma migrate dev
 Populate the database with initial data:
 
 ```bash
-node prisma/seed.js
+php artisan db:seed
 ```
 
 6. **Start the Server**
 
-If you want to run the server in production mode, use:
-```bash
-npm start
-```
-
-If you want to run in development mode, use:
+Compile Front-End Assets
 ```bash
 npm run dev
+```
+
+Start the Server
+```bash
+php artisan serve
 ```
 
 ### Reset Database
 
 To reset the database, you could run the following command to undo all migrations and re-run them.
-```
-npx prisma migrate reset
-node prisma/seed.js
+```bash
+php artisan migrate:refresh
+php artisan db:seed
 ```
 
 ## Contributors
 
-1. quocanle - Lê Quốc Ân
+1. ngoinhaoto - Lê Đình Chính
 2. VinhPham131 - Phạm Quang Vinh
 3. comeheretnt - Phạm Nguyễn Huy Minh
 4. nhannguyen1208 - Nguyễn Minh Nhân
+5. voidkuugeki - Nguyễn Trần Xuân Trí
 
-## Contact
-* Email: an.le22020016@vnuk.edu.vn
-
-## Video demo
-[![Watch the video](https://img.youtube.com/vi/1dIoq4VAg94/maxresdefault.jpg)](https://youtu.be/1dIoq4VAg94)
